@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "name": "Nobin",
+    "title": "Nobin Sijo - Front-End Developer",
+    "description": "I develop interactive, responsive and animated websites with a strong focus on performance.",
+    "timeZone": "Asia/Kolkata",
+    "locale": "en-US"
+  },
+  "personal": {
+    "name": "Nobin",
+    "surname": "Sijo",
+    "role": "Front-End Developer",
+    "experience": 2,
+    "email": "nobinsijo360t@gmail.com",
+    "phone": "+91 8330857739",
+    "city": "Kollam",
+    "state": "Kerala",
+    "country": "India",
+    "username": "@nobinsijo360t",
+    "resumeURL": "https://docs.google.com/document/d/16Fd02ejg1HRan8TIXLOOe5kkBeGqtQvcHOybxVoHOYA/edit?usp=sharing"
+  },
+  "social": {
+    "twitter": "https://twitter.com/yasingencnet",
+    "instagram": "https://www.instagram.com/_phobiccnobin_/",
+    "linkedin": "https://www.linkedin.com/in/nobin-sijo-n77t/",
+    "github": "https://github.com/NobinSijo7T",
+    "dribble": "https://dribbble.com/NobinSijo360T"
+  },
+  "content": {
+    "verse": "Whoever sows sparingly will also reap sparingly, and whoever sows generously will also reap generously. [2 Cor. 9:6]"
+  }
+}
