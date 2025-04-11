@@ -133,7 +133,7 @@ export default function Hero() {
                     <div className={styles.inner}>
                         <div className={styles.title}>
                             <h1 ref={textRef}>
-                                I&apos;m Yasin <span className={`${styles.icon}`}>
+                                I&apos;m Nobin <span className={`${styles.icon}`}>
                                     <span className={styles.reveal}></span>
                                     <Image
                                         src="/hero-image.jpg"

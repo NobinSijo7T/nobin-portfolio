@@ -49,7 +49,7 @@ export default function Resume() {
                     <div className={styles.cardGroup} ref={cardGroup}>
                         <div className={`${styles.card} ${styles.cardV1}`}>
                             <div className={styles.cardInner}>
-                                <div className={styles.cardTitle}>YASIN GENC</div>
+                                <div className={styles.cardTitle}>Nobin Sijo</div>
                                 <div className={styles.cardDesc}>Senior Frontend Developer</div>
                                 <hr/>
                                 <p>I'm Nobin, a frontend developer with over 2 years of professional experience. Successfully designing websites and apps with Figma, then building user-friendly websites with ReactJS & NextJS. I pay attention to small details, enjoy technical problems, and work well in teams. I like learning new technologies and always aim to improve my skills.
@@ -63,13 +63,13 @@ export default function Resume() {
                                 <hr/>
                                 <div className={styles.cardSectionTitle}>WORK EXPERIENCE</div>
                                 <p>
-                                    Senior Frontend Developer | TenTwenty Digital Agency <br/>
-                                    UI & Frontend Developer | Denge Bilgisayar <br/>
-                                    Frontend Developer | Agency Look
+                                    UI Developer | TiltLabs <br/>
+                                    UI & Frontend Developer | MuLearn Foundation <br/>
+                                    Product Designer | TinkerHub Foundation
                                 </p>
                             </div>
                             <figure className={styles.figure}>
-                                <Image src="/yasin-genc-photo.jpeg" alt="Yasin Genc" width={150} height={150}/>
+                                <Image src="/yasin-genc-photo.jpeg" alt="Nobin" width={150} height={150}/>
                             </figure>
                         </div>
                         <div className={`${styles.card} ${styles.cardV2}`}>
