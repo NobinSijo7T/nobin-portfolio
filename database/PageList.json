@@ -56,7 +56,7 @@
   "about": {
     "isActive":  true,
     "showOnNavigation": true,
-    "showOnFooter": true,
+    "showOnFooter": false,
     "title": "About",
     "description": "I design & develop modern and accessible web interfaces.",
     "image": "",
