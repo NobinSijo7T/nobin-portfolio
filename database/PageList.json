@@ -22,7 +22,7 @@
     "showOnNavigation":  true,
     "showOnFooter":  true,
     "title": "Experience",
-    "description": "Check out the things I'm good at, from building websites to design and more.",
+    "description": "I have worked with some amazing companies and teams, and I am proud of what I've achieved.",
     "image": "",
     "link": "#experience"
   },
@@ -48,19 +48,19 @@
     "isActive":  true,
     "showOnNavigation":  false,
     "showOnFooter":  true,
-    "title": "Instagram",
-    "description": "Good memories, best times. My project journal.",
+    "title": "GitHub",
+    "description": "Check out my GitHub profile for my latest projects and contributions.",
     "image": "",
     "link": "https://github.com/NobinSijo7T/"
   },
   "about": {
     "isActive":  true,
-    "showOnNavigation": true,
+    "showOnNavigation": false,
     "showOnFooter": true,
     "title": "About",
     "description": "I design & develop modern and accessible web interfaces.",
     "image": "",
-    "link": "/about"
+    "link": "#about"
   }
 
 }
