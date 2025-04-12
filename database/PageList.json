@@ -55,20 +55,12 @@
   },
   "about": {
     "isActive":  false,
-    "showOnNavigation": false,
+    "showOnNavigation": true,
     "showOnFooter": false,
     "title": "About",
     "description": "I design & develop modern and accessible web interfaces.",
     "image": "",
     "link": "/about"
-  },
-  "blog": {
-    "isActive":  false,
-    "showOnNavigation":  false,
-    "showOnFooter":  false,
-    "title": "Blog",
-    "description": "Articles focused on CSS, HTML, JavaScript, and other frontend stuff.",
-    "image": "",
-    "link": "/blog"
   }
+
 }
