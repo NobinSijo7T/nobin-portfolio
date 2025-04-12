@@ -44,19 +44,19 @@
     "image": "",
     "link": "#footer"
   },
-  "instagram": {
+  "github": {
     "isActive":  true,
     "showOnNavigation":  false,
-    "showOnFooter":  false,
+    "showOnFooter":  true,
     "title": "Instagram",
-    "description": "Good memories, best times. My photo journal.",
+    "description": "Good memories, best times. My project journal.",
     "image": "",
-    "link": "https://www.instagram.com/_phobiccnobin_/"
+    "link": "https://github.com/NobinSijo7T/"
   },
   "about": {
     "isActive":  true,
     "showOnNavigation": true,
-    "showOnFooter": false,
+    "showOnFooter": true,
     "title": "About",
     "description": "I design & develop modern and accessible web interfaces.",
     "image": "",

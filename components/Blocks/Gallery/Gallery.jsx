@@ -75,7 +75,7 @@ export default function Gallery() {
             <Blobs type={'v2'} classVariable={`${styles.blob}`}/>
             <Container>
                 <header className={styles.header}>
-                    <Title color={'white'}><span>My</span> Photo <br/>Journal</Title>
+                    <Title color={'white'}><span>My</span> Project <br/>Journal</Title>
                     <FancyButton theme='button-1' target="_blank" link={commonConfig.social.github}>Follow on
                         GitHub</FancyButton>
                 </header>
