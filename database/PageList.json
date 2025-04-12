@@ -54,9 +54,9 @@
     "link": "https://www.instagram.com/_phobiccnobin_/"
   },
   "about": {
-    "isActive":  false,
+    "isActive":  true,
     "showOnNavigation": true,
-    "showOnFooter": false,
+    "showOnFooter": true,
     "title": "About",
     "description": "I design & develop modern and accessible web interfaces.",
     "image": "",
