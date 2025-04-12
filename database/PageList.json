@@ -47,11 +47,11 @@
   "instagram": {
     "isActive":  true,
     "showOnNavigation":  false,
-    "showOnFooter":  true,
+    "showOnFooter":  false,
     "title": "Instagram",
     "description": "Good memories, best times. My photo journal.",
     "image": "",
-    "link": "https://www.instagram.com/yasingencnet/"
+    "link": "https://www.instagram.com/_phobiccnobin_/"
   },
   "about": {
     "isActive":  false,
