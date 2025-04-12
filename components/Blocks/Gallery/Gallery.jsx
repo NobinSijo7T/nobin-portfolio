@@ -76,8 +76,8 @@ export default function Gallery() {
             <Container>
                 <header className={styles.header}>
                     <Title color={'white'}><span>My</span> Photo <br/>Journal</Title>
-                    <FancyButton theme='button-1' target="_blank" link={commonConfig.social.instagram}>Follow on
-                        Instagram</FancyButton>
+                    <FancyButton theme='button-1' target="_blank" link={commonConfig.social.github}>Follow on
+                        GitHub</FancyButton>
                 </header>
             </Container>
 
