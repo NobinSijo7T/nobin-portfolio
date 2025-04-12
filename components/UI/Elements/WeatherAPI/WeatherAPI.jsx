@@ -2,27 +2,36 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function WeatherAPI() {
-    const [weather, setWeather] = useState({});
+    const [weather, setWeather] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get('https://api.open-meteo.com/v1/forecast?latitude=8.8811&longitude=76.5847&daily=temperature_2m_max&hourly=temperature_2m&timezone=auto')
+        setLoading(true);
+        axios.get('https://api.open-meteo.com/v1/forecast?latitude=8.8811&longitude=76.5847&current=temperature_2m&timezone=auto')
             .then(response => {
                 setWeather(response.data);
+                setLoading(false);
             })
             .catch(error => {
                 console.error(error);
+                setError("Failed to load weather data");
+                setLoading(false);
             });
     }, []);
 
-    return(
+    if (loading) return <span>Weather forecast is loading...</span>;
+    if (error) return <span>{error}</span>;
+    
+    return (
         <>
-            {weather.current ? (
+            {weather && weather.current ? (
                 <span>
-                    {weather.current.temperature_2m}
+                    Current temperature in Kollam: {weather.current.temperature_2m}
                     {weather.current_units.temperature_2m}
                 </span>
             ) : (
-                <span>Weather forecast is loading...</span>
+                <span>Weather data unavailable</span>
             )}
         </>
     );
