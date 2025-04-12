@@ -8,7 +8,7 @@ export default function ImageTip({date, children}) {
         <div className={styles.element}>
             <figure className={styles.figure}>
                 <Image
-                    src="/yasin-genc-photo.jpeg"
+                    src="/nobin-sijo.webp"
                     alt={commonConfig.metadata.title}
                     width={40}
                     height={40}
