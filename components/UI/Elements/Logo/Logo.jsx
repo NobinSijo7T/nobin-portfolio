@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Logo.module.scss';
 import Link from 'next/link';
+import Image from 'next/image';
 import commonConfig from '@/database/config/metadata.json';
 
 export default function Logo({ classVariable }) {
     const [isHovered, setIsHovered] = useState(false);
     const [currentFontIndex, setCurrentFontIndex] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
     const fonts = [
-        'Paladins',
-        'Poppins',
-        'Montserrat',
-        'Lexend',
-        'Google Sans',
-        'Lato'
+        'Orbitron',
+        'Audiowide',
+        'Space Grotesk',
+        'Syncopate',
+        'Rajdhani',
+        'Exo 2'
     ];
 
     useEffect(() => {
         const fontInterval = setInterval(() => {
-            setCurrentFontIndex((prevIndex) => (prevIndex + 1) % fonts.length);
+            setIsTransitioning(true);
+            setTimeout(() => {
+                setCurrentFontIndex((prevIndex) => (prevIndex + 1) % fonts.length);
+                setIsTransitioning(false);
+            }, 300);
         }, 3000);
+
         return () => clearInterval(fontInterval);
     }, []);
 
@@ -32,11 +39,21 @@ export default function Logo({ classVariable }) {
             onMouseLeave={() => setIsHovered(false)}
         >
             <div className={styles.logoContainer}>
+                <div className={`${styles.logoImageWrapper} ${isHovered ? styles.logoHovered : ''}`}>
+                    <Image
+                        src="/logo-removebg-preview.png"
+                        alt="Logo"
+                        width={40}
+                        height={40}
+                        className={styles.logoImage}
+                        priority
+                    />
+                </div>
                 <div 
-                    className={`${styles.logoText} ${isHovered ? styles.textHovered : ''}`}
+                    className={`${styles.logoText} ${isHovered ? styles.textHovered : ''} ${isTransitioning ? styles.fontTransition : ''}`}
                     style={{ fontFamily: `${fonts[currentFontIndex]}, sans-serif` }}
                 >
-                    <span className={styles.fontTransition}>Nobin Sijo</span>
+                    <span>Nobin Sijo</span>
                 </div>
             </div>
         </Link>
