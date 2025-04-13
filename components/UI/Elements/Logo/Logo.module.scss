@@ -133,11 +133,11 @@
 
 .logoImageWrapper {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 45px;  // Increased from 40px
+  height: 45px;  // Increased from 40px
   transition: transform 0.3s ease-in-out;
   animation: float 3s ease-in-out infinite;
-  margin-right: 1rem;
+  margin-right: 0.3rem;  // Reduced from 1rem to bring text closer
   
   &::after {
     content: '';
