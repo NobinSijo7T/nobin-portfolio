@@ -43,8 +43,8 @@ export default function Logo({ classVariable }) {
                     <Image
                         src="/Logo.png"
                         alt="Logo"
-                        width={40}
-                        height={40}
+                        width={90}  // Increased from 40
+                        height={90} // Increased from 40
                         className={styles.logoImage}
                         priority
                     />
