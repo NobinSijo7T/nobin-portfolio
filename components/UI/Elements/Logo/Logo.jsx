@@ -41,7 +41,7 @@ export default function Logo({ classVariable }) {
             <div className={styles.logoContainer}>
                 <div className={`${styles.logoImageWrapper} ${isHovered ? styles.logoHovered : ''}`}>
                     <Image
-                        src="/logo-removebg-preview.png"
+                        src="/Logo.png"
                         alt="Logo"
                         width={40}
                         height={40}
