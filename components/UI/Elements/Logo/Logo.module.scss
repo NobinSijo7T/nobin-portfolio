@@ -140,18 +140,6 @@
   animation: float 3s ease-in-out infinite;
   margin-right: -0.9rem;  // Reduced from 1rem to bring text closer
   z-index: 2; // Ensure logo stays above the glow
-  
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(248, 208, 0, 0.2);
-    border-radius: 50%;
-    filter: blur(8px);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
 }
 
 .logoImage {
@@ -162,10 +150,6 @@
 
 .logoHovered {
   transform: scale(1.1);
-  
-  &::after {
-    opacity: 1;
-  }
   
   .logoImage {
     animation: pulse 1s ease-in-out infinite;
