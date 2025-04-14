@@ -31,6 +31,13 @@
   left: calc(50% - var(--size) / 2);
   margin-bottom: -2rem; // Changed from -0.8rem to reduce space more
   z-index: 2; // Added to ensure sphere stays on top
+
+  @include respond-below(sm) {
+    --size: 35dvw; // Increased from 16dvw for mobile
+    bottom: calc(-1 * var(--size) / 3); // Changed from /2 to /3 to move up
+    margin-bottom: -4rem; // Increased negative margin to move up
+  }
+
   .sphere{
     transition: all .3s ease-in-out;
     transform-origin: 50% 50%;
