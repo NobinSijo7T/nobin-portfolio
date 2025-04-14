@@ -116,13 +116,10 @@
 
   @include respond-below(sm) {
     --circSize: 150dvw;
-    --cardSize: calc(var(--circSize) / 4);  // Larger blobs for mobile
+    --cardSize: calc(var(--circSize) / 4);
     padding: calc(var(--cardSize) / 2);
     height: calc(var(--circSize) * 0.7);
-    position: relative;
-    left: calc(25dvw - 50%);  // Centers the component using viewport width
-    transform: translateX(-12.5dvw);  // Fine-tune the centering
-    margin: 0;
+    left: -50dvw;
   }
 
   .circularCarousel{
