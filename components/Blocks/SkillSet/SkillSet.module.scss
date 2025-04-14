@@ -95,7 +95,7 @@
   pointer-events: none;
   position: absolute;
   top: 0;
-  left: 90dvw;
+  left: -50dvw;
   width: 18dvw;
   
   @include respond-below(sm) {
