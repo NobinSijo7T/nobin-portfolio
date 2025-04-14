@@ -116,11 +116,11 @@
 
   @include respond-below(sm) {
     --circSize: 200dvw; // Increased circle size for better spacing
-    --cardSize: calc(var(--circSize) / 7); // Adjusted divisor for larger gaps between blobs
+    --cardSize: calc(var(--circSize) / 5); // Changed from /7 to /5 for larger cards
     padding: calc(var(--cardSize) / 2);
     height: calc(var(--circSize) * 0.7);
     position: relative;
-    right: -25dvw; // Added to shift component towards right
+    right: -15dvw; // Changed from -25dvw to -15dvw to move more left
     transform: translateX(-50%) scale(0.85); // Added scale to fit screen while maintaining spacing
     margin: 0;
     overflow: visible;
