@@ -2,7 +2,7 @@
 
 .section {
   position: relative;
-  padding: calc(var(--x-spacing) * 0.6) 0; // Reduced padding for desktop
+  padding: calc(var(--x-spacing) * 0.8) 0; // Increased padding to accommodate content
   background: hsl(var(--color-bg-alt));
 
   @include respond-below(sm) {
@@ -107,11 +107,11 @@
   position: relative;
   --circSize: 115dvw;
   --cardSize: calc(var(--circSize) / 8);
-  padding: calc(var(--cardSize) / 3); // Reduced padding
-  margin: -4rem auto -2rem auto; // Added negative margin to reduce space
+  padding: calc(var(--cardSize) / 3);
+  margin: 2rem auto -2rem auto; // Changed from -4rem to 2rem to show top section
   width: fit-content;
-  height: calc(var(--circSize) * 0.45); // Reduced height from 0.55 to 0.45
-  overflow: hidden;
+  height: calc(var(--circSize) * 0.45);
+  overflow: visible; // Changed from hidden to show top content
   transform: translateX(-22dvw);
 
   @include respond-below(sm) {
