@@ -122,8 +122,8 @@
   transform: translateX(-20dvw); // Changed from -22dvw to -18dvw to move right
 
   @include respond-below(sm) {
-    --circSize: 280dvw; // Increased from 220dvw for wider spacing
-    --cardSize: calc(var(--circSize) / 6); // Kept same divisor to maintain card size
+    --circSize: 220dvw; // Decreased from 280dvw for smaller circle
+    --cardSize: calc(var(--circSize) / 6); // Changed divisor from 5 to 6 for smaller cards
     padding: calc(var(--cardSize) / 2);
     height: calc(var(--circSize) * 0.7);
     position: relative;
