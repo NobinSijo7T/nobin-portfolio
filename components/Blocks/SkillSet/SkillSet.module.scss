@@ -101,6 +101,7 @@
   width: fit-content;
   height: calc(var(--circSize) * 0.66);
   overflow: hidden;
+  transform: translateX(-10dvw); // Added this line to shift left in desktop view
 
   @include respond-below(sm) {
     --circSize: 150dvw;
