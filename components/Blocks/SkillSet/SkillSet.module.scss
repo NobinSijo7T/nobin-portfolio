@@ -6,7 +6,8 @@
   background: hsl(var(--color-bg-alt));
 
   @include respond-below(sm) {
-    padding: var(--x-spacing) 0; // Keep original padding for mobile
+    padding: calc(var(--x-spacing) * 2) 0; // Increased padding for taller mobile background
+    min-height: 130dvh; // Added minimum height for mobile
   }
 }
 
@@ -121,8 +122,8 @@
   transform: translateX(-20dvw); // Changed from -22dvw to -18dvw to move right
 
   @include respond-below(sm) {
-    --circSize: 220dvw; // Decreased from 280dvw for smaller circle
-    --cardSize: calc(var(--circSize) / 6); // Changed divisor from 5 to 6 for smaller cards
+    --circSize: 280dvw; // Increased from 220dvw for wider spacing
+    --cardSize: calc(var(--circSize) / 6); // Kept same divisor to maintain card size
     padding: calc(var(--cardSize) / 2);
     height: calc(var(--circSize) * 0.7);
     position: relative;
