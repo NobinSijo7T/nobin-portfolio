@@ -6,7 +6,8 @@
   background: hsl(var(--color-bg-alt));
 
   @include respond-below(sm) {
-    padding: var(--x-spacing) 0; // Keep original padding for mobile
+    padding: calc(var(--x-spacing) * 2) 0; // Increased padding for taller mobile background
+    min-height: 100dvh; // Added minimum height for mobile
   }
 }
 
