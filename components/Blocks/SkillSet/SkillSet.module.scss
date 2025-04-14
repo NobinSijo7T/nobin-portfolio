@@ -95,11 +95,11 @@
   pointer-events: none;
   position: absolute;
   top: 0;
-  left: -150dvw;
+  left: 90dvw;
   width: 18dvw;
   
   @include respond-below(sm) {
-    left: 75dvw; // Added mobile-specific position
+    left: 175dvw; // Added mobile-specific position
     width: 25dvw; // Slightly larger for mobile
   }
   
