@@ -72,13 +72,7 @@
     "subtitle": "Scroll Animations",
     "description": "I use GSAP for captivating animations that bring web pages to life, enhancing the overall user experience."
   },
-  {
-    "icon": "IconGSAP",
-    "image": "/icon/icon-gsap.svg",
-    "title": "GSAP",
-    "subtitle": "Scroll Animations",
-    "description": "I use GSAP for captivating animations that bring web pages to life, enhancing the overall user experience."
-  },
+  
   {
     "icon": "IconDocker",
     "image": "/icon/Docker.svg",
