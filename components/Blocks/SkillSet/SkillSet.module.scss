@@ -94,7 +94,7 @@
 
 .circularCarouselWrapper{
   position: relative;
-  --circSize: 85dvw;
+  --circSize: 65dvw;
   --cardSize: calc(var(--circSize) / 5.2);
   padding: calc(var(--cardSize) / 2);
   margin: 0 auto 0 auto;
