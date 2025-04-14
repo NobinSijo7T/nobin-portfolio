@@ -126,7 +126,7 @@
   width: fit-content;
   height: calc(var(--circSize) * 0.45);
   overflow: visible; // Changed from hidden to show top content
-  transform: translateX(-20dvw); // Changed from -22dvw to -18dvw to move right
+  transform: translateX(-20dvw); // Changed from -22dvw to -18dvw to move right // Changed from -22dvw to -18dvw to move right
 
   @include respond-below(sm) {
     --circSize: 220dvw; // Decreased from 280dvw for smaller circle
