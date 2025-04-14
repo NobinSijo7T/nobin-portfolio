@@ -7,7 +7,7 @@
 
   @include respond-below(sm) {
     padding: calc(var(--x-spacing) * 2) 0; // Increased padding for taller mobile background
-    min-height: 100dvh; // Added minimum height for mobile
+    height: 100dvh; // Changed from min-height to fixed height
   }
 }
 
