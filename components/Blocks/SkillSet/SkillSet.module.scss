@@ -108,7 +108,7 @@
   --circSize: 115dvw;
   --cardSize: calc(var(--circSize) / 8);
   padding: calc(var(--cardSize) / 3); // Reduced padding
-  margin: 0 auto -2rem auto; // Added negative margin to reduce space
+  margin: 4rem auto -2rem auto; // Added negative margin to reduce space
   width: fit-content;
   height: calc(var(--circSize) * 0.45); // Reduced height from 0.55 to 0.45
   overflow: hidden;
