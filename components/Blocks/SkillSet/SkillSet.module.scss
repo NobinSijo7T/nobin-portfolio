@@ -97,6 +97,12 @@
   top: 0;
   left: 90dvw;
   width: 18dvw;
+  
+  @include respond-below(sm) {
+    left: 75dvw; // Added mobile-specific position
+    width: 25dvw; // Slightly larger for mobile
+  }
+  
   svg{
     width: 100%;
     height: auto;
