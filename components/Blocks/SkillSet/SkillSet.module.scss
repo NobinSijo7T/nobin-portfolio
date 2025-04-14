@@ -6,8 +6,7 @@
   background: hsl(var(--color-bg-alt));
 
   @include respond-below(sm) {
-    padding: calc(var(--x-spacing) * 2) 0; // Increased padding for taller mobile background
-    min-height: 100dvh; // Added minimum height for mobile
+    padding: var(--x-spacing) 0; // Keep original padding for mobile
   }
 }
 
@@ -31,13 +30,6 @@
   left: calc(50% - var(--size) / 2);
   margin-bottom: -2rem; // Changed from -0.8rem to reduce space more
   z-index: 2; // Added to ensure sphere stays on top
-
-  @include respond-below(sm) {
-    --size: 35dvw; // Increased from 16dvw for mobile
-    bottom: calc(-1 * var(--size) / 3); // Changed from /2 to /3 to move up
-    margin-bottom: -7rem; // Increased negative margin to move up
-  }
-
   .sphere{
     transition: all .3s ease-in-out;
     transform-origin: 50% 50%;
@@ -126,31 +118,28 @@
   width: fit-content;
   height: calc(var(--circSize) * 0.45);
   overflow: visible; // Changed from hidden to show top content
-  transform: translateX(-20dvw); // Changed from -22dvw to -18dvw to move right // Changed from -22dvw to -18dvw to move right
+  transform: translateX(-20dvw); // Changed from -22dvw to -18dvw to move right
 
   @include respond-below(sm) {
     --circSize: 220dvw; // Decreased from 280dvw for smaller circle
     --cardSize: calc(var(--circSize) / 6); // Changed divisor from 5 to 6 for smaller cards
     padding: calc(var(--cardSize) / 2);
-    height: calc(var(--circSize) * 0.65); // Slightly reduced height
+    height: calc(var(--circSize) * 0.7);
     position: relative;
     right: 85dvw; // Changed from 35dvw to move more right
-    transform: scale(0.75) translateY(-2rem); // Added translateY to move up
-    margin: -4rem 0rem -8rem; // Adjusted margins for better spacing
+    transform: scale(0.75);
+    margin: -8rem 0rem -10rem;
     overflow: visible;
     
     .circularCarousel {
       transform-origin: center center;
-      transform: scale(0.85) translateY(-1rem); // Slightly smaller scale and moved up
+      transform: scale(0.9);
     }
 
     .box {
       transform: scale(1.2); // Reduced from 1.4 for smaller cards
-      margin-bottom: 1.5rem; // Added space between boxes
     }
-    
-    // Add spacing for circular descriptions
-    
+  }
 
   .circularCarousel{
     width: var(--circSize);
@@ -224,5 +213,4 @@
   max-width: 40ch;
   font-size: var(--fs-xs);
   color: hsl(var(--color-body));
-}
 }
