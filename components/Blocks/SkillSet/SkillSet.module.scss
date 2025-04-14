@@ -100,7 +100,7 @@
   
   @include respond-below(sm) {
     left: 155dvw; // Added mobile-specific position
-    width: 45dvw; // Slightly larger for mobile
+    width: 35dvw; // Slightly larger for mobile
   }
   
   svg{
