@@ -28,40 +28,43 @@
     "description": "Beyond markup, HTML is crucial for an inclusive web. I structure content carefully for universal accessibility."
   },
   {
-    "icon": "IconOptimization",
-    "image": "/icon/icon-optimization.svg",
-    "title": "PageSpeed",
-    "subtitle": "Insights",
-    "description": "I specialize in enhancing website performance, ensuring fast loading times and efficient resource utilization for an optimal user experience."
+    "icon": "IconR",
+    "image": "/icon/R.svg",
+    "title": "R,Jupyter",
+    "subtitle": "Dta Science, Data Analysis",
+    "description": "I utilize R for data science and analysis, employing its powerful libraries for statistical computing and data visualization."
+    
   },
   {
-    "icon": "IconA11Y",
-    "image": "/icon/icon-a11y.svg",
-    "title": "A11Y",
-    "subtitle": "Web Accessibility",
-    "description": "Accessibility is a must. I ensure everyone can use what I create, focusing on keyboard navigation and screen reader compatibility."
-  },
+    "icon": "IconSupabase",
+    "image": "/icon/supabase.svg",
+    "title": "Supabase",
+    "subtitle": "SQL,PostgreSQL",
+    "description": "I utilize Supabase for backend development, leveraging its SQL and PostgreSQL capabilities to create robust and scalable applications."
+    },
   {
     "icon": "IconFigma",
     "image": "/icon/icon-figma.svg",
     "title": "Design",
-    "subtitle": "Figma & Photoshop",
-    "description": "While not a full-time UI designer, I have an eye for aesthetics, creating visually appealing and user-friendly interfaces."
+    "subtitle": "Figma & Photoshop,Illustrator",
+    "description": "I design with Figma, creating user-friendly interfaces and prototypes. I also use Photoshop and Illustrator for graphics and branding."
+    
   },
   {
-    "icon": "IconWebpack",
-    "image": "/icon/icon-webpack.svg",
-    "title": "Development Env.",
-    "subtitle": "Webpack",
-    "description": "I use tools like Webpack, Vite, Parcel, or Gulp to streamline workflows, automating development for efficiency."
+    "icon": "IconFramer",
+    "image": "/icon/framer.svg",
+    "title": "Framer",
+    "subtitle": "Wordpress,Webflow",
+    "description": "I utilize Framer for rapid prototyping and design, creating interactive and visually stunning web experiences."     
+    
   },
   {
-    "icon": "IconAPI",
-    "image": "/icon/icon-api.svg",
-    "title": "REST APIs",
-    "subtitle": "Axios x Fetch",
-    "description": "I integrate data and functionality seamlessly with REST APIs, creating dynamic web applications for enhanced performance."
-  },
+    "icon": "IconPython",
+    "image": "/icon/Python.svg",
+    "title": "Python",
+    "subtitle": "Django, Flask",
+    "description": "I leverage Python for backend development, creating robust applications with Django and Flask frameworks."
+    },
   {
     "icon": "IconGSAP",
     "image": "/icon/icon-gsap.svg",
