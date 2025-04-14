@@ -35,7 +35,7 @@
   @include respond-below(sm) {
     --size: 35dvw; // Increased from 16dvw for mobile
     bottom: calc(-1 * var(--size) / 3); // Changed from /2 to /3 to move up
-    margin-bottom: 5rem; // Increased negative margin to move up
+    margin-bottom: 8rem; // Increased negative margin to move up
   }
 
   .sphere{
