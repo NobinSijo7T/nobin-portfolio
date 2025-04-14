@@ -92,10 +92,10 @@
   }
 }
 
-.circularCarouselWrapper{
+.circularCarouselWrapper {
   position: relative;
   --circSize: 75dvw;
-  --cardSize: calc(var(--circSize) / 6);  // Changed from 8 to 6 to increase blob size
+  --cardSize: calc(var(--circSize) / 5);  // Slightly larger blobs for desktop
   padding: calc(var(--cardSize) / 2);
   margin: 0 auto 0 auto;
   width: fit-content;
@@ -104,12 +104,13 @@
 
   @include respond-below(sm) {
     --circSize: 150dvw;
-    --cardSize: calc(var(--circSize) / 4);  // Changed from 6 to 4 for larger mobile blobs
+    --cardSize: calc(var(--circSize) / 4);  // Larger blobs for mobile
     padding: calc(var(--cardSize) / 2);
     height: calc(var(--circSize) * 0.7);
-    left: 0;  // Changed from -50dvw to 0 to center the component
-    right: 0;
-    margin: 0 auto;  // Added to help with centering
+    position: relative;
+    left: calc(25dvw - 50%);  // Centers the component using viewport width
+    transform: translateX(-12.5dvw);  // Fine-tune the centering
+    margin: 0;
   }
 
   .circularCarousel{
