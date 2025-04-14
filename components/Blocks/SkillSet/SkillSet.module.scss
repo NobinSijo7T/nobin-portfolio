@@ -120,9 +120,9 @@
     padding: calc(var(--cardSize) / 2);
     height: calc(var(--circSize) * 0.7);
     position: relative;
-    right: 45dvw; // Changed from 35dvw to move more right
+    right: 85dvw; // Changed from 35dvw to move more right
     transform: scale(0.75);
-    margin: 2rem 0;
+    margin: -8rem 0rem -25rem;
     overflow: visible;
     
     .circularCarousel {
