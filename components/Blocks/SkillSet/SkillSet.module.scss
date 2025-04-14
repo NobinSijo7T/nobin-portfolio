@@ -1,16 +1,26 @@
 @import '/assets/media-queries.scss';
 
-.section{
+.section {
   position: relative;
-  padding: var(--x-spacing) 0;
+  padding: calc(var(--x-spacing) * 0.6) 0; // Reduced padding for desktop
   background: hsl(var(--color-bg-alt));
+
+  @include respond-below(sm) {
+    padding: var(--x-spacing) 0; // Keep original padding for mobile
+  }
 }
-.grid{
+
+.grid {
   display: grid;
   grid-template-columns: 1fr;
-  padding: var(--y-spacing) var(--x-spacing) 0;
-  gap: 4rem; // Reduced from 6rem to decrease overall spacing
+  padding: calc(var(--y-spacing) * 0.7) var(--x-spacing) 0; // Reduced padding for desktop
+  gap: 2rem; // Reduced gap for desktop
   overflow: hidden;
+
+  @include respond-below(sm) {
+    padding: var(--y-spacing) var(--x-spacing) 0; // Keep original padding for mobile
+    gap: 4rem; // Keep original gap for mobile
+  }
 }
 
 .sphereWrapper{
@@ -95,14 +105,14 @@
 
 .circularCarouselWrapper {
   position: relative;
-  --circSize: 115dvw;  // Increased from 75dvw to create wider circular trajectory
-  --cardSize: calc(var(--circSize) / 8);  // Adjusted to maintain same blob size with wider circle
-  padding: calc(var(--cardSize) / 2);
-  margin: 0 auto 0 auto; // Removed negative bottom margin
+  --circSize: 115dvw;
+  --cardSize: calc(var(--circSize) / 8);
+  padding: calc(var(--cardSize) / 3); // Reduced padding
+  margin: 0 auto -2rem auto; // Added negative margin to reduce space
   width: fit-content;
-  height: calc(var(--circSize) * 0.55); // Reduced from 0.66 to bring content closer
+  height: calc(var(--circSize) * 0.45); // Reduced height from 0.55 to 0.45
   overflow: hidden;
-  transform: translateX(-22dvw); // Added this line to shift left in desktop view
+  transform: translateX(-22dvw);
 
   @include respond-below(sm) {
     --circSize: 150dvw;
