@@ -94,14 +94,14 @@
 
 .circularCarouselWrapper {
   position: relative;
-  --circSize: 95dvw;  // Increased from 75dvw to create wider circular trajectory
+  --circSize: 115dvw;  // Increased from 75dvw to create wider circular trajectory
   --cardSize: calc(var(--circSize) / 6.3);  // Adjusted to maintain same blob size with wider circle
   padding: calc(var(--cardSize) / 2);
   margin: 0 auto 0 auto;
   width: fit-content;
   height: calc(var(--circSize) * 0.66);
   overflow: hidden;
-  transform: translateX(-15dvw); // Added this line to shift left in desktop view
+  transform: translateX(-13dvw); // Added this line to shift left in desktop view
 
   @include respond-below(sm) {
     --circSize: 150dvw;
