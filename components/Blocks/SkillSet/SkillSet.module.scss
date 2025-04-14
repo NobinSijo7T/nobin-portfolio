@@ -19,6 +19,8 @@
   position: absolute;
   bottom: calc(-1 * var(--size) / 2);
   left: calc(50% - var(--size) / 2);
+  margin-bottom: -37.3rem;
+  margin-bottom: -0.8rem; // Added negative margin to reduce space
   .sphere{
     transition: all .3s ease-in-out;
     transform-origin: 50% 50%;
@@ -97,7 +99,7 @@
   --circSize: 115dvw;  // Increased from 75dvw to create wider circular trajectory
   --cardSize: calc(var(--circSize) / 8);  // Adjusted to maintain same blob size with wider circle
   padding: calc(var(--cardSize) / 2);
-  margin: 0 auto 0 auto;
+  margin: 0 auto -4rem auto; // Added negative bottom margin
   width: fit-content;
   height: calc(var(--circSize) * 0.66);
   overflow: hidden;
