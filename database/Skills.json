@@ -30,8 +30,8 @@
   {
     "icon": "IconR",
     "image": "/icon/R.svg",
-    "title": "R,Jupyter",
-    "subtitle": "Dta Science, Data Analysis",
+    "title": "R",
+    "subtitle": "Jupyter Notebook,Scikit-learn",
     "description": "I utilize R for data science and analysis, employing its powerful libraries for statistical computing and data visualization."
     
   },
@@ -71,5 +71,49 @@
     "title": "GSAP",
     "subtitle": "Scroll Animations",
     "description": "I use GSAP for captivating animations that bring web pages to life, enhancing the overall user experience."
-  }
+  },
+  {
+    "icon": "IconGSAP",
+    "image": "/icon/icon-gsap.svg",
+    "title": "GSAP",
+    "subtitle": "Scroll Animations",
+    "description": "I use GSAP for captivating animations that bring web pages to life, enhancing the overall user experience."
+  },
+  {
+    "icon": "IconDocker",
+    "image": "/icon/Docker.svg",
+    "title": "Docker",
+    "subtitle": "Containerization",
+    "description": "I utilize Docker for containerization, ensuring consistent environments for development, testing, and deployment."
+    },
+  {
+    "icon": "IconTensorflow",
+    "image": "/icon/tensorflow-icon.svg",
+    "title": "TensorFlow",
+    "subtitle": "Machine Learning",
+    "description": "I leverage TensorFlow for machine learning, building and deploying models for data-driven applications."
+     },
+  {
+    "icon": "IconGit",
+    "image": "/icon/git.svg",
+    "title": "Git",
+    "subtitle": "GitHub,GitLab",
+    "description": "I use Git for version control, managing code changes and collaborating effectively with teams."
+  },
+  {
+    "icon": "IconVercel",
+    "image": "/icon/vercel.svg",
+    "title": "Vercel",
+    "subtitle": "Deployment",
+    "description": "I deploy applications on Vercel, ensuring fast and reliable hosting for optimal performance."
+  },
+  {
+    "icon": "IconExpo",
+    "image": "/icon/Expo.svg",
+    "title": "Expo",
+    "subtitle": "React Native",
+    "description": "I use Expo for building React Native applications, streamlining the development process with its powerful tools and libraries."
+    }
+
+  
 ]
