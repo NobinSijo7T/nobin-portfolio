@@ -9,8 +9,7 @@
   display: grid;
   grid-template-columns: 1fr;
   padding: var(--y-spacing) var(--x-spacing) 0;
-  gap: 6rem;
-
+  gap: 4rem; // Reduced from 6rem to decrease overall spacing
   overflow: hidden;
 }
 
@@ -19,8 +18,8 @@
   position: absolute;
   bottom: calc(-1 * var(--size) / 2);
   left: calc(50% - var(--size) / 2);
-  margin-bottom: -37.3rem;
-  margin-bottom: -0.8rem; // Added negative margin to reduce space
+  margin-bottom: -2rem; // Changed from -0.8rem to reduce space more
+  z-index: 2; // Added to ensure sphere stays on top
   .sphere{
     transition: all .3s ease-in-out;
     transform-origin: 50% 50%;
@@ -99,9 +98,9 @@
   --circSize: 115dvw;  // Increased from 75dvw to create wider circular trajectory
   --cardSize: calc(var(--circSize) / 8);  // Adjusted to maintain same blob size with wider circle
   padding: calc(var(--cardSize) / 2);
-  margin: 0 auto -4rem auto; // Added negative bottom margin
+  margin: 0 auto 0 auto; // Removed negative bottom margin
   width: fit-content;
-  height: calc(var(--circSize) * 0.66);
+  height: calc(var(--circSize) * 0.55); // Reduced from 0.66 to bring content closer
   overflow: hidden;
   transform: translateX(-22dvw); // Added this line to shift left in desktop view
 
