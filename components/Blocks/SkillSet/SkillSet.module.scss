@@ -94,8 +94,8 @@
 
 .circularCarouselWrapper{
   position: relative;
-  --circSize: 75dvw;  // Increased from 65dvw
-  --cardSize: calc(var(--circSize) / 8);  // Changed from 5.2 to 8 to create wider trajectory
+  --circSize: 75dvw;
+  --cardSize: calc(var(--circSize) / 6);  // Changed from 8 to 6 to increase blob size
   padding: calc(var(--cardSize) / 2);
   margin: 0 auto 0 auto;
   width: fit-content;
@@ -104,10 +104,12 @@
 
   @include respond-below(sm) {
     --circSize: 150dvw;
-    --cardSize: calc(var(--circSize) / 6);  // Adjusted for mobile as well
+    --cardSize: calc(var(--circSize) / 4);  // Changed from 6 to 4 for larger mobile blobs
     padding: calc(var(--cardSize) / 2);
     height: calc(var(--circSize) * 0.7);
-    left: -50dvw;
+    left: 0;  // Changed from -50dvw to 0 to center the component
+    right: 0;
+    margin: 0 auto;  // Added to help with centering
   }
 
   .circularCarousel{
