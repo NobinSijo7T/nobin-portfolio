@@ -115,11 +115,17 @@
   transform: translateX(-20dvw); // Changed from -22dvw to -18dvw to move right
 
   @include respond-below(sm) {
-    --circSize: 150dvw;
-    --cardSize: calc(var(--circSize) / 4);
+    --circSize: 180dvw; // Increased from 150dvw for larger circle
+    --cardSize: calc(var(--circSize) / 5); // Changed from /4 to /5 for better spacing
     padding: calc(var(--cardSize) / 2);
     height: calc(var(--circSize) * 0.7);
-    left: -50dvw;
+    left: 50%; // Changed from -50dvw
+    transform: translateX(-50%); // Added to center the component
+    margin: 0 auto; // Added for better centering
+    
+    .circularCarousel {
+      transform: scale(0.9); // Added to ensure visibility
+    }
   }
 
   .circularCarousel{
