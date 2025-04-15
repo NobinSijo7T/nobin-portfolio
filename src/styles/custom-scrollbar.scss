@@ -1,0 +1,34 @@
+// Hide default scrollbar while maintaining functionality
+html {
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE and Edge
+  
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Opera
+  }
+}
+
+// Custom scrollbar styles
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffd700; // Yellow color
+  border-radius: 5px;
+  
+  &:hover {
+    background: #ffcc00; // Slightly darker yellow on hover
+  }
+}
+
+// Firefox custom scrollbar
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ffd700 #f1f1f1;
+}
