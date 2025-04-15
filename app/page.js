@@ -5,7 +5,7 @@ import Resume from "@/components/Blocks/Resume/Resume";
 import SkillSet from "@/components/Blocks/SkillSet/SkillSet";
 import BoldTitle from "@/components/UI/Cards/BoldTitle/BoldTitle";
 import Gallery from "@/components/Blocks/Gallery/Gallery";
-import './styles/custom-scrollbar.scss';
+import CustomScrollbar from './CustomScrollbar';
 
 export default function Home() {
     return (
