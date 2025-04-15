@@ -1,26 +1,26 @@
 [
   {
-    "url": "/gallery/G0062517.JPG",
-    "date": "July 2022",
-    "location": "Oludeniz, Turkey",
+    "url": "/gallery/MuPlay.png",
+    "date": "MuLearn Foundation",
+    "location": "MuPlay",
     "direction": "vertical"
   },
   {
-    "url": "/gallery/IMG_20231225_165326.jpg",
-    "date": "December 2023",
-    "location": "Seattle, WA",
+    "url": "/gallery/top100makers.png",
+    "date": "MuLearn Foundation",
+    "location": "Top 100 Makers",
     "direction": "vertical"
   },
   {
-    "url": "/gallery/G0062743.JPG",
-    "date": "30 August",
-    "location": "Kas, Turkey",
+    "url": "/gallery/Mucomics.png",
+    "date": "MuLearn Foundation",
+    "location": "MuComics",
     "direction": "horizontal"
   },
   {
-    "url": "/gallery/AIROB.webp",
-    "date": "April 2018",
-    "location": "AIROB, IEEE SB CEK",
+    "url": "/gallery/foundation.png",
+    "date": "MuLearn Foundation",
+    "location": "The Foundation Programme",
     "direction": "vertical"
   },
   {
@@ -30,45 +30,45 @@
     "direction": "vertical"
   },
   {
-    "url": "/gallery/IMG_20230420_134057.jpg",
-    "date": "April 2023",
-    "location": "Lycian Way, Antalya",
+    "url": "/gallery/luxathon.png",
+    "date": " IEEE SB CEK",
+    "location": "Luxathon 5.0",
     "direction": "vertical"
   },
   {
     "url": "/gallery/AIROB1.webp",
-    "date": "July 2020",
-    "location": "Yalova, Turkey",
+    "date": " IEEE SB CEK",
+    "location": "AIROB",
     "direction": "vertical"
   },
   {
-    "url": "/gallery/IMG_20210130_135221.jpg",
-    "date": "January 2021",
-    "location": "Lutsk, Ukraine",
+    "url": "/gallery/aithon.png",
+    "date": " IEEE SB CEK",
+    "location": "Aithon 2.0",
     "direction": "vertical"
   },
   {
-    "url": "/gallery/IMG_20210713_103018.jpg",
-    "date": "July 2021",
-    "location": "Kamianets-Podilskyi, Ukraine",
+    "url": "/gallery/to-do.png",
+    "date": "Saturday Hacknight",
+    "location": "To-Do List App",
     "direction": "vertical"
   },
   {
-    "url": "/gallery/IMG_20220715_132804.jpg",
-    "date": "July 2022",
-    "location": "Kas, Turkey",
+    "url": "/gallery/purebeats.png",
+    "date": "Side Project",
+    "location": "Pure Beats",
     "direction": "horizontal"
   },
   {
-    "url": "/gallery/image_2024-01-24_23-54-41.png",
-    "date": "February 2021",
-    "location": "Lviv, Ukraine",
+    "url": "/gallery/simplified.png",
+    "date": "Side Project",
+    "location": "Learning Simplified",
     "direction": "vertical"
   },
   {
-    "url": "/gallery/IMG20210707082309.jpg",
-    "date": "July 2021",
-    "location": "Kyiv, Ukraine",
+    "url": "/gallery/Mulearn 2.0.png",
+    "date": "Side Project",
+    "location": "Mulearn 2.0",
     "direction": "vertical"
   }
 
