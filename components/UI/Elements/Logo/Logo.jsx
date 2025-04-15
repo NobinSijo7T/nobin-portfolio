@@ -15,7 +15,24 @@ export default function Logo({ classVariable }) {
         'Space Grotesk',
         'Syncopate',
         'Rajdhani',
-        'Exo 2'
+        'Exo 2',
+        'Codystar',
+        'Permanent Marker',
+        'Bangers',
+        'Silkscreen',
+        'Doto',
+        'Rammetto One',
+        'Bruno Ace SC',
+        'Sixtyfour',
+        'Zen Tokyo Zoo',
+        'Kablammo',
+        'Playwrite México',
+        'Stint Ultra Expanded',
+        'Yuji Boku',
+        'Darumadrop One',
+        'Jacquard 24',
+        'Geostar Fill',
+        'Workbench'
     ];
 
     useEffect(() => {
