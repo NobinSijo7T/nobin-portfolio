@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/custom-scrollbar.scss';
+import './custom-scrollbar.scss';
 
 const CustomScrollbar = ({ children }) => {
   return (
