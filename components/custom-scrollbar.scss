@@ -60,3 +60,23 @@ html {
   scrollbar-width: thin;
   scrollbar-color: #ffd700 #f1f1f1;
 }
+
+.progress-bar-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 6px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  z-index: 1000;
+}
+
+.progress-bar {
+  width: 100%;
+  background: #ffd700;
+  position: absolute;
+  bottom: 0;
+  border-radius: 3px;
+  transition: height 0.2s ease;
+}
