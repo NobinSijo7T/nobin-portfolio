@@ -1,4 +1,6 @@
-# Welcome to My Portfolio
+<div align="center">
+  <h1>✨ My Portfolio Workspace ✨</h1>
+</div>
 
 ![Portfolio Preview](/public/readme.png)
 
@@ -30,13 +32,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 | Core | UI & Animation | Utilities | Platform |
 |------|----------------|-----------|----------|
-| <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" height="20"> Next.js | <img src="https://camo.githubusercontent.com/a4f5293a6e4ec06de1866917404dc4f358d93e30461c9b89adc7532e5a430227/68747470733a2f2f677265656e736f636b2e636f6d2f75706c6f6164732f6d6f6e74686c795f323032305f30332f7477656572716f6e652e706e67" height="20"> GSAP | <img src="https://cdn.worldvectorlogo.com/logos/axios.svg" height="20"> Axios | <img src="https://assets.vercel.com/image/upload/v1607554385/repositories/vercel/logo.png" height="20"> Vercel |
+| <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" height="20"> Next.js | <img src="https://img.shields.io/badge/GSAP-Animation-brightgreen" height="20"> GSAP | <img src="https://cdn.worldvectorlogo.com/logos/axios.svg" height="20"> Axios | <img src="https://assets.vercel.com/image/upload/v1607554385/repositories/vercel/logo.png" height="20"> Vercel |
 | <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" height="20"> React | <img src="https://cdn.worldvectorlogo.com/logos/sass-1.svg" height="20"> Sass | <img src="https://img.shields.io/badge/usehooks-hooks-blue" height="20"> useHooks | <img src="https://assets.vercel.com/image/upload/v1607554385/repositories/vercel/logo.png" height="20"> Analytics |
-| <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" height="20"> React DOM | <img src="https://framerusercontent.com/images/48ha9ZR9oZQGQ6gZ8YUfElP3T0A.png" height="20"> Framer Motion | | |
-| | <img src="https://studio-freight.github.io/lenis/favicon/favicon.svg" height="20"> Lenis | | |
+| <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" height="20"> React DOM | <img src="https://framerusercontent.com/images/48ha9ZR9oZQGQ6gZ8YUfElP3T0A.png" height="20"> Framer Motion | <img src="https://infinityfree.net/assets/favicon/favicon-32x32.png" height="20"> InfinityFree | |
+| | <img src="https://img.shields.io/badge/Lenis-Smooth_Scroll-blue" height="20"> Lenis | | |
 | | <img src="https://swiperjs.com/images/swiper-logo.svg" height="20"> Swiper | | |
 | | <img src="https://cdn.worldvectorlogo.com/logos/threejs-1.svg" height="20"> Three.js | | |
-| | <img src="https://user-images.githubusercontent.com/33971845/133919546-03015fe3-b45c-455c-a004-b366c1867c9a.png" height="20"> Fast Marquee | | |
+| | <img src="https://img.shields.io/badge/Fast_Marquee-Scrolling-orange" height="20"> Fast Marquee | | |
 
 </div>
 
