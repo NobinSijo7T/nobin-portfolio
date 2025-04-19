@@ -11,7 +11,7 @@
   <a href="https://www.hackerrank.com/yourusername" title="HackerRank"><img src="https://img.shields.io/badge/HackerRank-00EA64?style=for-the-badge&logo=hackerrank&logoColor=white" alt="HackerRank" /></a>
 </div>
 
-This is my portfolio [https://yasingenc.net](https://yasingenc.net). Drop me a line if I can do anything else for you.
+This is my portfolio [https://yasingenc.net](http://nobinsijo.great-site.net). Drop me a line if I can do anything else for you.
 
 ---
 
@@ -34,7 +34,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 |------|----------------|-----------|----------|
 | <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" height="20"> Next.js | <img src="https://img.shields.io/badge/GSAP-Animation-brightgreen" height="20"> GSAP | <img src="https://cdn.worldvectorlogo.com/logos/axios.svg" height="20"> Axios | <img src="https://assets.vercel.com/image/upload/v1607554385/repositories/vercel/logo.png" height="20"> Vercel |
 | <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" height="20"> React | <img src="https://cdn.worldvectorlogo.com/logos/sass-1.svg" height="20"> Sass | <img src="https://img.shields.io/badge/usehooks-hooks-blue" height="20"> useHooks | <img src="https://assets.vercel.com/image/upload/v1607554385/repositories/vercel/logo.png" height="20"> Analytics |
-| <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" height="20"> React DOM | <img src="https://framerusercontent.com/images/48ha9ZR9oZQGQ6gZ8YUfElP3T0A.png" height="20"> Framer Motion | <img src="https://infinityfree.net/assets/favicon/favicon-32x32.png" height="20"> InfinityFree | |
+| <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" height="20"> React DOM | <img src="https://framerusercontent.com/images/48ha9ZR9oZQGQ6gZ8YUfElP3T0A.png" height="20"> Framer Motion | | <img src="https://img.shields.io/badge/InfinityFree-Hosting-purple" height="20"> InfinityFree |
 | | <img src="https://img.shields.io/badge/Lenis-Smooth_Scroll-blue" height="20"> Lenis | | |
 | | <img src="https://swiperjs.com/images/swiper-logo.svg" height="20"> Swiper | | |
 | | <img src="https://cdn.worldvectorlogo.com/logos/threejs-1.svg" height="20"> Three.js | | |
@@ -42,5 +42,3 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 </div>
 
-## License
-Feel free to use this project.
