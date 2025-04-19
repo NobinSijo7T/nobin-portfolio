@@ -11,7 +11,7 @@
   <a href="https://www.hackerrank.com/yourusername" title="HackerRank"><img src="https://img.shields.io/badge/HackerRank-00EA64?style=for-the-badge&logo=hackerrank&logoColor=white" alt="HackerRank" /></a>
 </div>
 
-This is my portfolio [https://yasingenc.net](http://nobinsijo.great-site.net). Drop me a line if I can do anything else for you.
+This is my portfolio [http://nobinsijo.great-site.net](http://nobinsijo.great-site.net). Drop me a line if I can do anything else for you.
 
 ---
 
