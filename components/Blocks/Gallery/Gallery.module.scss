@@ -36,11 +36,169 @@
   position: relative;
   overflow: hidden;
   border-radius: 2rem;
+  cursor: pointer;
   @include respond-above(xl) {
     width: fit-content;
   }
   @include respond-below(xl) {
     height: 50rem;
+  }
+}
+
+.projectCard {
+  position: relative;
+  transition: all 0.3s ease;
+  
+  &.active {
+    .overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 2;
+  
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.actionButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 30rem;
+  position: relative;
+  
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    max-width: 25rem;
+  }
+  
+  @include respond-below(sm) {
+    padding: 1.2rem;
+    gap: 0.6rem;
+    max-width: 20rem;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: hsl(var(--color-white));
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  
+  // Only show on mobile/touch devices
+  @media (hover: hover) and (pointer: fine) {
+    display: none;
+  }
+  
+  svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1.2rem 1.6rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.8rem;
+  color: hsl(var(--color-white));
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  // Touch device specific styles
+  @media (hover: none) and (pointer: coarse) {
+    &:hover {
+      transform: none;
+    }
+    
+    &:active {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(0.98);
+    }
+  }
+  
+  svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    flex-shrink: 0;
+  }
+  
+  @include respond-below(md) {
+    padding: 1rem 1.4rem;
+    font-size: var(--fs-sm);
+  }
+  
+  @include respond-below(sm) {
+    padding: 0.8rem 1.2rem;
+    font-size: var(--fs-xs);
+    gap: 0.6rem;
+    
+    svg {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
   }
 }
 

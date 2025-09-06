@@ -1,8 +1,9 @@
 import styles from './Button.module.scss';
 import Link from "next/link";
 
-export default function FancyButton({element, type, link, target, theme, isEnabled, children, onClick}) {
+export default function FancyButton({element, type, link, target, theme, isEnabled, children, onClick, dataText}) {
     const btnClass = styles[theme];
+    const hoverText = dataText || children;
 
     if(element === 'button'){
         return (
@@ -12,7 +13,7 @@ export default function FancyButton({element, type, link, target, theme, isEnabl
                     <span></span>
                 </span>
                 <span className={styles.title}>
-                    <span data-text={children}>{children}</span>
+                    <span data-text={hoverText}>{children}</span>
                 </span>
             </button>
         )
@@ -24,7 +25,7 @@ export default function FancyButton({element, type, link, target, theme, isEnabl
                     <span></span>
                 </span>
                 <span className={styles.title}>
-                    <span data-text={children}>{children}</span>
+                    <span data-text={hoverText}>{children}</span>
                 </span>
             </Link>
         )

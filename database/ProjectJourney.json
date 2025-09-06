@@ -1,0 +1,170 @@
+[
+  {
+    "id": "muplay",
+    "title": "MuPlay",
+    "company": "MuLearn Foundation",
+    "image": "/gallery/MuPlay.png",
+    "direction": "vertical",
+    "description": "Interactive gaming platform for the MuLearn community with challenges and rewards system.",
+    "technologies": ["React", "Node.js", "MongoDB", "Express"],
+    "links": {
+      "github": "https://github.com/nobinsijo/muplay",
+      "dribbble": null,
+      "live": "https://muplay.mulearn.org"
+    }
+  },
+  {
+    "id": "top100makers",
+    "title": "Top 100 Makers",
+    "company": "MuLearn Foundation",
+    "image": "/gallery/top100makers.png",
+    "direction": "vertical",
+    "description": "Recognition platform for top makers in the community with leaderboard and achievement system.",
+    "technologies": ["Next.js", "React", "CSS3", "JavaScript"],
+    "links": {
+      "github": "https://github.com/nobinsijo/top100makers",
+      "dribbble": "https://dribbble.com/shots/top100makers",
+      "live": "https://top100.mulearn.org"
+    }
+  },
+  {
+    "id": "mucomics",
+    "title": "MuComics",
+    "company": "MuLearn Foundation",
+    "image": "/gallery/Mucomics.png",
+    "direction": "horizontal",
+    "description": "Comic creation and sharing platform for the community to express creativity through visual storytelling.",
+    "technologies": ["React", "Canvas API", "Node.js", "PostgreSQL"],
+    "links": {
+      "github": "https://github.com/nobinsijo/mucomics",
+      "dribbble": "https://dribbble.com/shots/mucomics",
+      "live": null
+    }
+  },
+  {
+    "id": "foundation",
+    "title": "The Foundation Programme",
+    "company": "MuLearn Foundation",
+    "image": "/gallery/foundation.png",
+    "direction": "vertical",
+    "description": "Comprehensive learning platform with courses, assessments, and progress tracking for students.",
+    "technologies": ["React", "Node.js", "Express", "MongoDB", "Socket.io"],
+    "links": {
+      "github": "https://github.com/nobinsijo/foundation-programme",
+      "dribbble": null,
+      "live": "https://foundation.mulearn.org"
+    }
+  },
+  {
+    "id": "xcarta",
+    "title": "Xcarta Interactive",
+    "company": "Tiltlabs",
+    "image": "/gallery/xcarta.png",
+    "direction": "vertical",
+    "description": "Interactive mapping solution with real-time data visualization and user engagement features.",
+    "technologies": ["Vue.js", "Mapbox", "Node.js", "Express", "MongoDB"],
+    "links": {
+      "github": null,
+      "dribbble": "https://dribbble.com/shots/xcarta-interactive",
+      "live": "https://xcarta.tiltlabs.io"
+    }
+  },
+  {
+    "id": "luxathon",
+    "title": "Luxathon 5.0",
+    "company": "IEEE SB CEK",
+    "image": "/gallery/luxathon.png",
+    "direction": "vertical",
+    "description": "Hackathon event management platform with registration, team formation, and project submission features.",
+    "technologies": ["React", "Firebase", "Node.js", "Express"],
+    "links": {
+      "github": "https://github.com/nobinsijo/luxathon5",
+      "dribbble": "https://dribbble.com/shots/luxathon5",
+      "live": "https://luxathon.ieee-cek.org"
+    }
+  },
+  {
+    "id": "airob",
+    "title": "AIROB",
+    "company": "IEEE SB CEK",
+    "image": "/gallery/AIROB1.webp",
+    "direction": "vertical",
+    "description": "AI and Robotics competition platform with automated judging and real-time scoring system.",
+    "technologies": ["React", "Python", "TensorFlow", "Node.js", "MongoDB"],
+    "links": {
+      "github": "https://github.com/nobinsijo/airob",
+      "dribbble": null,
+      "live": "https://airob.ieee-cek.org"
+    }
+  },
+  {
+    "id": "aithon",
+    "title": "Aithon 2.0",
+    "company": "IEEE SB CEK",
+    "image": "/gallery/aithon.png",
+    "direction": "vertical",
+    "description": "AI-focused hackathon platform with machine learning challenges and collaborative workspace.",
+    "technologies": ["React", "Python", "FastAPI", "PostgreSQL", "Docker"],
+    "links": {
+      "github": "https://github.com/nobinsijo/aithon2",
+      "dribbble": "https://dribbble.com/shots/aithon2",
+      "live": null
+    }
+  },
+  {
+    "id": "todo-app",
+    "title": "To-Do List App",
+    "company": "Saturday Hacknight",
+    "image": "/gallery/to-do.png",
+    "direction": "vertical",
+    "description": "Feature-rich task management application with drag-and-drop, categories, and deadline tracking.",
+    "technologies": ["React", "Local Storage", "CSS3", "JavaScript"],
+    "links": {
+      "github": "https://github.com/nobinsijo/todo-app",
+      "dribbble": "https://dribbble.com/shots/todo-app",
+      "live": "https://todo.nobinsijo.dev"
+    }
+  },
+  {
+    "id": "purebeats",
+    "title": "Pure Beats",
+    "company": "Side Project",
+    "image": "/gallery/purebeats.png",
+    "direction": "horizontal",
+    "description": "Music streaming platform with curated playlists, social features, and personalized recommendations.",
+    "technologies": ["React", "Node.js", "Spotify API", "MongoDB", "Express"],
+    "links": {
+      "github": "https://github.com/nobinsijo/purebeats",
+      "dribbble": "https://dribbble.com/shots/purebeats",
+      "live": "https://purebeats.nobinsijo.dev"
+    }
+  },
+  {
+    "id": "learning-simplified",
+    "title": "Learning Simplified",
+    "company": "Side Project",
+    "image": "/gallery/simplified.png",
+    "direction": "vertical",
+    "description": "Educational platform with interactive courses, quizzes, and progress tracking for enhanced learning experience.",
+    "technologies": ["Next.js", "React", "Prisma", "PostgreSQL", "Stripe"],
+    "links": {
+      "github": "https://github.com/nobinsijo/learning-simplified",
+      "dribbble": null,
+      "live": "https://learning.nobinsijo.dev"
+    }
+  },
+  {
+    "id": "mulearn2",
+    "title": "Mulearn 2.0",
+    "company": "Side Project",
+    "image": "/gallery/Mulearn 2.0.png",
+    "direction": "vertical",
+    "description": "Redesigned learning platform with improved UI/UX, better performance, and enhanced user engagement.",
+    "technologies": ["React", "TypeScript", "Node.js", "GraphQL", "PostgreSQL"],
+    "links": {
+      "github": "https://github.com/nobinsijo/mulearn2",
+      "dribbble": "https://dribbble.com/shots/mulearn2",
+      "live": null
+    }
+  }
+]

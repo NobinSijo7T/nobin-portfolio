@@ -130,3 +130,26 @@
   --text-color: hsl(var(--color-black));
   --text-after-color: hsl(var(--color-white));
 }
+
+.button-4{
+  --bg-color: hsl(var(--color-primary));
+  --border-color: transparent;
+  --ripple-color: hsl(var(--color-primary));
+  --text-color: hsl(var(--color-black));
+  --text-after-color: hsl(var(--color-black));
+  
+  // Disable hover effects for this theme
+  &:hover {
+    .ripple {
+      span {
+        transform: translateY(101%);
+        border-radius: 50% 50% 0 0;
+      }
+    }
+    .title {
+      span {
+        transform: translateY(0);
+      }
+    }
+  }
+}

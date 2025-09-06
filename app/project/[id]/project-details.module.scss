@@ -1,0 +1,465 @@
+@import '/assets/media-queries.scss';
+
+.main {
+  position: relative;
+  min-height: 100vh;
+  background: hsl(var(--color-bg-alt));
+  padding: var(--y-spacing) 0;
+  overflow: hidden;
+}
+
+.mobileBackButton {
+  display: none;
+  justify-content: center;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+  
+  @include respond-below(md) {
+    display: flex;
+  }
+  
+  // Style the FancyButton component for mobile back button
+  :global(.button) {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2.5rem;
+    
+    @include respond-below(sm) {
+      padding: 0 2rem;
+      font-size: var(--fs-xs);
+    }
+    
+    // Add arrow icon via CSS
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 1.6rem;
+      height: 1.6rem;
+      margin-right: 0.8rem;
+      background: currentColor;
+      mask: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 12H5M12 19L5 12L12 5' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
+      mask-size: contain;
+      transition: transform 0.3s ease;
+      
+      @include respond-below(sm) {
+        width: 1.4rem;
+        height: 1.4rem;
+        margin-right: 0.6rem;
+      }
+    }
+    
+    &:hover::before {
+      transform: translateX(-0.3rem);
+    }
+  }
+}
+
+// Background Elements (copied from Hero)
+.background {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  z-index: -1;
+
+  > * {
+    position: absolute;
+  }
+
+  .noise {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: url('/noise.png') repeat;
+    pointer-events: none;
+  }
+
+  .line {
+    width: 50%;
+    height: 100%;
+    display: flex;
+
+    &.lineLeft {
+      left: 0;
+    }
+
+    &.lineRight {
+      right: 0;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      margin-top: auto;
+    }
+  }
+}
+
+.particlesBG {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+
+  > * {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+  
+  @include respond-below(xl) {
+    gap: 4rem;
+  }
+  
+  @include respond-below(lg) {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  
+  @include respond-below(md) {
+    gap: 3rem;
+  }
+}
+
+.imageSection {
+  position: sticky;
+  top: 4rem;
+  
+  @include respond-below(lg) {
+    position: relative;
+    top: 0;
+  }
+  
+  @include respond-below(md) {
+    display: none; // Hide desktop image on mobile
+  }
+}
+
+.mobileImageSection {
+  display: none; // Hidden by default
+  
+  @include respond-below(md) {
+    display: block; // Show only on mobile
+    margin: 2rem 0; // Add spacing around the image
+  }
+  
+  @include respond-below(sm) {
+    margin: 1.5rem 0; // Reduce spacing on smaller screens
+  }
+}
+
+.projectImage {
+  width: 100%;
+  height: auto;
+  border-radius: 2rem;
+  filter: contrast(1.1);
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3);
+}
+
+.detailsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  
+  @include respond-below(md) {
+    gap: 2.5rem;
+  }
+  
+  @include respond-below(sm) {
+    gap: 2rem;
+  }
+}
+
+.backButtonWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  
+  @include respond-below(md) {
+    display: none; // Hide desktop back button on mobile
+  }
+  
+  // Style the FancyButton component specifically for back button
+  :global(.button) {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2.5rem;
+    position: relative;
+    
+    @include respond-below(sm) {
+      padding: 0 2rem;
+      font-size: var(--fs-xs);
+    }
+    
+    // Add arrow icon via CSS
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 1.6rem;
+      height: 1.6rem;
+      margin-right: 0.8rem;
+      background: currentColor;
+      mask: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 12H5M12 19L5 12L12 5' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
+      mask-size: contain;
+      transition: transform 0.3s ease;
+      
+      @include respond-below(sm) {
+        width: 1.4rem;
+        height: 1.4rem;
+        margin-right: 0.6rem;
+      }
+    }
+    
+    &:hover::before {
+      transform: translateX(-0.3rem);
+    }
+  }
+}
+
+.projectHeader {
+  .company {
+    color: hsl(var(--color-white));
+    font-size: var(--fs-lg);
+    margin-top: 0.5rem;
+    font-weight: 400;
+  }
+}
+
+.description {
+  h3 {
+    color: hsl(var(--color-white));
+    font-size: var(--fs-xl);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+  
+  p {
+    color: hsl(var(--color-white));
+    font-size: var(--fs-lg);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+}
+
+.technologies {
+  h3 {
+    color: hsl(var(--color-white));
+    font-size: var(--fs-xl);
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+  
+  @include respond-below(sm) {
+    h3 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+.iconCloudContainer {
+  display: flex;
+  justify-content: center; // Center alignment for both desktop and mobile
+  align-items: center; // Vertical center
+  height: 400px;
+  margin-bottom: 3rem;
+  border: 1px solid hsl(var(--color-primary) / 0.2);
+  border-radius: 1rem;
+  background: hsl(var(--color-bg) / 0.1);
+  padding: 0; // Remove left padding for consistent centering
+  
+  @include respond-below(lg) {
+    height: 350px;
+    margin-bottom: 2.5rem;
+  }
+  
+  @include respond-below(md) {
+    height: 300px;
+    margin-bottom: 2rem;
+  }
+  
+  @include respond-below(sm) {
+    height: 250px;
+    margin-bottom: 1.5rem;
+  }
+  
+  // Style for the new HTML-based icon cloud
+  > div {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+  }
+}
+
+.noIcons {
+  color: hsl(var(--color-text-muted));
+  font-style: italic;
+  text-align: center;
+}
+
+.iconCloudLoading {
+  color: hsl(var(--color-text-muted));
+  font-style: italic;
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  
+  @include respond-below(sm) {
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  
+  // Style the FancyButton components in tech list
+  :global(.button) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.6rem;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    
+    @include respond-below(sm) {
+      padding: 0.6rem 1.2rem;
+      font-size: var(--fs-xs);
+    }
+  }
+}
+
+.links {
+  h3 {
+    color: hsl(var(--color-white));
+    font-size: var(--fs-xl);
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+
+  :global(.button) {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1.5rem;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover svg {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.linkButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  
+  @include respond-below(sm) {
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  // Style all FancyButton components in linkButtons to match back button
+  :global(.button) {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem; // Match back button gap
+    padding: 0 2.5rem; // Match back button padding
+    position: relative;
+    
+    @include respond-below(sm) {
+      padding: 0 2rem; // Match back button mobile padding
+      font-size: var(--fs-xs);
+      gap: 0.8rem;
+    }
+    
+    svg {
+      width: 1.6rem; // Match back button icon size
+      height: 1.6rem;
+      flex-shrink: 0;
+      margin-right: 0.8rem; // Match back button icon spacing
+      transition: transform 0.3s ease; // Add hover transition
+      
+      @include respond-below(sm) {
+        width: 1.4rem; // Match back button mobile icon size
+        height: 1.4rem;
+        margin-right: 0.6rem;
+      }
+    }
+    
+    // Disable hover text animation for link buttons to keep logo visible
+    &:hover {
+      .title {
+        span {
+          transform: translateY(0) !important; // Prevent text sliding to keep logo visible
+        }
+      }
+    }
+    
+    // Add hover effect for SVG
+    &:hover svg {
+      transform: translateX(0.2rem); // Subtle forward movement for action buttons
+    }
+  }
+}
+
+.notFound {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: hsl(var(--color-bg));
+  
+  p {
+    color: hsl(var(--color-text));
+    font-size: var(--fs-lg);
+    margin: 2rem 0;
+  }
+}
+
+.backLink {
+  display: inline-block;
+  background: hsl(var(--color-primary));
+  color: hsl(var(--color-white));
+  padding: 1.2rem 2.4rem;
+  border-radius: 0.8rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: hsl(var(--color-primary-dark));
+    transform: translateY(-0.2rem);
+  }
+}

@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@400;700&family=Syncopate:wght@400;700&family=Audiowide&family=Exo+2:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Codystar&family=Permanent+Marker&family=Bangers&family=Silkscreen&family=Rammetto+One&family=Bruno+Ace+SC&family=Zen+Tokyo+Zoo&family=Kablammo&family=Stint+Ultra+Expanded&family=Yuji+Boku&family=Darumadrop+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@400;700&family=Audiowide&family=Bangers&family=Silkscreen&display=swap');
-
+@import "tailwindcss";
 @import 'media-queries.scss';
-//////////////////////////////
-// THEMING
-//////////////////////////////
+
 :root {
   --font-alt: 'Libre Baskerville', serif;
   --font-primary: 'Manrope', sans-serif;

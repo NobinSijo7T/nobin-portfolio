@@ -1,0 +1,163 @@
+[
+  {
+    "id": "project-001",
+    "title": "E-Commerce Platform",
+    "shortDescription": "Modern React-based e-commerce platform with real-time inventory management",
+    "fullDescription": "A comprehensive e-commerce solution built with React and Node.js, featuring real-time inventory management, secure payment processing, and an intuitive admin dashboard. The platform handles thousands of concurrent users and processes over 500 transactions daily.",
+    "image": "/gallery/simplified.png",
+    "category": "Full Stack",
+    "technologies": ["React", "Node.js", "MongoDB", "Stripe", "Socket.io"],
+    "status": "completed",
+    "links": {
+      "github": "https://github.com/nobinsijo7t/ecommerce-platform",
+      "live": "https://ecommerce-demo.nobinsijo.com",
+      "case_study": "/projects/ecommerce-platform"
+    },
+    "features": [
+      "Real-time inventory tracking",
+      "Secure payment processing",
+      "Advanced search and filtering",
+      "Admin dashboard with analytics"
+    ],
+    "challenges": "Handling real-time inventory updates across multiple users without conflicts",
+    "solutions": "Implemented optimistic locking and WebSocket connections for real-time synchronization",
+    "date_completed": "2024-03-15",
+    "duration": "4 months",
+    "team_size": 1,
+    "role": "Full Stack Developer"
+  },
+  {
+    "id": "project-002",
+    "title": "AI Music Generator",
+    "shortDescription": "Machine learning powered music composition tool with intuitive interface",
+    "fullDescription": "An innovative AI-powered music generation application that creates original compositions based on user preferences and mood selection. Built with Python, TensorFlow, and React.",
+    "image": "/gallery/purebeats.png",
+    "category": "Machine Learning",
+    "technologies": ["Python", "TensorFlow", "React", "Web Audio API", "Flask"],
+    "status": "completed",
+    "links": {
+      "github": "https://github.com/nobinsijo7t/ai-music-generator",
+      "dribbble": "https://dribbble.com/shots/ai-music-interface",
+      "live": "https://ai-music.nobinsijo.com",
+      "case_study": "/projects/ai-music-generator"
+    },
+    "features": [
+      "AI-powered composition generation",
+      "Real-time audio preview",
+      "Mood-based music creation",
+      "MIDI export functionality"
+    ],
+    "challenges": "Training the model to generate harmonically coherent music sequences",
+    "solutions": "Used LSTM networks with attention mechanisms and music theory constraints",
+    "date_completed": "2024-01-20",
+    "duration": "6 months",
+    "team_size": 1,
+    "role": "ML Engineer & Frontend Developer"
+  },
+  {
+    "id": "project-003",
+    "title": "Task Management App",
+    "shortDescription": "Collaborative task management platform with real-time updates and team features",
+    "fullDescription": "A comprehensive task management application designed for teams, featuring real-time collaboration, project tracking, and advanced reporting capabilities.",
+    "image": "/gallery/to-do.png",
+    "category": "Web Development",
+    "technologies": ["React", "Firebase", "Material-UI", "Chart.js"],
+    "status": "completed",
+    "links": {
+      "github": "https://github.com/nobinsijo7t/task-manager",
+      "live": "https://tasks.nobinsijo.com",
+      "case_study": "/projects/task-manager"
+    },
+    "features": [
+      "Real-time collaboration",
+      "Project timeline tracking",
+      "Team performance analytics",
+      "File attachment support"
+    ],
+    "challenges": "Implementing conflict resolution for simultaneous edits",
+    "solutions": "Used operational transformation algorithms for real-time collaborative editing",
+    "date_completed": "2023-11-10",
+    "duration": "3 months",
+    "team_size": 1,
+    "role": "Frontend Developer"
+  },
+  {
+    "id": "project-004",
+    "title": "Portfolio Website",
+    "shortDescription": "Modern, animated portfolio website showcasing creative work and technical skills",
+    "fullDescription": "A personal portfolio website featuring advanced animations, interactive elements, and optimized performance. Built with Next.js and GSAP for smooth user experience.",
+    "image": "/gallery/foundation.png",
+    "category": "UI/UX Design",
+    "technologies": ["Next.js", "GSAP", "SCSS", "Framer Motion"],
+    "status": "in-progress",
+    "links": {
+      "github": "https://github.com/nobinsijo7t/portfolio",
+      "dribbble": "https://dribbble.com/shots/portfolio-design",
+      "case_study": "/projects/portfolio-website"
+    },
+    "features": [
+      "Advanced GSAP animations",
+      "Responsive design",
+      "Dark/Light theme toggle",
+      "Performance optimized"
+    ],
+    "challenges": "Balancing complex animations with performance optimization",
+    "solutions": "Implemented lazy loading and GPU-accelerated animations with GSAP",
+    "date_completed": "2024-09-01",
+    "duration": "2 months",
+    "team_size": 1,
+    "role": "UI/UX Designer & Developer"
+  },
+  {
+    "id": "project-005",
+    "title": "Mobile Banking App",
+    "shortDescription": "Secure mobile banking application with biometric authentication",
+    "fullDescription": "A comprehensive mobile banking solution with advanced security features, real-time transaction processing, and intuitive user interface design.",
+    "image": "/gallery/xcarta.png",
+    "category": "Mobile App",
+    "technologies": ["React Native", "Node.js", "PostgreSQL", "JWT"],
+    "status": "concept",
+    "links": {
+      "dribbble": "https://dribbble.com/shots/banking-app-concept",
+      "case_study": "/projects/mobile-banking"
+    },
+    "features": [
+      "Biometric authentication",
+      "Real-time transactions",
+      "Budget tracking",
+      "Investment portfolio"
+    ],
+    "challenges": "Implementing bank-level security in mobile environment",
+    "solutions": "Multi-layer security with biometrics, encryption, and secure enclaves",
+    "date_completed": "2024-06-15",
+    "duration": "5 months",
+    "team_size": 3,
+    "role": "Mobile Developer & Security Specialist"
+  },
+  {
+    "id": "project-006",
+    "title": "Data Visualization Dashboard",
+    "shortDescription": "Interactive dashboard for complex data analysis and visualization",
+    "fullDescription": "A powerful data visualization platform that transforms complex datasets into interactive, insightful dashboards for business intelligence and analytics.",
+    "image": "/gallery/Mulearn 2.0.png",
+    "category": "Data Science",
+    "technologies": ["D3.js", "React", "Python", "FastAPI", "MongoDB"],
+    "status": "completed",
+    "links": {
+      "github": "https://github.com/nobinsijo7t/data-dashboard",
+      "live": "https://data-viz.nobinsijo.com"
+    },
+    "features": [
+      "Interactive data visualizations",
+      "Real-time data streaming",
+      "Custom chart builder",
+      "Export functionality"
+    ],
+    "challenges": "Rendering large datasets without performance degradation",
+    "solutions": "Implemented virtual scrolling and data aggregation techniques",
+    "date_completed": "2023-09-30",
+    "duration": "4 months",
+    "team_size": 2,
+    "role": "Frontend Developer & Data Analyst"
+  }
+]

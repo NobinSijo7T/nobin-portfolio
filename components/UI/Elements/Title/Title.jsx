@@ -38,7 +38,9 @@ export default function Title({heading, color, children, className}) {
                 ease: "power1.out",
                 stagger: 0.01,
                 onComplete: () => {
-                    textRef.current.classList.add(`animated`);
+                    if (textRef.current) {
+                        textRef.current.classList.add(`animated`);
+                    }
                 }
             });
         }
