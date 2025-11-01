@@ -145,11 +145,16 @@ const getTechnologyIcons = (technologies) => {
 export default function ProjectDetails() {
     const params = useParams();
     const router = useRouter();
-    const project = ProjectJourney.find(p => p.id === params.id);
+    const [projectId, setProjectId] = React.useState(null);
+    const [project, setProject] = React.useState(null);
 
-    const handleBackClick = () => {
-        router.back();
-    };
+    React.useEffect(() => {
+        if (params?.id) {
+            setProjectId(params.id);
+            const foundProject = ProjectJourney.find(p => p.id === params.id);
+            setProject(foundProject);
+        }
+    }, [params]);
 
     // Debug: Log the technologies and generated icons
     React.useEffect(() => {
@@ -158,6 +163,28 @@ export default function ProjectDetails() {
             console.log('Generated icons:', getTechnologyIcons(project.technologies));
         }
     }, [project]);
+
+    // Move useMemo before any conditional returns
+    const iconCloudContent = React.useMemo(() => {
+        if (!project?.technologies) return null;
+        
+        const icons = getTechnologyIcons(project.technologies);
+        console.log('Rendering IconCloud with icons:', icons);
+        
+        if (icons.length > 0) {
+            return <IconCloud icons={icons} />;
+        } else {
+            return (
+                <div className={styles.noIcons}>
+                    No icons available for technologies: {project.technologies.join(', ')}
+                </div>
+            );
+        }
+    }, [project?.technologies]);
+
+    const handleBackClick = () => {
+        router.back();
+    };
 
     if (!project) {
         return (
@@ -407,20 +434,7 @@ export default function ProjectDetails() {
                         <div className={styles.technologies}>
                             <h3>Technologies Used</h3>
                             <div className={styles.iconCloudContainer}>
-                                {React.useMemo(() => {
-                                    const icons = getTechnologyIcons(project.technologies);
-                                    console.log('Rendering IconCloud with icons:', icons);
-                                    
-                                    if (icons.length > 0) {
-                                        return <IconCloud icons={icons} />;
-                                    } else {
-                                        return (
-                                            <div className={styles.noIcons}>
-                                                No icons available for technologies: {project.technologies.join(', ')}
-                                            </div>
-                                        );
-                                    }
-                                }, [project.technologies])}
+                                {iconCloudContent}
                             </div>
                             <div className={styles.techList}>
                                 {project.technologies.map((tech, index) => (

@@ -185,9 +185,12 @@ export default function Gallery() {
                                         className={`${styles.image} ${styles[project.direction]}`}
                                     />
                                 </FadeIn>
-                                <ImageTip date={project.company}>{project.title}</ImageTip>
                                 
                                 <div className={styles.floatingDockWrapper}>
+                                    <div className={styles.projectInfo}>
+                                        <span className={styles.projectCompany}>{project.company}</span>
+                                        <span className={styles.projectTitle}>{project.title}</span>
+                                    </div>
                                     <FloatingDock 
                                         items={getFloatingDockItems(project)} 
                                         desktopClassName={styles.floatingDockDesktop}

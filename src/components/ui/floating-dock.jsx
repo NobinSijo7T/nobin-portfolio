@@ -7,6 +7,7 @@
 import { cn } from "@/lib/utils";
 import { IconLayoutNavbarCollapse } from "@tabler/icons-react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import Link from "next/link";
 
 import { useRef, useState } from "react";
 
@@ -51,12 +52,23 @@ const FloatingDockMobile = ({
                   },
                 }}
                 transition={{ delay: (items.length - 1 - idx) * 0.05 }}>
-                <a
-                  href={item.href}
-                  key={item.title}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900">
-                  <div className="h-4 w-4">{item.icon}</div>
-                </a>
+                {item.href?.startsWith('/') ? (
+                  <Link
+                    href={item.href}
+                    key={item.title}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-800">
+                    <div className="h-4 w-4 text-gray-400">{item.icon}</div>
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    key={item.title}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-800">
+                    <div className="h-4 w-4 text-gray-400">{item.icon}</div>
+                  </a>
+                )}
               </motion.div>
             ))}
           </motion.div>
@@ -64,8 +76,8 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-800">
-        <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-800">
+        <IconLayoutNavbarCollapse className="h-5 w-5 text-gray-400" />
       </button>
     </div>
   );
@@ -134,36 +146,47 @@ function IconContainer({
   });
 
   const [hovered, setHovered] = useState(false);
-
-  return (
-    <a href={href}>
+  
+  // Check if it's an internal link (starts with /)
+  const isInternal = href?.startsWith('/');
+  
+  const content = (
+    <motion.div
+      ref={ref}
+      style={{ width, height }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`relative flex aspect-square items-center justify-center rounded-full transition-colors duration-300 ${
+        hovered ? 'bg-[#FFD700]' : 'bg-gray-800'
+      }`}>
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: 2, x: "-50%" }}
+            className="absolute -top-8 left-1/2 w-fit rounded-md border border-[#FFD700] bg-black px-2 py-0.5 text-xs whitespace-pre text-[#FFD700] font-semibold">
+            {title}
+          </motion.div>
+        )}
+      </AnimatePresence>
       <motion.div
-        ref={ref}
-        style={{ width, height }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className={`relative flex aspect-square items-center justify-center rounded-full transition-colors duration-300 ${
-          hovered ? 'bg-[#FFD700]' : 'bg-gray-800'
+        style={{ width: widthIcon, height: heightIcon }}
+        className={`flex items-center justify-center transition-colors duration-300 ${
+          hovered ? 'text-black' : 'text-gray-400'
         }`}>
-        <AnimatePresence>
-          {hovered && (
-            <motion.div
-              initial={{ opacity: 0, y: 10, x: "-50%" }}
-              animate={{ opacity: 1, y: 0, x: "-50%" }}
-              exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="absolute -top-8 left-1/2 w-fit rounded-md border border-[#FFD700] bg-black px-2 py-0.5 text-xs whitespace-pre text-[#FFD700] font-semibold">
-              {title}
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <motion.div
-          style={{ width: widthIcon, height: heightIcon }}
-          className={`flex items-center justify-center transition-colors duration-300 ${
-            hovered ? 'text-black' : 'text-gray-400'
-          }`}>
-          {icon}
-        </motion.div>
+        {icon}
       </motion.div>
+    </motion.div>
+  );
+
+  return isInternal ? (
+    <Link href={href}>
+      {content}
+    </Link>
+  ) : (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {content}
     </a>
   );
 }
