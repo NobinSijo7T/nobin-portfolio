@@ -6,6 +6,7 @@ import LenisScroller from '@/components/UI/LenisScroller/LenisScroller';
 import Header from "@/components/Layout/Header/Header";
 import Footer from "@/components/Layout/Footer/Footer";
 import CustomCursor from "@/components/UI/Elements/CustomCursor/CustomCursor";
+import AudioPlayerWrapper from '@/components/UI/Elements/AudioPlayer/AudioPlayerWrapper';
 
 const bodyFont = Manrope({
     subsets: ['latin'],
@@ -37,13 +38,15 @@ export default function RootLayout({children}) {
     return (
         <html lang="en" className={bodyFont.className}>
         <body>
-        <Header/>
-        <main>
-            {children}
-        </main>
-        <Footer/>
-        <CustomCursor/>
-        <LenisScroller/>
+        <AudioPlayerWrapper>
+            <Header/>
+            <main>
+                {children}
+            </main>
+            <Footer/>
+            <CustomCursor/>
+            <LenisScroller/>
+        </AudioPlayerWrapper>
         <Analytics/>
         
         </body>

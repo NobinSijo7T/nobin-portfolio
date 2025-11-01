@@ -1,4 +1,4 @@
-@import '/assets/media-queries.scss';
+@import '../../../assets/media-queries.scss';
 
 .main {
   position: relative;
@@ -359,24 +359,6 @@
     margin-bottom: 2rem;
     font-weight: 600;
   }
-
-  :global(.button) {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.8rem 1.5rem;
-    
-    svg {
-      width: 20px;
-      height: 20px;
-      margin-right: 0.5rem;
-      transition: transform 0.3s ease;
-    }
-
-    &:hover svg {
-      transform: scale(1.1);
-    }
-  }
 }
 
 .linkButtons {
@@ -388,48 +370,53 @@
     gap: 1rem;
     justify-content: center;
   }
+}
+
+.projectButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  background: hsl(var(--color-bg-alt));
+  border: 1px solid hsl(var(--color-white) / 0.2);
+  color: hsl(var(--color-white));
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
   
-  // Style all FancyButton components in linkButtons to match back button
-  :global(.button) {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem; // Match back button gap
-    padding: 0 2.5rem; // Match back button padding
-    position: relative;
+  @include respond-below(sm) {
+    width: 5rem;
+    height: 5rem;
+  }
+  
+  svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    fill: currentColor;
+    transition: transform 0.3s ease;
     
     @include respond-below(sm) {
-      padding: 0 2rem; // Match back button mobile padding
-      font-size: var(--fs-xs);
-      gap: 0.8rem;
+      width: 2rem;
+      height: 2rem;
     }
+  }
+  
+  &:hover {
+    background: hsl(var(--color-primary));
+    border-color: hsl(var(--color-primary));
+    color: hsl(var(--color-black));
+    transform: scale(1.05);
     
     svg {
-      width: 1.6rem; // Match back button icon size
-      height: 1.6rem;
-      flex-shrink: 0;
-      margin-right: 0.8rem; // Match back button icon spacing
-      transition: transform 0.3s ease; // Add hover transition
-      
-      @include respond-below(sm) {
-        width: 1.4rem; // Match back button mobile icon size
-        height: 1.4rem;
-        margin-right: 0.6rem;
-      }
+      transform: scale(1.1);
+      fill: hsl(var(--color-black));
     }
-    
-    // Disable hover text animation for link buttons to keep logo visible
-    &:hover {
-      .title {
-        span {
-          transform: translateY(0) !important; // Prevent text sliding to keep logo visible
-        }
-      }
-    }
-    
-    // Add hover effect for SVG
-    &:hover svg {
-      transform: translateX(0.2rem); // Subtle forward movement for action buttons
-    }
+  }
+  
+  &:active {
+    transform: scale(0.95);
   }
 }
 
@@ -463,3 +450,4 @@
     transform: translateY(-0.2rem);
   }
 }
+

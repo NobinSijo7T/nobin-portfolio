@@ -1,4 +1,4 @@
-@import '/assets/media-queries.scss';
+@import '../../../assets/media-queries.scss';
 
 .header{
   position: absolute;
@@ -153,5 +153,98 @@
   text-transform: uppercase;
   @include respond-below(xs) {
     display: none;
+  }
+}
+
+.audioButton {
+  width: 4.5rem;
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid hsla(var(--color-white), .2);
+  border-radius: 50%;
+  color: hsl(var(--color-white));
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 1.5rem;
+  position: relative;
+  
+  @include respond-below(xs) {
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem;
+  }
+  
+  svg {
+    width: 2rem;
+    height: 2rem;
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover {
+    background: hsl(var(--color-primary));
+    border-color: hsl(var(--color-primary));
+    color: hsl(var(--color-black));
+    transform: scale(1.1);
+    
+    svg {
+      transform: rotate(360deg);
+    }
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.audioButtonPlaying {
+  border-color: hsl(var(--color-primary));
+  animation: musicPulse 1.5s ease-in-out infinite;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    border: 2px solid hsl(var(--color-primary));
+    animation: musicRipple 2s ease-out infinite;
+  }
+  
+  svg {
+    animation: musicBounce 0.8s ease-in-out infinite;
+  }
+}
+
+@keyframes musicPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsla(var(--color-primary), .3);
+  }
+  50% {
+    box-shadow: 0 0 0 0.8rem hsla(var(--color-primary), 0);
+  }
+}
+
+@keyframes musicRipple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes musicBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
   }
 }
