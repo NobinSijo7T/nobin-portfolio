@@ -179,46 +179,91 @@
   }
 }
 
-.trackNumber {
-  font-size: var(--fs-xs);
-  color: #FFD700; /* Yellow */
-  min-width: 2.5rem;
-  font-weight: var(--fw-medium);
-  font-variant-numeric: tabular-nums;
+.trackAlbumArt {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: hsl(var(--color-white) / 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  svg {
+    color: hsl(var(--color-white) / 0.3);
+  }
+}
+
+.trackDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
 }
 
 .trackName {
   font-size: var(--fs-sm);
-  color: #FFD700; /* Yellow */
-  flex: 1;
+  color: #FFD700;
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trackArtist {
+  font-size: var(--fs-xs);
+  color: hsl(var(--color-white) / 0.6);
   font-weight: var(--fw-regular);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.trackItemActive .trackName {
-  color: #FFD700; /* Yellow */
-  font-weight: var(--fw-bold);
-}
-
-.trackItemActive .trackNumber {
-  color: #FFD700; /* Yellow */
-}
-
-.playingIndicator {
-  width: 0.8rem;
-  height: 0.8rem;
+.trackPlayButton {
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
-  background: hsl(var(--color-primary));
-  animation: pulse 2s infinite;
+  background: transparent;
+  border: 1px solid hsl(var(--color-white) / 0.2);
+  color: hsl(var(--color-white));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  
+  &:hover {
+    background: hsl(var(--color-white) / 0.1);
+    border-color: hsl(var(--color-primary));
+    color: hsl(var(--color-primary));
+    transform: scale(1.1);
+  }
+  
+  svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
+.trackItemActive {
+  .trackName {
+    color: #FFD700;
+    font-weight: var(--fw-bold);
   }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.2);
+  
+  .trackPlayButton {
+    background: hsl(var(--color-primary) / 0.2);
+    border-color: hsl(var(--color-primary));
+    color: hsl(var(--color-primary));
   }
 }
 

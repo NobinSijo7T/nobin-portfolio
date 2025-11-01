@@ -27,6 +27,8 @@ import ProjectJourney from '@/database/ProjectJourney.json';
 import Container from "@/components/UI/Layout/Layout";
 import FadeIn from "@/components/UI/FadeIn/FadeIn";
 import Blobs from "@/components/UI/Elements/Blobs/Blobs";
+import { FloatingDock } from "@/src/components/ui/floating-dock";
+import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink } from "@tabler/icons-react";
 export default function Gallery() {
     const swiperRef = useRef();
     const container = useRef();
@@ -66,66 +68,41 @@ export default function Gallery() {
         }
     };
 
-    const renderActionButtons = (project) => (
-        <div className={styles.actionButtons}>
-            <Link 
-                href={`/project/${project.id}`} 
-                className={styles.actionButton}
-                aria-label={`View details for ${project.title}`}
-            >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.35-4.35"/>
-                </svg>
-                More Details
-            </Link>
-            
-            {project.links.dribbble && (
-                <a 
-                    href={project.links.dribbble} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={styles.actionButton}
-                    aria-label={`View ${project.title} on Dribbble`}
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.374 0 0 5.373 0 12s5.374 12 12 12 12-5.373 12-12S18.626 0 12 0zm7.568 5.302c1.4 1.5 2.252 3.5 2.464 5.69-.313-.067-3.463-.744-6.636-.34-.061-.14-.122-.28-.184-.427-.173-.413-.362-.822-.555-1.221 3.434-1.402 5.043-3.382 5.043-3.382l-.132-.32zm-7.568 1.5c2.8 0 5.36 1.07 7.285 2.827-.192.252-1.493 1.927-4.842 3.22C12.123 8.617 9.96 5.9 9.96 5.9c.68-.31 1.41-.498 2.04-.498zm-3.26.74s2.1 2.67 4.522 7.27c-5.75 1.53-10.82 1.48-11.41 1.47 0-.08 0-.16.01-.24.76-3.64 3.06-6.73 6.88-8.5zm8.91 2.54c2.8.36 5.24.11 5.69.02-.2 2.64-1.21 5.06-2.79 6.9-.06-.04-2.86-1.92-5.81-3.26.48-1.21.77-2.35.9-3.66z"/>
-                    </svg>
-                    Dribbble
-                </a>
-            )}
-            
-            {project.links.github && (
-                <a 
-                    href={project.links.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={styles.actionButton}
-                    aria-label={`View ${project.title} source code on GitHub`}
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    GitHub
-                </a>
-            )}
-            
-            {project.links.live && (
-                <a 
-                    href={project.links.live} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={styles.actionButton}
-                    aria-label={`View live demo of ${project.title}`}
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
-                    </svg>
-                    Live Demo
-                </a>
-            )}
-        </div>
-    );
+    const getFloatingDockItems = (project) => {
+        const items = [
+            {
+                title: "More Details",
+                icon: <IconInfoCircle className="h-full w-full" />,
+                href: `/project/${project.id}`,
+            }
+        ];
+
+        if (project.links.github) {
+            items.push({
+                title: "GitHub",
+                icon: <IconBrandGithub className="h-full w-full" />,
+                href: project.links.github,
+            });
+        }
+
+        if (project.links.dribbble) {
+            items.push({
+                title: "Dribbble",
+                icon: <IconBrandDribbble className="h-full w-full" />,
+                href: project.links.dribbble,
+            });
+        }
+
+        if (project.links.live) {
+            items.push({
+                title: "Live Demo",
+                icon: <IconExternalLink className="h-full w-full" />,
+                href: project.links.live,
+            });
+        }
+
+        return items;
+    };
 
     const onLeaveAnim = contextSafe((e) => {
         let imageElement = e.currentTarget.querySelector(`.${styles.image}`);
@@ -210,8 +187,12 @@ export default function Gallery() {
                                 </FadeIn>
                                 <ImageTip date={project.company}>{project.title}</ImageTip>
                                 
-                                <div className={`${styles.overlay} ${hoveredCard === project.id || clickedCard === project.id ? styles.visible : ''}`}>
-                                    {renderActionButtons(project)}
+                                <div className={styles.floatingDockWrapper}>
+                                    <FloatingDock 
+                                        items={getFloatingDockItems(project)} 
+                                        desktopClassName={styles.floatingDockDesktop}
+                                        mobileClassName={styles.floatingDockMobile}
+                                    />
                                 </div>
                             </figure>
                         </div>

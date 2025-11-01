@@ -10,7 +10,7 @@ import React, {
   useState,
 } from 'react';
 import * as SliderPrimitive from '@radix-ui/react-slider';
-import { Check, Pause, Play, Settings } from 'lucide-react';
+import { Check, Pause, Play, Settings, Music } from 'lucide-react';
 import { cn } from '@/utils/utils';
 import { generateAlbumArtPlaceholder } from '@/utils/albumArt';
 import styles from './AudioPlayerNew.module.scss';
@@ -510,6 +510,13 @@ export default function AudioPlayerNew({ isOpen, onClose }) {
 function TrackListItem({ track, index }) {
   const player = useAudioPlayer();
   const isActive = player.isItemActive(track.id);
+  const [artworkUrl, setArtworkUrl] = useState(null);
+
+  useEffect(() => {
+    if (track.artwork) {
+      setArtworkUrl(track.artwork);
+    }
+  }, [track.artwork]);
 
   const handleClick = () => {
     if (isActive && player.isPlaying) {
@@ -525,9 +532,24 @@ function TrackListItem({ track, index }) {
       className={cn(styles.trackItem, isActive && styles.trackItemActive)}
       onClick={handleClick}
     >
-      <span className={styles.trackNumber}>{index + 1}</span>
-      <span className={styles.trackName}>{track.name}</span>
-      {isActive && player.isPlaying && <div className={styles.playingIndicator} />}
+      <div className={styles.trackAlbumArt}>
+        {artworkUrl ? (
+          <img src={artworkUrl} alt={track.name} />
+        ) : (
+          <Music size={20} />
+        )}
+      </div>
+      <div className={styles.trackDetails}>
+        <span className={styles.trackName}>{track.name}</span>
+        <span className={styles.trackArtist}>Artist Name</span>
+      </div>
+      <button className={styles.trackPlayButton}>
+        {isActive && player.isPlaying ? (
+          <Pause size={16} />
+        ) : (
+          <Play size={16} />
+        )}
+      </button>
     </li>
   );
 }
