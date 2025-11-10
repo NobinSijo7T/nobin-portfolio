@@ -248,3 +248,34 @@
     transform: translateY(-3px);
   }
 }
+
+.chatButton {
+  width: 4.5rem;
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid hsla(var(--color-white), .2);
+  border-radius: 50%;
+  color: hsl(var(--color-white));
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 1.5rem;
+  position: relative;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &:hover {
+    border-color: hsl(var(--color-primary));
+    color: hsl(var(--color-primary));
+    transform: scale(1.05);
+  }
+
+  @include respond-below(xs) {
+    display: none;
+  }
+}

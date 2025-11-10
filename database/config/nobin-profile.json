@@ -1,0 +1,127 @@
+{
+  "personal": {
+    "name": "Nobin Sijo",
+    "tagline": "Full Stack Developer & UI/UX Designer",
+    "location": "Kollam, Kerala, India",
+    "email": "nobin.sijo@example.com",
+    "phone": "+91-XXXXXXXXXX",
+    "bio": "Passionate full-stack developer and designer creating beautiful and functional web experiences. With expertise in modern web technologies and a keen eye for design, I build applications that users love. Currently open to work and exciting collaboration opportunities.",
+    "availability": "Open to Work",
+    "workPreference": "Remote/Hybrid/On-site"
+  },
+  "social": {
+    "linkedin": "https://www.linkedin.com/in/nobin-sijo-n77t/",
+    "instagram": "https://www.instagram.com/nobinn.n/",
+    "github": "https://github.com/nobinsijo",
+    "portfolio": "https://nobinsijo.com"
+  },
+  "skills": {
+    "frontend": [
+      "React.js",
+      "Next.js",
+      "JavaScript",
+      "TypeScript",
+      "HTML5",
+      "CSS3",
+      "SCSS/SASS",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Redux"
+    ],
+    "backend": [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "GraphQL",
+      "MongoDB",
+      "PostgreSQL",
+      "Firebase"
+    ],
+    "design": [
+      "UI/UX Design",
+      "Figma",
+      "Adobe XD",
+      "Photoshop",
+      "Illustrator",
+      "Wireframing",
+      "Prototyping",
+      "Design Systems"
+    ],
+    "tools": [
+      "Git",
+      "GitHub",
+      "VS Code",
+      "Postman",
+      "Docker",
+      "Vercel",
+      "Netlify",
+      "AWS"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Full Stack Developer",
+      "company": "Tech Company",
+      "duration": "2022 - Present",
+      "description": "Building scalable web applications using React, Next.js, and Node.js. Focusing on performance optimization and user experience."
+    },
+    {
+      "title": "UI/UX Designer & Developer",
+      "company": "Design Studio",
+      "duration": "2020 - 2022",
+      "description": "Created beautiful and functional designs, implemented responsive interfaces, and improved user engagement."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Technology",
+      "field": "Computer Science",
+      "institution": "University Name",
+      "year": "2020"
+    }
+  ],
+  "projects": {
+    "highlights": [
+      "E-commerce Platform with Next.js and Stripe integration",
+      "Real-time Chat Application using Socket.io",
+      "Portfolio websites for various clients",
+      "Design System and Component Library",
+      "AI-powered content management system"
+    ]
+  },
+  "interests": [
+    "Web Development",
+    "UI/UX Design",
+    "Technology Innovation",
+    "Open Source",
+    "Continuous Learning",
+    "Problem Solving"
+  ],
+  "languages": [
+    "English - Fluent",
+    "Hindi - Fluent",
+    "Malayalam - Native"
+  ],
+  "achievements": [
+    "Successfully delivered 20+ client projects",
+    "Contributed to open-source projects",
+    "Built applications used by thousands of users",
+    "Expertise in modern web technologies"
+  ],
+  "services": [
+    "Web Application Development",
+    "UI/UX Design",
+    "Frontend Development",
+    "Backend Development",
+    "API Development",
+    "Website Redesign",
+    "Performance Optimization",
+    "Consultation & Code Review"
+  ],
+  "aiContext": {
+    "personality": "friendly, professional, and helpful",
+    "tone": "conversational yet professional",
+    "responseStyle": "concise, informative, and engaging",
+    "specialties": "Excels at explaining technical concepts in simple terms, passionate about clean code and great user experiences"
+  }
+}

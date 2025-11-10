@@ -1,5 +1,4 @@
 import { Analytics } from '@vercel/analytics/react';
-import {Manrope, Libre_Baskerville} from 'next/font/google';
 import '@/assets/globals.scss';
 import commonConfig from '@/database/config/metadata.json';
 import LenisScroller from '@/components/UI/LenisScroller/LenisScroller';
@@ -8,18 +7,8 @@ import Footer from "@/components/Layout/Footer/Footer";
 import CustomCursor from "@/components/UI/Elements/CustomCursor/CustomCursor";
 import AudioPlayerWrapper from '@/components/UI/Elements/AudioPlayer/AudioPlayerWrapper';
 
-const bodyFont = Manrope({
-    subsets: ['latin'],
-    variable: '--font-primary',
-    weight: ['300', '400', '500', '700'],
-    display: 'swap',
-});
-export const altFont = Libre_Baskerville({
-    subsets: ['latin'],
-    variable: '--font-alt',
-    weight: ['400', '700'],
-    display: 'swap',
-});
+// Temporary workaround for Turbopack font loading issue
+// Using CSS imports instead of next/font/google
 
 export const metadata = {
     title: commonConfig.metadata.title,
@@ -36,7 +25,12 @@ export const viewport = {
 
 export default function RootLayout({children}) {
     return (
-        <html lang="en" className={bodyFont.className}>
+        <html lang="en">
+        <head>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+            <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
+        </head>
         <body>
         <AudioPlayerWrapper>
             <Header/>
@@ -53,3 +47,4 @@ export default function RootLayout({children}) {
         </html>
     )
 }
+
