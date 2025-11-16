@@ -3,43 +3,70 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink } from "@tabler/icons-react";
+import { useRouter } from 'next/navigation';
+import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink, IconArrowLeft } from "@tabler/icons-react";
 import styles from './ProjectsShowcase.module.scss';
 import ProjectJourney from '@/database/ProjectJourney.json';
 import Container from "@/components/UI/Layout/Layout";
 import Title from "@/components/UI/Elements/Title/Title";
+import GooeyNav from '@/components/GooeyNav';
 
-const categories = ['All Designs', 'Websites', 'Applications', 'Dashboards'];
+const categoryItems = [
+  { label: '🔥 All Designs', href: '#' },
+  { label: '🌐 Websites', href: '#' },
+  { label: '📱 Applications', href: '#' },
+  { label: '💚 Dashboards', href: '#' }
+];
 
 export default function ProjectsShowcase() {
-  const [activeCategory, setActiveCategory] = useState('All Designs');
+  const [activeCategory, setActiveCategory] = useState(0);
+  const router = useRouter();
+
+  const handleBackClick = () => {
+    router.back();
+  };
+
+  // Override the GooeyNav click to update our state
+  const handleCategoryChange = (index) => {
+    setActiveCategory(index);
+  };
 
   return (
     <section className={styles.section}>
       <Container>
+        {/* Back Button */}
+        <div className={styles.backButtonWrapper}>
+          <button onClick={handleBackClick} className={styles.backButton}>
+            <IconArrowLeft size={20} />
+            <span>Back to Portfolio</span>
+          </button>
+        </div>
+
         <header className={styles.header}>
           <Title color={'white'}>
             <span>Showcasing</span> the best! 🚀
           </Title>
         </header>
 
-        {/* Category Filter */}
+        {/* Category Filter with GooeyNav */}
         <div className={styles.categoryFilter}>
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`${styles.categoryButton} ${
-                activeCategory === category ? styles.active : ''
-              }`}
-              onClick={() => setActiveCategory(category)}
-            >
-              {category === 'All Designs' && '🔥 '}
-              {category === 'Websites' && '🌐 '}
-              {category === 'Applications' && '📱 '}
-              {category === 'Dashboards' && '💚 '}
-              {category}
-            </button>
-          ))}
+          <GooeyNav 
+            items={categoryItems.map((item, idx) => ({
+              ...item,
+              href: '#',
+              onClick: (e) => {
+                e.preventDefault();
+                handleCategoryChange(idx);
+              }
+            }))}
+            particleCount={15}
+            particleDistances={[90, 10]}
+            particleR={100}
+            initialActiveIndex={activeCategory}
+            animationTime={600}
+            timeVariance={300}
+            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+          />
         </div>
 
         {/* Projects Grid */}

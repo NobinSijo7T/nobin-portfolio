@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
@@ -142,19 +142,19 @@ const getTechnologyIcons = (technologies) => {
     return technologies.map(tech => iconMap[tech]).filter(Boolean);
 };
 
-export default function ProjectDetails() {
-    const params = useParams();
+export default function ProjectDetails({ params }) {
     const router = useRouter();
+    const unwrappedParams = React.use(params);
     const [projectId, setProjectId] = React.useState(null);
     const [project, setProject] = React.useState(null);
 
     React.useEffect(() => {
-        if (params?.id) {
-            setProjectId(params.id);
-            const foundProject = ProjectJourney.find(p => p.id === params.id);
+        if (unwrappedParams?.id) {
+            setProjectId(unwrappedParams.id);
+            const foundProject = ProjectJourney.find(p => p.id === unwrappedParams.id);
             setProject(foundProject);
         }
-    }, [params]);
+    }, [unwrappedParams]);
 
     // Debug: Log the technologies and generated icons
     React.useEffect(() => {
