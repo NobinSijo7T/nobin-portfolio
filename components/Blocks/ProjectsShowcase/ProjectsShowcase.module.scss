@@ -4,6 +4,13 @@
   min-height: 100vh;
   background: hsl(var(--color-bg-alt));
   padding: calc(var(--header-height) + 4rem) 0 var(--y-spacing);
+  position: relative;
+  
+  // Content wrapper for z-index above particles
+  > :not(div:first-child) {
+    position: relative;
+    z-index: 1;
+  }
   
   @include respond-below(md) {
     padding: calc(var(--header-height) + 3rem) 0 12rem;

@@ -10,6 +10,7 @@ import ProjectJourney from '@/database/ProjectJourney.json';
 import Container from "@/components/UI/Layout/Layout";
 import Title from "@/components/UI/Elements/Title/Title";
 import GooeyNav from '@/components/GooeyNav';
+import Particles from '@/components/UI/Particles/Particles';
 
 const categoryItems = [
   { label: '🔥 All Designs', href: '#' },
@@ -33,6 +34,28 @@ export default function ProjectsShowcase() {
 
   return (
     <section className={styles.section}>
+      {/* Particles Background */}
+      <div style={{ 
+        position: 'fixed', 
+        top: 0, 
+        left: 0, 
+        width: '100%', 
+        height: '100%', 
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}>
+        <Particles 
+          particleCount={200}
+          spread={10}
+          speed={0.1}
+          particleColors={['#FFD700', '#FFA500', '#FF8C00', '#FFFFFF']}
+          hover={true}
+          alpha={0.8}
+          size={10}
+          rotation={true}
+        />
+      </div>
+
       <Container>
         {/* Back Button */}
         <div className={styles.backButtonWrapper}>

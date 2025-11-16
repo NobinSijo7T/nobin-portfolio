@@ -37,6 +37,8 @@
   display: flex;
   align-items: flex-start;
   padding-top: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
 }
 
 .gooey-nav-container nav {
@@ -45,6 +47,15 @@
   transform: translate3d(0, 0, 0.01px);
   width: 100%;
   justify-content: center;
+  opacity: 0;
+  animation: fadeInNav 0.3s ease forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes fadeInNav {
+  to {
+    opacity: 1;
+  }
 }
 
 .gooey-nav-container nav ul {
@@ -69,6 +80,7 @@
     box-shadow 0.3s ease;
   box-shadow: 0 0 0.5px 1.5px transparent;
   color: white;
+  z-index: 2;
 }
 
 .gooey-nav-container nav ul li a {
@@ -78,6 +90,8 @@
   font-weight: 600;
   color: inherit;
   text-decoration: none;
+  position: relative;
+  z-index: 3;
 }
 
 .gooey-nav-container nav ul li:focus-within:has(:focus-visible) {
@@ -101,9 +115,16 @@
   text-shadow: none;
 }
 
+.gooey-nav-container nav ul li.active a {
+  color: black !important;
+  position: relative;
+  z-index: 5;
+}
+
 .gooey-nav-container nav ul li.active::after {
   opacity: 1;
   transform: scale(1);
+  z-index: 1;
 }
 
 .gooey-nav-container .effect {
@@ -116,17 +137,20 @@
   pointer-events: none;
   display: grid;
   place-items: center;
-  z-index: 1;
+  z-index: 0;
 }
 
 .gooey-nav-container .effect.text {
   color: white;
   transition: color 0.3s ease;
   font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .gooey-nav-container .effect.text.active {
   color: black;
+  opacity: 0;
 }
 
 .gooey-nav-container .effect.filter {
