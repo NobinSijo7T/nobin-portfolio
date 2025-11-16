@@ -29,7 +29,7 @@ export default function LogoRibbon() {
               Building exceptional digital experiences and delivering innovative solutions that drive real results. Explore my gallery to see the creative journey and achievements.
             </p>
           </div>
-          <FancyButton theme='button-2' link='#gallery'>
+          <FancyButton theme='button-2' link='/gallery'>
             Gallery
           </FancyButton>
         </div>
