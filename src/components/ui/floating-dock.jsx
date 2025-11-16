@@ -35,7 +35,7 @@ const FloatingDockMobile = ({
         {open && (
           <motion.div
             layoutId="nav"
-            className="absolute inset-x-0 bottom-full mb-2 flex flex-col gap-2">
+            className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex flex-row gap-3">
             {items.map((item, idx) => (
               <motion.div
                 key={item.title}
@@ -56,8 +56,8 @@ const FloatingDockMobile = ({
                   <Link
                     href={item.href}
                     key={item.title}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-800">
-                    <div className="h-4 w-4 text-gray-400">{item.icon}</div>
+                    className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-800 hover:bg-[#FFD700] transition-colors group">
+                    <div className="h-7 w-7 text-gray-400 group-hover:text-black transition-colors">{item.icon}</div>
                   </Link>
                 ) : (
                   <a
@@ -65,8 +65,8 @@ const FloatingDockMobile = ({
                     key={item.title}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-800">
-                    <div className="h-4 w-4 text-gray-400">{item.icon}</div>
+                    className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-800 hover:bg-[#FFD700] transition-colors group">
+                    <div className="h-7 w-7 text-gray-400 group-hover:text-black transition-colors">{item.icon}</div>
                   </a>
                 )}
               </motion.div>
@@ -76,8 +76,8 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-800">
-        <IconLayoutNavbarCollapse className="h-5 w-5 text-gray-400" />
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-800 hover:bg-[#FFD700] transition-colors group">
+        <IconLayoutNavbarCollapse className="h-7 w-7 text-gray-400 group-hover:text-black transition-colors" />
       </button>
     </div>
   );

@@ -276,6 +276,14 @@
   }
 
   @include respond-below(xs) {
-    display: none;
+    width: 4rem;
+    height: 4rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    
+    svg {
+      width: 1.8rem;
+      height: 1.8rem;
+    }
   }
 }
