@@ -6,6 +6,7 @@ import SkillSet from "@/components/Blocks/SkillSet/SkillSet";
 import BoldTitle from "@/components/UI/Cards/BoldTitle/BoldTitle";
 import Gallery from "@/components/Blocks/Gallery/Gallery";
 import CustomScrollbar from '@/components/CustomScrollbar';
+import LogoRibbon from '@/components/UI/LogoRibbon/LogoRibbon';
 
 export default function Home() {
     return (
@@ -14,6 +15,7 @@ export default function Home() {
             <SkillSet/>
             <ExperienceBlock/>
             <BoldTitle/>
+            <LogoRibbon/>
             <Resume/>
             <Gallery/>
         </>
