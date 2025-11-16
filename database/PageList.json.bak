@@ -58,9 +58,18 @@
     "showOnNavigation":  true,
     "showOnFooter":  false,
     "title": "Contact",
-    "description": "Now it's your turn to say hi. I hope to hear from you!",
+    "description": "Now it’s your turn to say hi. I hope to hear from you!",
     "image": "",
     "link": "#footer"
+  },
+  "github": {
+    "isActive":  true,
+    "showOnNavigation":  false,
+    "showOnFooter":  true,
+    "title": "GitHub",
+    "description": "Check out my GitHub profile for my latest projects and contributions.",
+    "image": "",
+    "link": "https://github.com/NobinSijo7T/"
   },
   "about": {
     "isActive":  true,
