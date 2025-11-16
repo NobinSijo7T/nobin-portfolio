@@ -17,6 +17,74 @@
   }
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  
+  @include respond-below(md) {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.5rem;
+  }
+  
+  @include respond-below(xs) {
+    width: 100%;
+    align-items: stretch;
+  }
+}
+
+.showAllButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.4rem 3rem;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10rem;
+  color: #FFD700;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  
+  @include respond-below(md) {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.5rem;
+  }
+  
+  @include respond-below(sm) {
+    padding: 1.1rem 2.2rem;
+    font-size: 1.4rem;
+    gap: 0.8rem;
+  }
+  
+  @include respond-below(xs) {
+    justify-content: center;
+  }
+  
+  svg {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+  
+  &:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: #FFD700;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+    
+    svg {
+      transform: translateX(4px);
+    }
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
 .slider{
   padding: var(--x-spacing) 0;
   font-size: var(--fs-sm);
