@@ -111,6 +111,7 @@
   background: transparent;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain; // Prevent scroll chaining to parent
   
   // Custom scrollbar styling
   scrollbar-width: thin;
@@ -154,6 +155,38 @@
   gap: 2rem;
 }
 
+.emptyStateContent {
+  // Override the ConversationEmptyState component styles
+  color: #fff;
+  
+  // Target all text elements
+  * {
+    color: #fff;
+    font-family: 'Orbitron', 'Manrope', sans-serif;
+  }
+  
+  // Style headings
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    font-size: 2.4rem;
+    
+    @include respond-below(xs) {
+      font-size: 2rem;
+    }
+  }
+  
+  // Style paragraphs and descriptions
+  p, span, div {
+    font-weight: 400;
+    font-size: 1.4rem;
+    opacity: 0.9;
+    
+    @include respond-below(xs) {
+      font-size: 1.3rem;
+    }
+  }
+}
+
 .examplePrompts {
   padding: 0 2rem;
   display: flex;
@@ -168,11 +201,22 @@
   .promptsTitle {
     font-size: 1.3rem;
     color: rgba(255, 215, 0, 0.8);
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 1rem 0;
     font-weight: 600;
 
     @include respond-below(xs) {
       font-size: 1.2rem;
+    }
+  }
+
+  .promptsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    
+    @include respond-below(xs) {
+      gap: 0.8rem;
+      grid-template-columns: 1fr; // Stack vertically on very small screens
     }
   }
 
@@ -185,21 +229,23 @@
     font-size: 1.3rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-align: left;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
 
     @include respond-below(xs) {
       padding: 0.9rem 1.2rem;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
 
     &:hover {
       background: rgba(255, 215, 0, 0.2);
       border-color: #FFD700;
-      transform: translateX(5px);
+      transform: translateY(-2px);
     }
 
     &:active {
-      transform: translateX(3px);
+      transform: translateY(0);
     }
   }
 }
