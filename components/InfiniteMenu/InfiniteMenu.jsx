@@ -914,6 +914,7 @@ export default function InfiniteMenu({ items = [] }) {
   const canvasRef = useRef(null);
   const [activeItem, setActiveItem] = useState(null);
   const [isMoving, setIsMoving] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -945,12 +946,12 @@ export default function InfiniteMenu({ items = [] }) {
   }, [items]);
 
   const handleButtonClick = () => {
-    if (!activeItem?.link) return;
-    if (activeItem.link.startsWith('http')) {
-      window.open(activeItem.link, '_blank');
-    } else {
-      console.log('Internal route:', activeItem.link);
-    }
+    if (!activeItem?.image) return;
+    setShowOverlay(true);
+  };
+
+  const handleCloseOverlay = () => {
+    setShowOverlay(false);
   };
 
   return (
@@ -967,6 +968,19 @@ export default function InfiniteMenu({ items = [] }) {
             <p className="action-button-icon">&#x2197;</p>
           </div>
         </>
+      )}
+
+      {showOverlay && activeItem && (
+        <div className="image-overlay" onClick={handleCloseOverlay}>
+          <button className="close-button" onClick={handleCloseOverlay}>
+            ✕
+          </button>
+          <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
+            <img src={activeItem.image} alt={activeItem.title} className="overlay-image" />
+            {activeItem.title && <h3 className="overlay-title">{activeItem.title}</h3>}
+            {activeItem.description && <p className="overlay-description">{activeItem.description}</p>}
+          </div>
+        </div>
       )}
     </div>
   );

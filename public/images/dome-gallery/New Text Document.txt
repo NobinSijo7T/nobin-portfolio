@@ -1,0 +1,33 @@
+main5 - title : Tinkerhub Saturday Hacknight
+        description : Won best project : Mojo Tasks App
+
+main6 - title : IEDC execom 2024
+        description : As Chief Technical Officer
+
+main7 - title : MuLearn KNP Execom
+        description : As Design Lead
+
+main8 - title : Tinkerhub Saturday Hacknight
+        
+
+main9 - title : IIC SHE HACKS 1.0
+        
+main10 - title :IIC SHE HACKS 2.0
+        
+
+main11 - title : Tinkerhub Tink-Her-Hack
+       
+
+main12 - title : Tinkerhub Saturday Hacknight
+        description : With my teammate Prashant
+
+main14 - title : IEEE SB CEK : Intro To C
+
+main15 - title : IEEE SB CEK : AGM 24
+        
+
+main16 - title : IEEE SB CEK Execom 24
+        description : As Activity Coordinator
+
+main5 - title :  IEEE SB CEK : IEEE Day
+                

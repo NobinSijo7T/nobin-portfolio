@@ -11,34 +11,9 @@ import { SiSpacex } from "react-icons/si";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
 import { useRef } from "react";
 import InfiniteMenu from '@/components/InfiniteMenu/InfiniteMenu';
+import galleryData from '@/database/config/dome-gallery.json';
 
 export default function GalleryPage() {
-  const items = [
-    {
-      image: 'https://picsum.photos/300/300?grayscale',
-      link: 'https://google.com/',
-      title: 'Item 1',
-      description: 'This is pretty cool, right?'
-    },
-    {
-      image: 'https://picsum.photos/400/400?grayscale',
-      link: 'https://google.com/',
-      title: 'Item 2',
-      description: 'This is pretty cool, right?'
-    },
-    {
-      image: 'https://picsum.photos/500/500?grayscale',
-      link: 'https://google.com/',
-      title: 'Item 3',
-      description: 'This is pretty cool, right?'
-    },
-    {
-      image: 'https://picsum.photos/600/600?grayscale',
-      link: 'https://google.com/',
-      title: 'Item 4',
-      description: 'This is pretty cool, right?'
-    }
-  ];
 
   return (
     <div>
@@ -55,7 +30,7 @@ export default function GalleryPage() {
         <Hero />
         <div style={{ height: '600px', position: 'relative' }}>
           <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#0b0b0e] to-transparent z-10 pointer-events-none" />
-          <InfiniteMenu items={items}/>
+          <InfiniteMenu items={galleryData}/>
         </div>
       </ReactLenis>
     </div>
@@ -98,7 +73,7 @@ const CenterImage = () => {
   const backgroundSize = useTransform(
     scrollY,
     [0, SECTION_HEIGHT + 500],
-    ["170%", "100%"]
+    ["105%", "100%"]
   );
   const opacity = useTransform(
     scrollY,
@@ -114,7 +89,7 @@ const CenterImage = () => {
         backgroundSize,
         opacity,
         backgroundImage:
-          "url(https://images.unsplash.com/photo-1460186136353-977e9d6085a1?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+          "url(/images/main.jpg)",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
@@ -129,14 +104,14 @@ const ParallaxImages = () => {
         {/* Left Column */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
           <ParallaxImg
-            src="https://images.unsplash.com/photo-1484600899469-230e8d1d59c0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="/images/main1.jpg"
             alt="Gallery image 1"
             start={-200}
             end={200}
             className="w-full"
           />
           <ParallaxImg
-            src="https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="/images/main2.jpg"
             alt="Gallery image 2"
             start={200}
             end={-200}
@@ -147,14 +122,14 @@ const ParallaxImages = () => {
         {/* Right Column */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
           <ParallaxImg
-            src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="/images/main3.jpg"
             alt="Gallery image 3"
             start={-150}
             end={150}
             className="w-full"
           />
           <ParallaxImg
-            src="https://images.unsplash.com/photo-1494022299300-899b96e49893?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="/images/main4.jpg"
             alt="Gallery image 4"
             start={150}
             end={-150}
