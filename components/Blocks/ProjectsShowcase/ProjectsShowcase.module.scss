@@ -351,3 +351,341 @@
     flex-shrink: 0;
   }
 }
+
+// Graphic Works Section
+.graphicWorksSection {
+  margin-top: 8rem;
+  padding-top: 6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  
+  @include respond-below(md) {
+    margin-top: 6rem;
+    padding-top: 4rem;
+  }
+  
+  @include respond-below(sm) {
+    margin-top: 5rem;
+    padding-top: 3rem;
+  }
+}
+
+.sectionHeader {
+  margin-bottom: 4rem;
+  text-align: center;
+  
+  @include respond-below(sm) {
+    margin-bottom: 3rem;
+  }
+}
+
+.graphicTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 8rem;
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  
+  @include respond-below(lg) {
+    font-size: 7rem;
+  }
+  
+  @include respond-below(md) {
+    font-size: 6rem;
+    gap: 1.5rem;
+  }
+  
+  @include respond-below(sm) {
+    font-size: 4.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  @include respond-below(xs) {
+    font-size: 3.5rem;
+  }
+}
+
+.graphicWord {
+  display: inline-block;
+  background: linear-gradient(
+    135deg,
+    #FFD700 0%,
+    #FFA500 50%,
+    #FF8C00 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease infinite;
+  
+  &:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+}
+
+.graphicSparkle {
+  display: inline-block;
+  font-size: 0.6em;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.6);
+  
+  @include respond-below(sm) {
+    font-size: 1.3rem;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.breadcrumbIcon {
+  font-size: 1.8rem;
+  
+  @include respond-below(sm) {
+    font-size: 1.6rem;
+  }
+}
+
+.breadcrumbArrow {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.breadcrumbText {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.heartIcon {
+  color: #ff4458;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.sectionTitle {
+  font-size: 6rem;
+  font-weight: 900;
+  color: #FF6B35;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  
+  @include respond-below(md) {
+    font-size: 5rem;
+  }
+  
+  @include respond-below(sm) {
+    font-size: 4rem;
+  }
+  
+  @include respond-below(xs) {
+    font-size: 3rem;
+  }
+}
+
+.graphicWorksGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+  
+  @include respond-below(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @include respond-below(md) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  @include respond-below(sm) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+.graphicWorkCard {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 107, 53, 0.5);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+    
+    .graphicWorkImage {
+      transform: scale(1.05);
+    }
+  }
+  
+  @include respond-below(sm) {
+    border-radius: 1rem;
+  }
+}
+
+.graphicWorkImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.viewMoreWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  
+  @include respond-below(sm) {
+    margin-top: 3rem;
+  }
+}
+
+.viewMoreButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.6rem 4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  @include respond-below(sm) {
+    padding: 1.4rem 3rem;
+    font-size: 1.5rem;
+    gap: 0.8rem;
+  }
+  
+  &:hover {
+    background: rgba(255, 107, 53, 0.2);
+    border-color: #FF6B35;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+.viewMoreArrow {
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+  
+  .viewMoreButton:hover & {
+    transform: translateX(5px);
+  }
+}
+
+.imageOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+  
+  @include respond-below(sm) {
+    padding: 1rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.overlayContent {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlayImage {
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 1rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.closeButton {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid white;
+  color: white;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  
+  @include respond-below(sm) {
+    top: 1rem;
+    right: 1rem;
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.6rem;
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+  }
+}

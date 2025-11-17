@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "image": "/posters/main(1).jpg",
+    "title": "Graphic Work 1"
+  },
+  {
+    "id": 2,
+    "image": "/posters/main(2).jpg",
+    "title": "Graphic Work 2"
+  },
+  {
+    "id": 3,
+    "image": "/posters/main(3).jpg",
+    "title": "Graphic Work 3"
+  },
+  {
+    "id": 4,
+    "image": "/posters/main(4).jpg",
+    "title": "Graphic Work 4"
+  },
+  {
+    "id": 5,
+    "image": "/posters/main(5).jpg",
+    "title": "Graphic Work 5"
+  },
+  {
+    "id": 6,
+    "image": "/posters/main(6).jpg",
+    "title": "Graphic Work 6"
+  },
+  {
+    "id": 7,
+    "image": "/posters/main(7).jpg",
+    "title": "Graphic Work 7"
+  },
+  {
+    "id": 8,
+    "image": "/posters/main(8).jpg",
+    "title": "Graphic Work 8"
+  },
+  {
+    "id": 9,
+    "image": "/posters/main(9).jpg",
+    "title": "Graphic Work 9"
+  },
+  {
+    "id": 10,
+    "image": "/posters/main(10).jpg",
+    "title": "Graphic Work 10"
+  },
+  {
+    "id": 11,
+    "image": "/posters/main(11).jpg",
+    "title": "Graphic Work 11"
+  },
+  {
+    "id": 12,
+    "image": "/posters/main(12).jpg",
+    "title": "Graphic Work 12"
+  },
+  {
+    "id": 13,
+    "image": "/posters/main(13).jpg",
+    "title": "Graphic Work 13"
+  }
+]

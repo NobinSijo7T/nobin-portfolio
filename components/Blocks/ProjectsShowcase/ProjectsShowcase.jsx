@@ -4,9 +4,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink, IconArrowLeft } from "@tabler/icons-react";
+import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink, IconArrowLeft, IconHeart } from "@tabler/icons-react";
 import styles from './ProjectsShowcase.module.scss';
 import ProjectJourney from '@/database/ProjectJourney.json';
+import graphicWorks from '@/database/config/graphic-works.json';
 import Container from "@/components/UI/Layout/Layout";
 import Title from "@/components/UI/Elements/Title/Title";
 import GooeyNav from '@/components/GooeyNav';
@@ -98,6 +99,9 @@ export default function ProjectsShowcase() {
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
+
+        {/* Graphic Works Section */}
+        <GraphicWorksSection />
       </Container>
     </section>
   );
@@ -174,6 +178,70 @@ function ProjectCard({ project }) {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function GraphicWorksSection() {
+  const [showAll, setShowAll] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const displayedWorks = showAll ? graphicWorks : graphicWorks.slice(0, 4);
+
+  return (
+    <div className={styles.graphicWorksSection}>
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.graphicTitle}>
+          <span className={styles.graphicWord}>Graphic</span>
+          <span className={styles.graphicWord}>Works</span>
+          <span className={styles.graphicSparkle}>✨</span>
+        </h2>
+      </div>
+
+      <div className={styles.graphicWorksGrid}>
+        {displayedWorks.map((work) => (
+          <div 
+            key={work.id} 
+            className={styles.graphicWorkCard}
+            onClick={() => setSelectedImage(work)}
+          >
+            <Image
+              src={work.image}
+              alt={work.title}
+              width={400}
+              height={400}
+              className={styles.graphicWorkImage}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.viewMoreWrapper}>
+        <button 
+          className={styles.viewMoreButton}
+          onClick={() => setShowAll(!showAll)}
+        >
+          {showAll ? 'Show Less' : 'View More'}
+          <span className={styles.viewMoreArrow}>→</span>
+        </button>
+      </div>
+
+      {/* Image Overlay */}
+      {selectedImage && (
+        <div className={styles.imageOverlay} onClick={() => setSelectedImage(null)}>
+          <button className={styles.closeButton} onClick={() => setSelectedImage(null)}>
+            ✕
+          </button>
+          <div className={styles.overlayContent} onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={selectedImage.image}
+              alt={selectedImage.title}
+              width={1200}
+              height={1200}
+              className={styles.overlayImage}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
