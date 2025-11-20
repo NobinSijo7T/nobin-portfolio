@@ -1,0 +1,22 @@
+.text-block {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  font-family: monospace;
+  font-size: clamp(14px, 4vw, 32px);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.text-block p {
+  margin: 0;
+  width: 100%;
+}
+
+.char {
+  will-change: transform;
+  display: inline-block;
+}

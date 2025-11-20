@@ -12,6 +12,7 @@ import Container from "@/components/UI/Layout/Layout";
 import Title from "@/components/UI/Elements/Title/Title";
 import GooeyNav from '@/components/GooeyNav';
 import Particles from '@/components/UI/Particles/Particles';
+import ScrambledText from '@/components/ScrambledText/ScrambledText';
 
 const categoryItems = [
   { label: '🔥 All Designs', href: '#' },
@@ -36,16 +37,16 @@ export default function ProjectsShowcase() {
   return (
     <section className={styles.section}>
       {/* Particles Background */}
-      <div style={{ 
-        position: 'fixed', 
-        top: 0, 
-        left: 0, 
-        width: '100%', 
-        height: '100%', 
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
         zIndex: 0,
         pointerEvents: 'none'
       }}>
-        <Particles 
+        <Particles
           particleCount={200}
           spread={10}
           speed={0.1}
@@ -74,7 +75,7 @@ export default function ProjectsShowcase() {
 
         {/* Category Filter with GooeyNav */}
         <div className={styles.categoryFilter}>
-          <GooeyNav 
+          <GooeyNav
             items={categoryItems.map((item, idx) => ({
               ...item,
               href: '#',
@@ -111,7 +112,7 @@ function ProjectCard({ project }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div 
+    <div
       className={styles.projectCard}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -143,34 +144,34 @@ function ProjectCard({ project }) {
           <Link href={`/project/${project.id}`} className={styles.actionButton}>
             <IconInfoCircle size={18} />
           </Link>
-          
+
           {project.links.github && (
-            <a 
-              href={project.links.github} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={project.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.actionButton}
             >
               <IconBrandGithub size={18} />
             </a>
           )}
-          
+
           {project.links.dribbble && (
-            <a 
-              href={project.links.dribbble} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={project.links.dribbble}
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.actionButton}
             >
               <IconBrandDribbble size={18} />
             </a>
           )}
-          
+
           {project.links.live && (
-            <a 
-              href={project.links.live} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={project.links.live}
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.actionButton}
             >
               <IconExternalLink size={18} />
@@ -190,17 +191,31 @@ function GraphicWorksSection() {
   return (
     <div className={styles.graphicWorksSection}>
       <div className={styles.sectionHeader}>
-        <h2 className={styles.graphicTitle}>
-          <span className={styles.graphicWord}>Graphic</span>
-          <span className={styles.graphicWord}>Works</span>
-          <span className={styles.graphicSparkle}>✨</span>
-        </h2>
+        <ScrambledText
+          className={styles.scrambledGraphicTitle}
+          radius={100}
+          duration={1.2}
+          speed={0.5}
+          scrambleChars=".:"
+          style={{
+            fontSize: 'clamp(32px, 6vw, 72px)',
+            fontWeight: 'bold',
+            color: '#FFD700',
+            textAlign: 'center',
+            margin: '0 auto',
+            width: '100%',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em'
+          }}
+        >
+          Graphic Works ✨
+        </ScrambledText>
       </div>
 
       <div className={styles.graphicWorksGrid}>
         {displayedWorks.map((work) => (
-          <div 
-            key={work.id} 
+          <div
+            key={work.id}
             className={styles.graphicWorkCard}
             onClick={() => setSelectedImage(work)}
           >
@@ -216,7 +231,7 @@ function GraphicWorksSection() {
       </div>
 
       <div className={styles.viewMoreWrapper}>
-        <button 
+        <button
           className={styles.viewMoreButton}
           onClick={() => setShowAll(!showAll)}
         >
