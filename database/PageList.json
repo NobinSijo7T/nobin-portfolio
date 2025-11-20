@@ -10,7 +10,7 @@
   },
   "skills": {
     "isActive": true,
-    "showOnNavigation":  true,
+    "showOnNavigation":  false,
     "showOnFooter":  true,
     "title": "Skills",
     "description": "Check out the things I'm good at, from building websites to design and more.",
@@ -19,7 +19,7 @@
   },
   "experience": {
     "isActive": true,
-    "showOnNavigation":  true,
+    "showOnNavigation":  false,
     "showOnFooter":  true,
     "title": "Experience",
     "description": "I have worked with some amazing companies and teams, and I am proud of what I've achieved.",
@@ -46,12 +46,21 @@
   },
   "gallery": {
     "isActive":  true,
-    "showOnNavigation":  false,
+    "showOnNavigation":  true,
     "showOnFooter":  true,
     "title": "Gallery",
     "description": "Explore my visual portfolio and creative works in an immersive gallery experience.",
     "image": "",
     "link": "/gallery"
+  },
+  "projects": {
+    "isActive":  true,
+    "showOnNavigation":  true,
+    "showOnFooter":  true,
+    "title": "Projects",
+    "description": "Explore my collection of projects showcasing design and development excellence.",
+    "image": "",
+    "link": "/projects"
   },
   "contact": {
     "isActive":  true,
