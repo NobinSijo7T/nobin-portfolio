@@ -9,7 +9,6 @@ const logos = [
   { name: 'IEDC', src: '/logo/iedc.png' },
   { name: 'IEEE', src: '/logo/ieee - Edited.png' },
   { name: 'IIC', src: '/logo/iic.png' },
-  { name: 'MuLearn Campus', src: '/logo/mulearn-campus-logo (8).png' },
   { name: 'MuLearn', src: '/logo/mulearn-white-logo.png' },
   { name: 'Tilt Labs', src: '/logo/tiltlabs.png' },
   { name: 'TinkerHub', src: '/logo/TinkerHub_Foundation.png' },
@@ -33,7 +32,7 @@ export default function LogoRibbon() {
             Gallery
           </FancyButton>
         </div>
-        
+
         <div className={styles.ribbonWrapper}>
           {/* First ribbon - moving right, tilted down */}
           <div className={styles.ribbon}>

@@ -1,5 +1,11 @@
 [
   {
+    "id": "main1",
+    "image": "/images/main1.jpg",
+    "title": "Graphic Works",
+    "description": "Creative design showcase"
+  },
+  {
     "id": "main5",
     "image": "/images/dome-gallery/main5.jpg",
     "title": "Tinkerhub Saturday Hacknight",

@@ -30,7 +30,7 @@ export default function GalleryPage() {
         <Hero />
         <div style={{ height: '600px', position: 'relative' }}>
           <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#0b0b0e] to-transparent z-10 pointer-events-none" />
-          <InfiniteMenu items={galleryData}/>
+          <InfiniteMenu items={galleryData} />
         </div>
       </ReactLenis>
     </div>
@@ -73,7 +73,7 @@ const CenterImage = () => {
   const backgroundSize = useTransform(
     scrollY,
     [0, SECTION_HEIGHT + 500],
-    ["105%", "100%"]
+    ["170%", "100%"]
   );
   const opacity = useTransform(
     scrollY,
@@ -81,19 +81,32 @@ const CenterImage = () => {
     [1, 0]
   );
 
+  const titleOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const titleScale = useTransform(scrollY, [0, 500], [1, 0.8]);
+
   return (
-    <motion.div
-      className="sticky top-0 h-screen w-full"
-      style={{
-        clipPath,
-        backgroundSize,
-        opacity,
-        backgroundImage:
-          "url(/images/main.jpg)",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    />
+    <div className="sticky top-0 h-screen w-full">
+      <motion.div
+        className="absolute inset-0 h-full w-full"
+        style={{
+          clipPath,
+          backgroundSize,
+          opacity,
+          backgroundImage:
+            "url(/images/main.jpg)",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
+      <motion.div
+        style={{ opacity: titleOpacity, scale: titleScale }}
+        className="absolute inset-0 flex h-full w-full items-center justify-center pointer-events-none z-10"
+      >
+        <h1 style={{ color: '#ffffff' }} className="text-8xl font-black uppercase tracking-tighter drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
+          Gallery
+        </h1>
+      </motion.div>
+    </div>
   );
 };
 
@@ -118,7 +131,7 @@ const ParallaxImages = () => {
             className="w-full"
           />
         </div>
-        
+
         {/* Right Column */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
           <ParallaxImg
