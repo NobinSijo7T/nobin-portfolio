@@ -1,18 +1,25 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, memo } from 'react';
 import * as THREE from 'three';
 import gsap from 'gsap';
 
-import './Particles.module.scss'; // Assuming you have a separate CSS file
+import './Particles.module.scss';
 
-export default function Particles({ className }) {
+const Particles = ({ className }) => {
     const sceneRef = useRef(null);
 
     useEffect(() => {
+        if (!sceneRef.current) return;
+
         // Set up scene
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
+        const renderer = new THREE.WebGLRenderer({ 
+            alpha: true, 
+            antialias: false,
+            powerPreference: 'default'
+        });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
         // Append renderer's DOM element to the sceneRef
         sceneRef.current.appendChild(renderer.domElement);
@@ -25,7 +32,8 @@ export default function Particles({ className }) {
         const particleGeometry = new THREE.BufferGeometry();
         const particleMaterial = new THREE.PointsMaterial({
             size: 0.02,
-            vertexColors: true, // Enable vertex colors
+            vertexColors: true,
+            sizeAttenuation: true,
         });
 
         const numParticles = 500;
@@ -38,18 +46,15 @@ export default function Particles({ className }) {
             positions[i + 2] = (Math.random() - 0.5) * 10;
 
             if (i % 2 === 0) {
-                // Set color for every even index particle
-                colors[i] = 255 / 255; // Red component
-                colors[i + 1] = 255 / 255; // Green component
-                colors[i + 2] = 255; // Blue component
+                colors[i] = 1;
+                colors[i + 1] = 1;
+                colors[i + 2] = 1;
             } else {
-                // Set color for every odd index particle
-                colors[i] = 66 / 255; // Red component
-                colors[i + 1] = 118 / 255; // Green component
-                colors[i + 2] = 195 / 255; // Blue component
+                colors[i] = 66 / 255;
+                colors[i + 1] = 118 / 255;
+                colors[i + 2] = 195 / 255;
             }
         }
-
 
         particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
@@ -64,17 +69,19 @@ export default function Particles({ className }) {
         // Mouse movement interaction
         const mouse = new THREE.Vector2(0, 0);
         const targetMouse = new THREE.Vector2(0, 0);
+        let animationFrameId;
 
-        window.addEventListener('mousemove', (event) => {
+        const onMouseMove = (event) => {
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
+        };
+
+        window.addEventListener('mousemove', onMouseMove);
 
         // Add animation
         const animate = () => {
-            requestAnimationFrame(animate);
+            animationFrameId = requestAnimationFrame(animate);
 
-            // Smooth wave motion with phase offset
             const time = Date.now() * 0.0001;
             const positions = particleGeometry.attributes.position.array;
 
@@ -82,10 +89,8 @@ export default function Particles({ className }) {
                 positions[i + 1] = Math.sin(i / 100 + time);
             }
 
-            // Update particle system
             particleGeometry.attributes.position.needsUpdate = true;
 
-            // Rotate particles towards the mouse
             targetMouse.x += (mouse.x * 0.2 - targetMouse.x) * 0.02;
             targetMouse.y += (-mouse.y * 0.2 - targetMouse.y) * 0.02;
 
@@ -105,6 +110,7 @@ export default function Particles({ className }) {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         };
 
         window.addEventListener('resize', handleResize);
@@ -112,9 +118,16 @@ export default function Particles({ className }) {
         // Clean up Three.js resources on component unmount
         return () => {
             window.removeEventListener('resize', handleResize);
+            window.removeEventListener('mousemove', onMouseMove);
+            cancelAnimationFrame(animationFrameId);
             renderer.dispose();
+            particleGeometry.dispose();
+            particleMaterial.dispose();
+            scene.remove(particles);
         };
     }, []);
 
     return <div className={className} ref={sceneRef}></div>;
-}
+};
+
+export default memo(Particles);

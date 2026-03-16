@@ -49,27 +49,29 @@ export default function Header() {
                     <div className={styles.location}>{`${commonConfig.personal.city}, ${commonConfig.personal.state} ${currentTime}`}</div>
                     <div className={styles.openToWork}><span></span> Open To Work</div>
                     <Navigation isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen}></Navigation>
-                    <button 
-                        type={'button'} 
+                    <button
+                        type={'button'}
                         className={`${styles.audioButton} ${player.isPlaying ? styles.audioButtonPlaying : ''}`}
                         onClick={toggleAudioPlayer}
                         aria-label="Open audio player"
                         title="Music Player"
+                        suppressHydrationWarning
                     >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" suppressHydrationWarning>
                             <path d="M9 18V5l12-2v13"/>
                             <circle cx="6" cy="18" r="3"/>
                             <circle cx="18" cy="16" r="3"/>
                         </svg>
                     </button>
-                    <button 
-                        type={'button'} 
+                    <button
+                        type={'button'}
                         className={styles.chatButton}
                         onClick={toggleChat}
                         aria-label="Open AI chat"
                         title="AI Assistant"
+                        suppressHydrationWarning
                     >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" suppressHydrationWarning>
                             <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
                             <path d="M19 12l.75 2.25L22 15l-2.25.75L19 18l-.75-2.25L16 15l2.25-.75L19 12z"/>
                             <path d="M6 19l.75 2.25L9 22l-2.25.75L6 25l-.75-2.25L3 22l2.25-.75L6 19z" opacity="0.5"/>

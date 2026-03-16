@@ -1,24 +1,30 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo, useMemo } from 'react';
 import { Renderer, Camera, Geometry, Program, Mesh } from 'ogl';
 
 import './Particles.css';
 
 const defaultColors = ['#ffffff', '#ffffff', '#ffffff'];
 
-const hexToRgb = hex => {
-  hex = hex.replace(/^#/, '');
-  if (hex.length === 3) {
-    hex = hex
-      .split('')
-      .map(c => c + c)
-      .join('');
-  }
-  const int = parseInt(hex, 16);
-  const r = ((int >> 16) & 255) / 255;
-  const g = ((int >> 8) & 255) / 255;
-  const b = (int & 255) / 255;
-  return [r, g, b];
-};
+const hexToRgb = /*#__PURE__*/ (() => {
+  const cache = new Map();
+  return hex => {
+    if (cache.has(hex)) return cache.get(hex);
+    hex = hex.replace(/^#/, '');
+    if (hex.length === 3) {
+      hex = hex
+        .split('')
+        .map(c => c + c)
+        .join('');
+    }
+    const int = parseInt(hex, 16);
+    const r = ((int >> 16) & 255) / 255;
+    const g = ((int >> 8) & 255) / 255;
+    const b = (int & 255) / 255;
+    const result = [r, g, b];
+    cache.set(hex, result);
+    return result;
+  };
+})();
 
 const vertex = /* glsl */ `
   attribute vec3 position;
@@ -235,4 +241,4 @@ const Particles = ({
   return <div ref={containerRef} className={`particles-container ${className}`} />;
 };
 
-export default Particles;
+export default memo(Particles);

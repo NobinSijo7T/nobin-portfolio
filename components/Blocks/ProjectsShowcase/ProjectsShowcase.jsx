@@ -123,6 +123,8 @@ function ProjectCard({ project }) {
           alt={project.title}
           width={800}
           height={600}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          loading="lazy"
           className={styles.projectImage}
         />
         <div className={styles.overlay}>
@@ -224,6 +226,8 @@ function GraphicWorksSection() {
               alt={work.title}
               width={400}
               height={400}
+              sizes="(max-width: 768px) 50vw, 25vw"
+              loading="lazy"
               className={styles.graphicWorkImage}
             />
           </div>
@@ -252,6 +256,7 @@ function GraphicWorksSection() {
               alt={selectedImage.title}
               width={1200}
               height={1200}
+              sizes="90vw"
               className={styles.overlayImage}
             />
           </div>

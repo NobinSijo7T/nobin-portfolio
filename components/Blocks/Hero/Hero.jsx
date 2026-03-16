@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useCallback} from 'react';
 import gsap from "gsap";
 import {useGSAP} from "@gsap/react";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
@@ -15,6 +15,11 @@ import PreLoader from "@/components/Blocks/PreLoader/PreLoader";
 import Blobs from "@/components/UI/Elements/Blobs/Blobs";
 import Particles from "@/components/UI/Cards/Particles/Particles";
 
+// Register GSAP plugins once outside component
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, SplitText);
+}
+
 export default function Hero() {
     const [preloaderComplete, setPreloaderComplete] = useState(false);
     const container = useRef();
@@ -23,13 +28,12 @@ export default function Hero() {
     const descRef = useRef();
     const {contextSafe} = useGSAP({scope: container});
 
-    const handlePreloaderComplete = () => {
+    const handlePreloaderComplete = useCallback(() => {
         setPreloaderComplete(true);
-    };
+    }, []);
 
     // GSAP Animations
     useGSAP(() => {
-        gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, SplitText);
         gsap.set(`.${styles.line} svg path`, {
             drawSVG: '0%',
         });
@@ -141,6 +145,7 @@ export default function Hero() {
                                         width={640}
                                         height={300}
                                         priority
+                                        sizes="100vw"
                                         className={styles.heroImg}
                                     />
                                 </span> <br/> Creative Frontend Developer.

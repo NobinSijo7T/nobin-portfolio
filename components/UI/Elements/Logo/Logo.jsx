@@ -48,9 +48,9 @@ export default function Logo({ classVariable }) {
     }, []);
 
     return (
-        <Link 
-            href="/" 
-            className={classVariable} 
+        <Link
+            href="/"
+            className={classVariable}
             aria-label={commonConfig.metadata.title}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -60,15 +60,17 @@ export default function Logo({ classVariable }) {
                     <Image
                         src="/Logo.png"
                         alt="Logo"
-                        width={120}  // Increased from 40
-                        height={120} // Increased from 40
+                        width={120}
+                        height={120}
                         className={styles.logoImage}
                         priority
+                        suppressHydrationWarning
                     />
                 </div>
-                <div 
+                <div
                     className={`${styles.logoText} ${isHovered ? styles.textHovered : ''} ${isTransitioning ? styles.fontTransition : ''}`}
                     style={{ fontFamily: `${fonts[currentFontIndex]}, sans-serif` }}
+                    suppressHydrationWarning
                 >
                     <span>Nobin Sijo</span>
                 </div>
