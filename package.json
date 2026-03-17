@@ -23,7 +23,7 @@
     "caniuse-lite": "^1.0.30001779",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^10.18.0",
+    "framer-motion": "^12.0.0",
     "gl-matrix": "^3.4.4",
     "gsap": "^3.14.2",
     "imagesloaded": "^5.0.0",
