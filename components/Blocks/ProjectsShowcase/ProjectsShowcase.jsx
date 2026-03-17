@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink, IconArrowLeft, IconHeart } from "@tabler/icons-react";
+import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink, IconArrowLeft, IconHeart, IconBrandBehance } from "@tabler/icons-react";
 import styles from './ProjectsShowcase.module.scss';
 import ProjectJourney from '@/database/ProjectJourney.json';
 import graphicWorks from '@/database/config/graphic-works.json';
@@ -166,6 +166,17 @@ function ProjectCard({ project }) {
               className={styles.actionButton}
             >
               <IconBrandDribbble size={18} />
+            </a>
+          )}
+
+          {project.links.behance && (
+            <a
+              href={project.links.behance}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.actionButton}
+            >
+              <IconBrandBehance size={18} />
             </a>
           )}
 

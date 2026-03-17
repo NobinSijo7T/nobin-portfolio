@@ -170,7 +170,10 @@ export function StaggeredGrid({
             }}>
             {/* Project Title (Yellow, Large) and Description - AT THE TOP, CENTERED */}
             {projectTitle && (
-                <section className="relative z-30 px-6 w-full min-h-[100vh] flex flex-col justify-center items-center py-20">
+                <section
+                    className="relative z-30 px-6 w-full flex flex-col items-center pb-24"
+                    style={{ paddingTop: 'calc(var(--header-height) + 4rem)' }}
+                >
                     <div className="max-w-6xl w-full mx-auto text-center flex flex-col items-center">
                         {/* Project Title in Yellow - Very Large */}
                         <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold text-yellow-400 mb-6 tracking-tight text-center">
@@ -184,39 +187,41 @@ export function StaggeredGrid({
                         )}
                         {/* Project Description */}
                         {projectDescription && (
-                            <div className="max-w-4xl mx-auto mb-16">
-                                <p className="text-xl md:text-2xl text-gray-300 leading-relaxed text-center">
+                            <div className="max-w-4xl mx-auto mb-24">
+                                <p className="text-xl md:text-2xl text-gray-300 leading-[2] text-center">
                                     {projectDescription}
                                 </p>
                             </div>
                         )}
 
-                        {/* Bento Items (Tech stack + Details) - Below the description */}
                         {bentoItems && bentoItems.length > 0 && (
-                            <div className="w-full max-w-5xl h-[350px] md:h-[450px] mb-12 flex items-center justify-center gap-2">
+                            <div className="w-full max-w-5xl h-[400px] md:h-[520px] mb-16 flex items-center justify-center gap-2">
                                 {bentoItems.map((bentoItem, index) => {
                                     const isActive = activeBento === index;
                                     const activeWidth = 60;
                                     const inactiveWidth = bentoItems.length > 1 ? (100 - activeWidth) / (bentoItems.length - 1) : 100;
                                     return (
-                                        <div
+                                        <a
                                             key={bentoItem.id}
+                                            href={bentoItem.link || '#'}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className={cn(
-                                                "relative cursor-pointer overflow-hidden rounded-2xl h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
+                                                "relative cursor-pointer overflow-hidden rounded-2xl h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] block",
                                                 isActive
-                                                    ? "bg-zinc-900/10 shadow-2xl"
-                                                    : "bg-zinc-950"
+                                                    ? "bg-zinc-800/30 shadow-2xl"
+                                                    : "bg-zinc-900"
                                             )}
                                             style={{ width: isActive ? `${activeWidth}%` : `${inactiveWidth}%` }}
                                             onMouseEnter={() => setActiveBento(index)}
-                                            onClick={() => setActiveBento(index)}>
-                                            {/* Border Overlay - Fixes edge artifacts by sitting on top */}
+                                        >
+                                            {/* Border Overlay */}
                                             <div
                                                 className={cn(
                                                     "absolute inset-0 rounded-2xl border z-50 pointer-events-none transition-colors duration-700",
                                                     isActive
-                                                        ? "border-zinc-500/50"
-                                                        : "border-zinc-800/50 group-hover:border-zinc-700"
+                                                        ? "border-zinc-400/60"
+                                                        : "border-zinc-600/60"
                                                 )} />
                                             {/* Content Container */}
                                             <div className="relative z-10 w-full h-full flex flex-col p-0">
@@ -234,24 +239,17 @@ export function StaggeredGrid({
                                                                     src={bentoItem.image}
                                                                     alt={bentoItem.title}
                                                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 opacity-90 group-hover/img:opacity-100" />
-                                                                {/* Text Protection Gradient - Shadow peaking from bottom */}
                                                                 <div
                                                                     className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none" />
                                                             </>
                                                         )}
                                                     </div>
-
-                                                    {/* Footer Row - Full Width with Shadow */}
-                                                    <div
-                                                        className="absolute bottom-0 left-0 w-full h-20 flex items-center justify-between px-5 z-20">
-
-
+                                                    {/* Footer Row */}
+                                                    <div className="absolute bottom-0 left-0 w-full h-20 flex items-center justify-between px-5 z-20">
                                                         <div className="flex flex-col relative z-10">
-                                                            <h3
-                                                                className="text-sm font-bold text-white drop-shadow-md leading-none tracking-tight">{bentoItem.title}</h3>
+                                                            <h3 className="text-sm font-bold text-white drop-shadow-md leading-none tracking-tight">{bentoItem.title}</h3>
                                                         </div>
-                                                        <div
-                                                            className="text-white/90 transition-colors hover:text-white drop-shadow-md relative z-10">
+                                                        <div className="text-white drop-shadow-md relative z-10">
                                                             {bentoItem.icon}
                                                         </div>
                                                     </div>
@@ -263,20 +261,17 @@ export function StaggeredGrid({
                                                     "absolute inset-0 flex flex-col items-center justify-center gap-2 transition-all duration-500",
                                                     isActive ? "opacity-0 scale-90 pointer-events-none" : "opacity-100 scale-100"
                                                 )}>
-                                                <div className="text-white/50 group-hover:text-white transition-colors">
+                                                <div style={{ filter: 'brightness(0) invert(1)' }}>
                                                     {bentoItem.icon}
                                                 </div>
-                                                <span
-                                                    className="text-[10px] sm:text-xs font-medium text-zinc-500 group-hover:text-zinc-300 transition-colors uppercase tracking-wider hidden sm:block">{bentoItem.title}</span>
+                                                <span style={{ color: '#ffffff', fontWeight: 600, fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', marginTop: '4px' }} className="hidden sm:block">{bentoItem.title}</span>
                                             </div>
-                                        </div>
+                                        </a>
                                     );
                                 })}
                             </div>
                         )}
 
-                        {/* Quick links and extra elements passed as children */}
-                        {children}
                     </div>
                 </section>
             )}

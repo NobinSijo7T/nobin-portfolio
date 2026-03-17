@@ -1,5 +1,35 @@
 [
   {
+    "id": "sovrnplace",
+    "title": "SOVRNPLACE",
+    "company": "Web3 GovTech Platform",
+    "image": "/gallery/sovrn_preview.png",
+    "direction": "vertical",
+    "description": "Web3 GovTech platform enabling global citizens to explore residency programs, invest in smart cities, and manage digital citizenship.",
+    "technologies": ["Figma", "UI/UX Design", "Web3", "Branding", "Visual Identity"],
+    "links": {
+      "github": null,
+      "dribbble": null,
+      "behance": "https://www.behance.net/gallery/245972569/SOVRNPLACE",
+      "live": null
+    }
+  },
+  {
+    "id": "prism-ai-browser",
+    "title": "Prism AI Browser",
+    "company": "AI-Powered Web Experience",
+    "image": "/gallery/Prism-Web(preview).png",
+    "direction": "vertical",
+    "description": "Next-generation AI browser interface with intelligent search, contextual understanding, and seamless web interaction powered by advanced AI technology.",
+    "technologies": ["UI/UX Design", "AI Integration", "Modern Web", "Interface Design"],
+    "links": {
+      "github": null,
+      "dribbble": "https://dribbble.com/shots/27191776-Prism-AI-Browser",
+      "behance": null,
+      "live": "https://prismbrowser.tech/"
+    }
+  },
+  {
     "id": "muplay",
     "title": "MuPlay",
     "company": "MuLearn Foundation",

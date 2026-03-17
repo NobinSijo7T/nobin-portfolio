@@ -28,20 +28,20 @@ import Container from "@/components/UI/Layout/Layout";
 import FadeIn from "@/components/UI/FadeIn/FadeIn";
 import Blobs from "@/components/UI/Elements/Blobs/Blobs";
 import { FloatingDock } from "@/src/components/ui/floating-dock";
-import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink } from "@tabler/icons-react";
+import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink, IconBrandBehance } from "@tabler/icons-react";
 export default function Gallery() {
     const swiperRef = useRef();
     const container = useRef();
     const [hoveredCard, setHoveredCard] = useState(null);
     const [clickedCard, setClickedCard] = useState(null);
-    const { contextSafe } = useGSAP({scope: container});
+    const { contextSafe } = useGSAP({ scope: container });
 
     const onEnterAnim = contextSafe((e) => {
         let imageElement = e.currentTarget.querySelector(`.${styles.image}`);
 
         let rect = e.target.getBoundingClientRect();
 
-        let mouse = {x: 0, y: 0, moved: false};
+        let mouse = { x: 0, y: 0, moved: false };
 
         mouse.moved = true;
         mouse.x = e.clientX - rect.left;
@@ -58,7 +58,7 @@ export default function Gallery() {
         if (type === 'click' && e) {
             e.preventDefault();
         }
-        
+
         if (type === 'enter') {
             setHoveredCard(projectId);
         } else if (type === 'leave') {
@@ -93,6 +93,14 @@ export default function Gallery() {
             });
         }
 
+        if (project.links.behance) {
+            items.push({
+                title: "Behance",
+                icon: <IconBrandBehance className="h-full w-full" />,
+                href: project.links.behance,
+            });
+        }
+
         if (project.links.live) {
             items.push({
                 title: "Live Demo",
@@ -115,19 +123,19 @@ export default function Gallery() {
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
-    }, {scope: container});
+    }, { scope: container });
 
     return (
         <section className={styles.section} ref={container}>
-            <Blobs type={'v2'} classVariable={`${styles.blob}`}/>
+            <Blobs type={'v2'} classVariable={`${styles.blob}`} />
             <Container>
                 <header className={styles.header}>
-                    <Title color={'white'}><span>My</span> Project <br/>Journal</Title>
+                    <Title color={'white'}><span>My</span> Project <br />Journal</Title>
                     <div className={styles.headerActions}>
                         <Link href="/projects" className={styles.showAllButton}>
                             View All Projects
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </Link>
                         <FancyButton theme='button-1' target="_blank" link={commonConfig.social.github}>Follow on GitHub</FancyButton>
@@ -192,14 +200,14 @@ export default function Gallery() {
                                         className={`${styles.image} ${styles[project.direction]}`}
                                     />
                                 </FadeIn>
-                                
+
                                 <div className={styles.floatingDockWrapper}>
                                     <div className={styles.projectInfo}>
                                         <span className={styles.projectCompany}>{project.company}</span>
                                         <span className={styles.projectTitle}>{project.title}</span>
                                     </div>
-                                    <FloatingDock 
-                                        items={getFloatingDockItems(project)} 
+                                    <FloatingDock
+                                        items={getFloatingDockItems(project)}
                                         desktopClassName={styles.floatingDockDesktop}
                                         mobileClassName={styles.floatingDockMobile}
                                     />
@@ -212,20 +220,20 @@ export default function Gallery() {
                     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M5.96046e-08 32C5.96046e-08 14.3269 14.3269 0 32 0C49.6731 0 64 14.3269 64 32C64 49.6731 49.6731 64 32 64C14.3269 64 5.96046e-08 49.6731 5.96046e-08 32Z"
-                            fill="white"/>
+                            fill="white" />
                         <path
                             d="M48 31C48.5523 31 49 31.4477 49 32C49 32.5523 48.5523 33 48 33V31ZM17.2929 32.7071C16.9024 32.3166 16.9024 31.6834 17.2929 31.2929L23.6569 24.9289C24.0474 24.5384 24.6805 24.5384 25.0711 24.9289C25.4616 25.3195 25.4616 25.9526 25.0711 26.3431L19.4142 32L25.0711 37.6569C25.4616 38.0474 25.4616 38.6805 25.0711 39.0711C24.6805 39.4616 24.0474 39.4616 23.6569 39.0711L17.2929 32.7071ZM48 33H18V31H48V33Z"
-                            fill="black"/>
+                            fill="black" />
                     </svg>
                 </button>
                 <button onClick={() => swiperRef.current?.slideNext()} className={styles.buttonNext}>
                     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64C49.6731 64 64 49.6731 64 32Z"
-                            fill="white"/>
+                            fill="white" />
                         <path
                             d="M16 31C15.4477 31 15 31.4477 15 32C15 32.5523 15.4477 33 16 33V31ZM46.7071 32.7071C47.0976 32.3166 47.0976 31.6834 46.7071 31.2929L40.3431 24.9289C39.9526 24.5384 39.3195 24.5384 38.9289 24.9289C38.5384 25.3195 38.5384 25.9526 38.9289 26.3431L44.5858 32L38.9289 37.6569C38.5384 38.0474 38.5384 38.6805 38.9289 39.0711C39.3195 39.4616 39.9526 39.4616 40.3431 39.0711L46.7071 32.7071ZM16 33H46V31H16V33Z"
-                            fill="black"/>
+                            fill="black" />
                     </svg>
                 </button>
             </Swiper>

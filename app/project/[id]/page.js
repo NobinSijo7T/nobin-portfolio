@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { StaggeredGrid } from '@/src/components/ui/staggered-grid';
 import ProjectJourney from '@/database/ProjectJourney.json';
-import Container from '@/components/UI/Layout/Layout';
-import { IconBrandGithub, IconBrandDribbble, IconExternalLink } from "@tabler/icons-react";
+import Button from '@/components/UI/Elements/Button/Button';
+import { IconBrandGithub, IconBrandDribbble, IconExternalLink, IconBrandBehance } from "@tabler/icons-react";
 
 // Technology icon mapping for display
 const getTechnologyStack = (technologies) => {
@@ -91,6 +91,14 @@ export default function ProjectDetails({ params }) {
             link: project.links.dribbble,
             type: 'link'
         }] : []),
+        ...(project.links.behance ? [{
+            id: 'behance',
+            title: 'Behance',
+            image: project.image,
+            icon: <IconBrandBehance className="w-8 h-8" />,
+            link: project.links.behance,
+            type: 'link'
+        }] : []),
         ...(project.links.live ? [{
             id: 'live',
             title: 'Live Demo',
@@ -103,17 +111,16 @@ export default function ProjectDetails({ params }) {
 
     return (
         <div className="relative min-h-screen bg-black">
-            {/* Back Button */}
+            {/* Back to Projects Button */}
             <div className="fixed top-6 left-6 z-50">
-                <button
-                    onClick={() => router.back()}
-                    className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition-all duration-300 border border-white/20"
+                <Button
+                    element="link"
+                    link="/projects"
+                    theme="button-1"
+                    className="!h-12 !px-6 !text-xs md:!h-14 md:!px-8 md:!text-sm backdrop-blur-md"
                 >
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span className="text-sm font-medium">Back</span>
-                </button>
+                    All Projects
+                </Button>
             </div>
 
             {/* Staggered Grid with Project Info */}
@@ -127,44 +134,7 @@ export default function ProjectDetails({ params }) {
                 projectTitle={project.title}
                 projectCompany={project.company}
                 projectDescription={project.description}
-            >
-                {/* Quick Links Section */}
-                <div className="flex flex-wrap gap-4 justify-center mt-8">
-                    {project.links.github && (
-                        <a
-                            href={project.links.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition-all duration-300 border border-white/20"
-                        >
-                            <IconBrandGithub className="w-5 h-5" />
-                            <span>View Code</span>
-                        </a>
-                    )}
-                    {project.links.dribbble && (
-                        <a
-                            href={project.links.dribbble}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-6 py-3 bg-pink-500/20 backdrop-blur-md rounded-full text-pink-400 hover:bg-pink-500/30 transition-all duration-300 border border-pink-500/30"
-                        >
-                            <IconBrandDribbble className="w-5 h-5" />
-                            <span>Dribbble</span>
-                        </a>
-                    )}
-                    {project.links.live && (
-                        <a
-                            href={project.links.live}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-6 py-3 bg-yellow-500/20 backdrop-blur-md rounded-full text-yellow-400 hover:bg-yellow-500/30 transition-all duration-300 border border-yellow-500/30"
-                        >
-                            <IconExternalLink className="w-5 h-5" />
-                            <span>Live Demo</span>
-                        </a>
-                    )}
-                </div>
-            </StaggeredGrid>
+            />
         </div>
     );
 }
