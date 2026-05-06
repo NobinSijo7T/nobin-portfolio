@@ -103,7 +103,6 @@ export function AudioPlayerProvider({ children }) {
   const audioRef = useRef(null);
   const itemRef = useRef(null);
   const playPromiseRef = useRef(null);
-  const hasAutoPlayedRef = useRef(false);
   const [readyState, setReadyState] = useState(0);
   const [networkState, setNetworkState] = useState(0);
   const [time, setTime] = useState(0);
@@ -250,23 +249,6 @@ export function AudioPlayerProvider({ children }) {
       setPlaybackRate,
     ]
   );
-
-  // Auto-play Prism song on mount
-  useEffect(() => {
-    if (!hasAutoPlayedRef.current && audioRef.current) {
-      hasAutoPlayedRef.current = true;
-      // Find Prism track
-      const prismTrack = musicFiles.find(track => track.name === 'Prism');
-      if (prismTrack) {
-        // Small delay to ensure everything is mounted
-        setTimeout(() => {
-          play(prismTrack).catch(err => {
-            console.log('Auto-play prevented by browser:', err);
-          });
-        }, 500);
-      }
-    }
-  }, [play]);
 
   return (
     <AudioPlayerContext.Provider value={api}>

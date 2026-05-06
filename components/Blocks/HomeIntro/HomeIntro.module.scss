@@ -1,0 +1,221 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100svh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: hsl(var(--color-bg-alt));
+  color: hsl(var(--color-white));
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: hsl(var(--color-black));
+  isolation: isolate;
+}
+
+.baseImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+}
+
+.baseImage {
+  filter: contrast(1.08) brightness(0.82) saturate(0.86);
+  transform: scale(1.015);
+}
+
+.trailReveal {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: url("/reveal-image.png");
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.18) brightness(1.08);
+  pointer-events: none;
+  clip-path: polygon(
+    calc(var(--x) - var(--r2)) calc(var(--y) - var(--r)),
+    calc(var(--x) + var(--r3)) calc(var(--y) - var(--r)),
+    calc(var(--x) + var(--r3)) calc(var(--y) - var(--r2)),
+    calc(var(--x) + var(--r2)) calc(var(--y) - var(--r2)),
+    calc(var(--x) + var(--r2)) calc(var(--y) - var(--r3)),
+    calc(var(--x) + var(--r)) calc(var(--y) - var(--r3)),
+    calc(var(--x) + var(--r)) calc(var(--y) + var(--r2)),
+    calc(var(--x) + var(--r2)) calc(var(--y) + var(--r2)),
+    calc(var(--x) + var(--r2)) calc(var(--y) + var(--r)),
+    calc(var(--x) - var(--r3)) calc(var(--y) + var(--r)),
+    calc(var(--x) - var(--r3)) calc(var(--y) + var(--r2)),
+    calc(var(--x) - var(--r2)) calc(var(--y) + var(--r2)),
+    calc(var(--x) - var(--r2)) calc(var(--y) + var(--r3)),
+    calc(var(--x) - var(--r)) calc(var(--y) + var(--r3)),
+    calc(var(--x) - var(--r)) calc(var(--y) - var(--r2)),
+    calc(var(--x) - var(--r2)) calc(var(--y) - var(--r2))
+  );
+  animation: trailReveal 1150ms steps(9, end) forwards;
+}
+
+.trailReveal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 78%, hsla(var(--color-black), 0.2) 78% 100%),
+    linear-gradient(0deg, transparent 0 78%, hsla(var(--color-black), 0.16) 78% 100%);
+  background-size: clamp(1.2rem, 1.8vw, 2.8rem) clamp(1.2rem, 1.8vw, 2.8rem);
+  mix-blend-mode: multiply;
+}
+
+.trailReveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at var(--x) var(--y), hsla(var(--color-white), 0.16), transparent calc(var(--r) * 0.95)),
+    linear-gradient(90deg, transparent, hsla(var(--color-white), 0.08), transparent);
+  mix-blend-mode: screen;
+  opacity: 0.7;
+}
+
+.scanline,
+.grain,
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scanline {
+  z-index: 3;
+  background:
+    linear-gradient(hsla(var(--color-white), 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, hsla(var(--color-white), 0.025) 1px, transparent 1px);
+  background-size: 100% 0.42rem, 0.42rem 100%;
+  opacity: 0.36;
+  mix-blend-mode: overlay;
+}
+
+.grain {
+  z-index: 4;
+  background:
+    radial-gradient(circle at 22% 18%, hsla(var(--color-white), 0.18) 0 1px, transparent 1px),
+    radial-gradient(circle at 76% 62%, hsla(var(--color-white), 0.12) 0 1px, transparent 1px),
+    radial-gradient(circle at 48% 84%, hsla(var(--color-white), 0.1) 0 1px, transparent 1px);
+  background-size: 0.9rem 0.9rem, 1.3rem 1.3rem, 1.7rem 1.7rem;
+  opacity: 0.34;
+  mix-blend-mode: screen;
+  animation: grainShift 700ms steps(2, end) infinite;
+}
+
+.vignette {
+  z-index: 5;
+  background:
+    radial-gradient(circle at 50% 44%, transparent 0 40%, hsla(var(--color-black), 0.44) 68%, hsla(var(--color-black), 0.92) 100%),
+    linear-gradient(180deg, hsla(var(--color-black), 0.26), transparent 28%, hsla(var(--color-black), 0.5));
+}
+
+.controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(3rem, env(safe-area-inset-bottom));
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  padding: 0 2rem;
+  pointer-events: none;
+}
+
+.continueButton {
+  min-width: 15rem;
+  min-height: 5.2rem;
+  padding: 1.4rem 2.8rem;
+  border: 1px solid hsla(var(--color-white), 0.32);
+  border-radius: 999rem;
+  background: hsla(var(--color-black), 0.58);
+  color: hsl(var(--color-white));
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  box-shadow: 0 1.8rem 6rem hsla(var(--color-black), 0.35);
+  backdrop-filter: blur(18px);
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+  pointer-events: auto;
+
+  &:hover,
+  &:focus-visible {
+    border-color: hsl(var(--color-primary));
+    background: hsl(var(--color-primary));
+    color: hsl(var(--color-black));
+    transform: translateY(-0.2rem);
+  }
+
+  &:focus-visible {
+    outline: 2px solid hsl(var(--color-white));
+    outline-offset: 0.4rem;
+  }
+}
+
+@keyframes trailReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.98);
+  }
+
+  16% {
+    opacity: 0.94;
+    transform: translate3d(0.1rem, -0.08rem, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(0.35rem, -0.25rem, 0) scale(1.025);
+  }
+}
+
+@keyframes grainShift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-1.1rem, 0.8rem, 0);
+  }
+}
+
+@media (max-width: 767px) {
+  .baseImage,
+  .trailReveal {
+    object-position: 48% center;
+    background-position: 48% center;
+  }
+
+  .controls {
+    bottom: max(2rem, env(safe-area-inset-bottom));
+    padding: 0 1.6rem;
+  }
+
+  .continueButton {
+    width: min(100%, 22rem);
+    min-height: 5rem;
+    padding: 1.3rem 2rem;
+    font-size: 1.3rem;
+  }
+}

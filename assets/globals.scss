@@ -120,6 +120,16 @@ body {
   font-family: var(--font-primary);
 }
 
+body.home-intro-active {
+  overflow: hidden;
+
+  > header,
+  > footer {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
 /* Avoid text overflows */
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;

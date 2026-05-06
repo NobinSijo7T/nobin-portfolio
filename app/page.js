@@ -7,10 +7,11 @@ import BoldTitle from "@/components/UI/Cards/BoldTitle/BoldTitle";
 import Gallery from "@/components/Blocks/Gallery/Gallery";
 import CustomScrollbar from '@/components/CustomScrollbar';
 import LogoRibbon from '@/components/UI/LogoRibbon/LogoRibbon';
+import HomeIntro from "@/components/Blocks/HomeIntro/HomeIntro";
 
 export default function Home() {
     return (
-        <>
+        <HomeIntro>
             <Hero/>
             <SkillSet/>
             <ExperienceBlock/>
@@ -18,6 +19,6 @@ export default function Home() {
             <LogoRibbon/>
             <Resume/>
             <Gallery/>
-        </>
+        </HomeIntro>
     )
 }
