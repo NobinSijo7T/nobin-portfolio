@@ -61,9 +61,13 @@ export default function ProjectsShowcase() {
       <Container>
         {/* Back Button */}
         <div className={styles.backButtonWrapper}>
-          <button onClick={handleBackClick} className={styles.backButton}>
+          <button
+            onClick={handleBackClick}
+            className={styles.backButton}
+            aria-label="Back to portfolio"
+            title="Back"
+          >
             <IconArrowLeft size={20} />
-            <span>Back to Portfolio</span>
           </button>
         </div>
 

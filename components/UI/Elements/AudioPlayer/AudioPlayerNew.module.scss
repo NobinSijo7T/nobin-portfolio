@@ -2,313 +2,276 @@
 
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(10px);
+  inset: 0;
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  padding: 2rem;
+  background: hsla(var(--color-black), 0.72);
+  backdrop-filter: blur(18px);
+  animation: fadeIn 180ms ease both;
 }
 
 .playerContainer {
   position: relative;
-  width: 90%;
-  max-width: 900px;
-  background: hsl(var(--color-bg-alt));
-  border: 1px solid hsl(var(--color-white) / 0.1);
-  border-radius: 1.5rem;
-  padding: 0;
-  animation: slideUp 0.3s ease;
+  width: min(96rem, 100%);
+  max-height: min(72rem, calc(100dvh - 4rem));
   overflow: hidden;
-  
-  @include respond-below(md) {
-    width: 95%;
-    max-width: 100%;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(2rem);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  color: hsl(var(--color-white));
+  background:
+    radial-gradient(circle at 72% 16%, hsla(var(--color-primary), 0.12), transparent 28rem),
+    linear-gradient(180deg, hsla(var(--color-white), 0.08), transparent 38%),
+    hsla(var(--color-bg-alt), 0.97);
+  border: 1px solid hsla(var(--color-white), 0.12);
+  border-radius: 0.8rem;
+  box-shadow: 0 3rem 10rem hsla(var(--color-black), 0.62);
+  animation: slideUp 220ms ease both;
 }
 
 .closeButton {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
+  top: 1.4rem;
+  right: 1.4rem;
+  z-index: 10;
+  width: 3.8rem;
+  height: 3.8rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid hsl(var(--color-white) / 0.2);
+  color: hsla(var(--color-white), 0.78);
+  background: hsla(var(--color-black), 0.34);
+  border: 1px solid hsla(var(--color-white), 0.12);
   border-radius: 50%;
-  color: hsl(var(--color-white));
   cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
-  
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+
   svg {
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1.8rem;
+    height: 1.8rem;
   }
-  
-  &:hover {
+
+  &:hover,
+  &:focus-visible {
+    color: hsl(var(--color-black));
     background: hsl(var(--color-primary));
     border-color: hsl(var(--color-primary));
-    color: hsl(var(--color-black));
-    transform: rotate(90deg);
+    transform: translateY(-0.1rem);
+  }
+
+  &:focus-visible {
+    outline: 2px solid hsl(var(--color-white));
+    outline-offset: 0.3rem;
   }
 }
 
 .playerContent {
-  display: flex;
-  height: 600px;
-  
-  @include respond-below(md) {
-    flex-direction: column;
-    height: auto;
-    min-height: 500px;
-  }
+  display: grid;
+  grid-template-columns: minmax(28rem, 0.92fr) minmax(0, 1.35fr);
+  min-height: 58rem;
 }
 
-// Left Panel - Tracklist
 .tracklistPanel {
-  width: 40%;
-  background: hsl(var(--color-bg-alt));
-  border-right: 1px solid hsl(var(--color-white) / 0.1);
-  padding: 2rem;
-  overflow-y: auto;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  
-  @include respond-below(md) {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid hsl(var(--color-white) / 0.1);
-    max-height: 300px;
-  }
+  padding: 2.2rem;
+  border-right: 1px solid hsla(var(--color-white), 0.1);
+  background: hsla(var(--color-black), 0.18);
 }
 
 .tracklistHeader {
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
+  padding-right: 3rem;
 }
 
-.tracklistTitle {
-  font-size: var(--fs-md);
-  color: #FFD700; /* Yellow/Gold color */
-  font-weight: var(--fw-bold);
-  margin: 0;
-  display: block;
-  visibility: visible;
-}
-
-/* Backwards-compatible alias: some code uses `trackListTitle` (different casing).
-   Keep both selectors so the title is visible regardless of which component/style is used. */
+.tracklistTitle,
 .trackListTitle {
-  font-size: var(--fs-md);
-  color: #FFD700; /* Yellow/Gold color */
-  font-weight: var(--fw-bold);
   margin: 0;
+  color: hsl(var(--color-white));
+  font-size: 2rem;
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+}
+
+.tracklistHeader::after {
+  content: "Local tracks";
   display: block;
-  visibility: visible;
+  margin-top: 0.55rem;
+  color: hsla(var(--color-white), 0.48);
+  font-size: 1.15rem;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .tracklist {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  min-height: 0;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   flex: 1;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: hsla(var(--color-primary), 0.5) transparent;
+
+  &::-webkit-scrollbar {
+    width: 0.6rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: hsla(var(--color-primary), 0.45);
+    border-radius: 999rem;
+  }
 }
 
 .trackItem {
-  display: flex;
+  display: grid;
+  grid-template-columns: 5.2rem minmax(0, 1fr) 3.8rem;
   align-items: center;
-  gap: 1rem;
-  padding: 1.2rem;
-  background: hsl(var(--color-white) / 0.03);
-  border: 1px solid hsl(var(--color-white) / 0.05);
+  gap: 1.2rem;
+  min-height: 7.2rem;
+  padding: 1rem;
+  background: hsla(var(--color-white), 0.045);
+  border: 1px solid hsla(var(--color-white), 0.08);
   border-radius: 0.8rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+
   &:hover {
-    background: hsl(var(--color-white) / 0.08);
-    border-color: hsl(var(--color-white) / 0.15);
-    transform: translateX(0.3rem);
+    background: hsla(var(--color-white), 0.075);
+    border-color: hsla(var(--color-primary), 0.36);
+    transform: translateY(-0.1rem);
   }
-  
+
   &.trackItemActive {
-    background: hsl(var(--color-primary) / 0.15);
-    border-color: hsl(var(--color-primary));
-    
-    .trackNumber {
-      color: hsl(var(--color-primary));
-      font-weight: var(--fw-bold);
-    }
-    
-    .trackName {
-      color: hsl(var(--color-white));
-      font-weight: var(--fw-bold);
-    }
+    background: hsla(var(--color-primary), 0.11);
+    border-color: hsla(var(--color-primary), 0.56);
   }
 }
 
 .trackAlbumArt {
-  width: 5rem;
-  height: 5rem;
-  border-radius: 0.6rem;
-  overflow: hidden;
-  flex-shrink: 0;
-  background: hsl(var(--color-white) / 0.05);
+  width: 5.2rem;
+  height: 5.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  overflow: hidden;
+  background: hsla(var(--color-white), 0.06);
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+
   img {
     width: 100%;
     height: 100%;
+    display: block;
     object-fit: cover;
   }
-  
+
   svg {
-    color: hsl(var(--color-white) / 0.3);
+    color: hsla(var(--color-white), 0.42);
   }
 }
 
 .trackDetails {
-  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  min-width: 0;
+  gap: 0.35rem;
 }
 
 .trackName {
-  font-size: var(--fs-sm);
-  color: #FFD700;
-  font-weight: var(--fw-medium);
-  white-space: nowrap;
+  color: hsl(var(--color-white));
+  font-size: 1.42rem;
+  font-weight: var(--fw-bold);
+  line-height: 1.2;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .trackArtist {
-  font-size: var(--fs-xs);
-  color: hsl(var(--color-white) / 0.6);
-  font-weight: var(--fw-regular);
-  white-space: nowrap;
+  color: hsla(var(--color-white), 0.5);
+  font-size: 1.16rem;
+  line-height: 1.2;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .trackPlayButton {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50%;
-  background: transparent;
-  border: 1px solid hsl(var(--color-white) / 0.2);
-  color: hsl(var(--color-white));
-  display: flex;
+  width: 3.8rem;
+  height: 3.8rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: hsla(var(--color-white), 0.82);
+  background: hsla(var(--color-white), 0.05);
+  border: 1px solid hsla(var(--color-white), 0.1);
+  border-radius: 50%;
   cursor: pointer;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-  
-  &:hover {
-    background: hsl(var(--color-white) / 0.1);
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+
+  &:hover,
+  &:focus-visible {
+    color: hsl(var(--color-black));
+    background: hsl(var(--color-primary));
     border-color: hsl(var(--color-primary));
-    color: hsl(var(--color-primary));
-    transform: scale(1.1);
-  }
-  
-  svg {
-    width: 1.6rem;
-    height: 1.6rem;
+    transform: scale(1.04);
   }
 }
 
 .trackItemActive {
-  .trackName {
-    color: #FFD700;
-    font-weight: var(--fw-bold);
-  }
-  
+  .trackName,
   .trackPlayButton {
-    background: hsl(var(--color-primary) / 0.2);
-    border-color: hsl(var(--color-primary));
     color: hsl(var(--color-primary));
+  }
+
+  .trackPlayButton {
+    background: hsla(var(--color-primary), 0.14);
+    border-color: hsla(var(--color-primary), 0.45);
   }
 }
 
-// Right Panel - Controls
 .controlsPanel {
-  width: 60%;
-  background: hsl(var(--color-bg-alt));
-  padding: 3rem;
+  min-width: 0;
+  min-height: 58rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 600px;
-  
-  @include respond-below(md) {
-    width: 100%;
-    padding: 2rem;
-    min-height: auto;
-  }
+  padding: 4.8rem 4rem 3.2rem;
 }
 
 .trackInfo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  min-height: 0;
   text-align: center;
-  margin-bottom: 3rem;
 }
 
 .artworkContainer {
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 2rem;
-  border-radius: 1rem;
-  overflow: hidden;
-  background: hsl(var(--color-white) / 0.05);
+  width: min(28rem, 54vw);
+  aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  @include respond-below(sm) {
-    width: 150px;
-    height: 150px;
-  }
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, hsla(var(--color-white), 0.08), hsla(var(--color-white), 0.025));
+  border: 1px solid hsla(var(--color-white), 0.1);
+  border-radius: 0.8rem;
+  box-shadow: 0 2rem 7rem hsla(var(--color-black), 0.42);
 }
 
 .artwork {
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
 }
 
@@ -318,70 +281,69 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: hsl(var(--color-white) / 0.05);
+  color: hsl(var(--color-primary));
+  background:
+    radial-gradient(circle at 50% 40%, hsla(var(--color-primary), 0.16), transparent 48%),
+    hsla(var(--color-white), 0.035);
 }
 
 .musicIcon {
-  width: 5rem;
-  height: 5rem;
-  color: #FFD700; /* Yellow */
+  width: 5.4rem;
+  height: 5.4rem;
+  color: hsl(var(--color-primary));
 }
 
 .trackTitle {
-  font-size: var(--fs-lg);
-  color: #FFD700; /* Yellow */
-  font-weight: var(--fw-bold);
+  max-width: 100%;
   margin: 0;
-  
-  @include respond-below(sm) {
-    font-size: var(--fs-md);
-  }
+  color: hsl(var(--color-white));
+  font-size: clamp(2.6rem, 4vw, 4.2rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.06;
+  overflow-wrap: anywhere;
 }
 
 .controls {
   width: 100%;
-  margin-top: auto;
+  margin-top: 3rem;
 }
 
 .controlsRow {
-  display: flex;
+  display: grid;
+  grid-template-columns: 5rem 5.2rem minmax(0, 1fr) 5.2rem 4.4rem;
   align-items: center;
-  gap: 1.5rem;
-  width: 100%;
-  
-  @include respond-below(sm) {
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
+  gap: 1.2rem;
 }
 
 .playButton {
-  width: 4rem;
-  height: 4rem;
-  display: flex;
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: hsl(var(--color-white) / 0.1);
-  border: 1px solid hsl(var(--color-white) / 0.2);
-  border-radius: 0.8rem;
-  color: hsl(var(--color-white));
+  color: hsl(var(--color-black));
+  background: hsl(var(--color-primary));
+  border: 0;
+  border-radius: 50%;
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  flex-shrink: 0;
-  
-  &:hover {
-    background: hsl(var(--color-primary));
-    border-color: hsl(var(--color-primary));
-    color: hsl(var(--color-black));
-    transform: scale(1.05);
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0 2.8rem hsla(var(--color-primary), 0.26);
+  }
+
+  &:focus-visible {
+    outline: 2px solid hsl(var(--color-white));
+    outline-offset: 0.35rem;
   }
 }
 
 .icon {
   width: 2rem;
   height: 2rem;
-  transition: opacity 0.3s ease;
 }
 
 .iconHidden {
@@ -394,21 +356,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: hsl(var(--color-black));
+  background: hsla(var(--color-primary), 0.82);
   border-radius: inherit;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(2px);
 }
 
-.timeDisplay {
-  font-size: var(--fs-xs);
-  color: #FFD700; /* Yellow */
-  min-width: 4rem;
-  text-align: center;
+.timeDisplay,
+.timeText {
+  color: hsla(var(--color-white), 0.62);
+  font-size: 1.18rem;
   font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-align: center;
 }
 
 .progressWrapper {
-  flex: 1;
   min-width: 0;
 }
 
@@ -416,90 +378,82 @@
   position: relative;
   display: flex;
   align-items: center;
-  height: 1.6rem;
+  width: 100%;
+  height: 2rem;
+  cursor: pointer;
   touch-action: none;
   user-select: none;
-  width: 100%;
-  cursor: pointer;
-  
+
   &[data-disabled] {
-    opacity: 0.6;
+    opacity: 0.45;
     cursor: not-allowed;
-    
-    .track {
-      opacity: 0.5;
-    }
   }
 }
 
 .track {
   position: relative;
-  height: 0.4rem;
   width: 100%;
-  background: hsl(var(--color-white) / 0.1);
-  border-radius: 9999px;
+  height: 0.5rem;
   overflow: visible;
+  background: hsla(var(--color-white), 0.11);
+  border-radius: 999rem;
 }
 
 .range {
   position: absolute;
   height: 100%;
   background: hsl(var(--color-primary));
-  border-radius: 9999px;
-  transition: width 0.1s linear;
+  border-radius: inherit;
 }
 
 .thumb {
   position: relative;
-  display: flex;
-  height: 0;
   width: 0;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+  height: 0;
   outline: none;
-  
-  &:focus-visible {
-    opacity: 1;
-  }
-}
-
-.progressSlider:hover .thumb {
-  opacity: 1;
 }
 
 .thumbCircle {
   position: absolute;
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  width: 1.4rem;
+  height: 1.4rem;
   background: hsl(var(--color-white));
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 0.35rem solid hsl(var(--color-primary));
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.5rem hsla(var(--color-primary), 0.12);
+  transform: translate(-50%, -50%) scale(0.82);
+  transition: transform 160ms ease;
+}
+
+.progressSlider:hover .thumbCircle,
+.thumb:focus-visible .thumbCircle {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .speedDropdown {
   position: relative;
-  flex-shrink: 0;
 }
 
 .speedButton {
-  width: 4rem;
-  height: 4rem;
-  display: flex;
+  width: 4.4rem;
+  height: 4.4rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid hsl(var(--color-white) / 0.2);
-  border-radius: 0.8rem;
-  color: hsl(var(--color-white) / 0.7);
+  color: hsla(var(--color-white), 0.72);
+  background: hsla(var(--color-white), 0.055);
+  border: 1px solid hsla(var(--color-white), 0.1);
+  border-radius: 50%;
   cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background: hsl(var(--color-white) / 0.05);
-    border-color: hsl(var(--color-white) / 0.3);
-    color: hsl(var(--color-white));
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+
+  &:hover,
+  &:focus-visible {
+    color: hsl(var(--color-primary));
+    background: hsla(var(--color-primary), 0.1);
+    border-color: hsla(var(--color-primary), 0.36);
   }
 }
 
@@ -511,66 +465,62 @@
 
 .speedDropdownContent {
   position: absolute;
-  bottom: calc(100% + 0.5rem);
   right: 0;
-  min-width: 12rem;
-  background: hsl(var(--color-bg-alt));
-  border: 1px solid hsl(var(--color-white) / 0.2);
-  border-radius: 0.8rem;
-  padding: 0.5rem;
+  bottom: calc(100% + 0.8rem);
   z-index: 999;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  min-width: 13rem;
+  padding: 0.6rem;
+  background: hsl(var(--color-bg-alt));
+  border: 1px solid hsla(var(--color-white), 0.14);
+  border-radius: 0.8rem;
+  box-shadow: 0 1.6rem 5rem hsla(var(--color-black), 0.45);
 }
 
 .speedMenuItem {
   width: 100%;
+  min-height: 3.6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
+  gap: 1rem;
+  padding: 0 1rem;
+  color: hsla(var(--color-white), 0.72);
   background: transparent;
-  border: none;
-  border-radius: 0.5rem;
-  color: hsl(var(--color-white) / 0.7);
+  border: 0;
+  border-radius: 0.6rem;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: var(--fs-xs);
-  
+  font-size: 1.22rem;
+  text-align: left;
+
   &:hover {
-    background: hsl(var(--color-white) / 0.05);
     color: hsl(var(--color-white));
+    background: hsla(var(--color-white), 0.06);
   }
 }
 
 .speedMenuItemActive {
-  background: hsl(var(--color-primary) / 0.1);
   color: hsl(var(--color-primary));
+  background: hsla(var(--color-primary), 0.1);
 }
 
 .monoFont {
   font-variant-numeric: tabular-nums;
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .checkIcon {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.5rem;
+  height: 1.5rem;
   color: hsl(var(--color-primary));
 }
 
 .spinner {
-  width: 1.4rem;
-  height: 1.4rem;
-  border: 2px solid hsl(var(--color-white) / 0.2);
-  border-top-color: hsl(var(--color-white));
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid hsla(var(--color-black), 0.22);
+  border-top-color: hsl(var(--color-black));
   border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  animation: spin 650ms linear infinite;
 }
 
 .srOnly {
@@ -589,3 +539,105 @@
   display: none;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(1.2rem) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@include respond-below(md) {
+  .playerContent {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    max-height: calc(100dvh - 4rem);
+    overflow-y: auto;
+  }
+
+  .tracklistPanel {
+    border-right: 0;
+    border-bottom: 1px solid hsla(var(--color-white), 0.1);
+    max-height: 26rem;
+  }
+
+  .controlsPanel {
+    min-height: 0;
+    padding: 3rem 2.2rem 2.2rem;
+  }
+
+  .trackInfo {
+    gap: 1.5rem;
+  }
+
+  .artworkContainer {
+    width: min(22rem, 56vw);
+  }
+}
+
+@include respond-below(sm) {
+  .overlay {
+    padding: 1rem;
+  }
+
+  .playerContainer {
+    max-height: calc(100dvh - 2rem);
+  }
+
+  .tracklistPanel {
+    padding: 1.6rem;
+    max-height: 23rem;
+  }
+
+  .controlsPanel {
+    padding: 2.6rem 1.6rem 1.8rem;
+  }
+
+  .controlsRow {
+    grid-template-columns: 5rem minmax(0, 1fr) 4.4rem;
+    grid-template-areas:
+      "play progress speed"
+      "current progress duration";
+    gap: 1rem;
+  }
+
+  .playButton {
+    grid-area: play;
+  }
+
+  .progressWrapper {
+    grid-area: progress;
+  }
+
+  .speedDropdown {
+    grid-area: speed;
+  }
+
+  .timeDisplay:first-of-type {
+    grid-area: current;
+  }
+
+  .timeDisplay:last-of-type {
+    grid-area: duration;
+  }
+}

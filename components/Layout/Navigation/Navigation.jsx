@@ -51,6 +51,55 @@ export default function Navigation({ isMenuOpen, setMenuOpen }) {
 
     return (
         <div className={`${styles.container} ${isMenuOpen ? styles.menuOpen : ''}`}>
+            {/* SVG Glass Distortion Filter */}
+            <svg className={styles.glassFilter} aria-hidden="true">
+                <defs>
+                    <filter
+                        id="nav-glass-distortion"
+                        x="0%"
+                        y="0%"
+                        width="100%"
+                        height="100%"
+                        filterUnits="objectBoundingBox"
+                    >
+                        <feTurbulence
+                            type="fractalNoise"
+                            baseFrequency="0.001 0.005"
+                            numOctaves="1"
+                            seed="17"
+                            result="turbulence"
+                        />
+                        <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
+                        <feSpecularLighting
+                            in="softMap"
+                            surfaceScale="3"
+                            specularConstant="0.8"
+                            specularExponent="80"
+                            lightingColor="white"
+                            result="specLight"
+                        >
+                            <fePointLight x="-200" y="-200" z="300" />
+                        </feSpecularLighting>
+                        <feComposite
+                            in="specLight"
+                            operator="arithmetic"
+                            k1="0"
+                            k2="1"
+                            k3="1"
+                            k4="0"
+                            result="litImage"
+                        />
+                        <feDisplacementMap
+                            in="SourceGraphic"
+                            in2="softMap"
+                            scale="8"
+                            xChannelSelector="R"
+                            yChannelSelector="G"
+                        />
+                    </filter>
+                </defs>
+            </svg>
+
             <nav className={styles.navigation} ref={navigationRef}>
                 <ul>
                     {Object.values(PageList)

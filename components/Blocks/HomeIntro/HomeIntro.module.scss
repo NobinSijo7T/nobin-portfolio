@@ -44,24 +44,22 @@
   background-position: center;
   filter: saturate(1.18) brightness(1.08);
   pointer-events: none;
-  clip-path: polygon(
-    calc(var(--x) - var(--r2)) calc(var(--y) - var(--r)),
-    calc(var(--x) + var(--r3)) calc(var(--y) - var(--r)),
-    calc(var(--x) + var(--r3)) calc(var(--y) - var(--r2)),
-    calc(var(--x) + var(--r2)) calc(var(--y) - var(--r2)),
-    calc(var(--x) + var(--r2)) calc(var(--y) - var(--r3)),
-    calc(var(--x) + var(--r)) calc(var(--y) - var(--r3)),
-    calc(var(--x) + var(--r)) calc(var(--y) + var(--r2)),
-    calc(var(--x) + var(--r2)) calc(var(--y) + var(--r2)),
-    calc(var(--x) + var(--r2)) calc(var(--y) + var(--r)),
-    calc(var(--x) - var(--r3)) calc(var(--y) + var(--r)),
-    calc(var(--x) - var(--r3)) calc(var(--y) + var(--r2)),
-    calc(var(--x) - var(--r2)) calc(var(--y) + var(--r2)),
-    calc(var(--x) - var(--r2)) calc(var(--y) + var(--r3)),
-    calc(var(--x) - var(--r)) calc(var(--y) + var(--r3)),
-    calc(var(--x) - var(--r)) calc(var(--y) - var(--r2)),
-    calc(var(--x) - var(--r2)) calc(var(--y) - var(--r2))
-  );
+  clip-path: polygon(calc(var(--x) - var(--r2)) calc(var(--y) - var(--r)),
+      calc(var(--x) + var(--r3)) calc(var(--y) - var(--r)),
+      calc(var(--x) + var(--r3)) calc(var(--y) - var(--r2)),
+      calc(var(--x) + var(--r2)) calc(var(--y) - var(--r2)),
+      calc(var(--x) + var(--r2)) calc(var(--y) - var(--r3)),
+      calc(var(--x) + var(--r)) calc(var(--y) - var(--r3)),
+      calc(var(--x) + var(--r)) calc(var(--y) + var(--r2)),
+      calc(var(--x) + var(--r2)) calc(var(--y) + var(--r2)),
+      calc(var(--x) + var(--r2)) calc(var(--y) + var(--r)),
+      calc(var(--x) - var(--r3)) calc(var(--y) + var(--r)),
+      calc(var(--x) - var(--r3)) calc(var(--y) + var(--r2)),
+      calc(var(--x) - var(--r2)) calc(var(--y) + var(--r2)),
+      calc(var(--x) - var(--r2)) calc(var(--y) + var(--r3)),
+      calc(var(--x) - var(--r)) calc(var(--y) + var(--r3)),
+      calc(var(--x) - var(--r)) calc(var(--y) - var(--r2)),
+      calc(var(--x) - var(--r2)) calc(var(--y) - var(--r2)));
   animation: trailReveal 1150ms steps(9, end) forwards;
 }
 
@@ -173,6 +171,132 @@
   }
 }
 
+.continueShell {
+  position: relative;
+  width: 11rem;
+  height: 11rem;
+  display: grid;
+  place-items: center;
+  border: 1px dotted hsla(var(--color-white), 0.24);
+  border-radius: 50%;
+  padding: 0.45rem;
+  opacity: 0.62;
+  pointer-events: auto;
+  transition: opacity 220ms ease, border-color 220ms ease;
+
+  &:hover,
+  &:focus-within {
+    opacity: 1;
+    border-color: hsla(var(--color-white), 0.56);
+  }
+}
+
+.continueOrb {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 0;
+  color: hsla(var(--color-white), 0.84);
+  background: hsla(var(--color-black), 0.34);
+  border: 1px solid hsla(var(--color-white), 0.16);
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+
+  &:hover,
+  &:focus-visible {
+    background: hsla(var(--color-white), 0.14);
+    border-color: hsla(var(--color-white), 0.44);
+    transform: scale(1.06);
+    box-shadow: 0 0 3.5rem hsla(var(--color-white), 0.14);
+
+    .continueRing {
+      animation-duration: 5s;
+    }
+
+    .continueIcon {
+      background: hsl(var(--color-black));
+      color: hsl(var(--color-white));
+      transform: scale(1.08);
+    }
+
+    .continueArrowPrimary {
+      transform: translate(150%, -150%);
+    }
+
+    .continueArrowSecondary {
+      transform: translate(0, 0);
+      transition-delay: 80ms;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid hsl(var(--color-white));
+    outline-offset: 0.4rem;
+  }
+}
+
+.continueRing {
+  position: absolute;
+  inset: 0.75rem;
+  animation: textRotation 10s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+.continueLetter {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: hsla(var(--color-white), 0.7);
+  font-size: 1rem;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(var(--rotation)) translateY(-4.15rem);
+  transform-origin: 50% 50%;
+  user-select: none;
+}
+
+.continueIcon {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: hsla(var(--color-white), 0.78);
+  background: hsla(var(--color-white), 0.12);
+  border-radius: 50%;
+  transition: background 220ms ease, color 220ms ease, transform 220ms ease;
+
+  svg {
+    position: absolute;
+    width: 1.55rem;
+    height: 1.55rem;
+    transition: transform 260ms ease;
+  }
+}
+
+.continueArrowPrimary {
+  transform: translate(0, 0);
+}
+
+.continueArrowSecondary {
+  transform: translate(-150%, 150%);
+}
+
+@keyframes textRotation {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes trailReveal {
   0% {
     opacity: 0;
@@ -201,6 +325,7 @@
 }
 
 @media (max-width: 767px) {
+
   .baseImage,
   .trailReveal {
     object-position: 48% center;

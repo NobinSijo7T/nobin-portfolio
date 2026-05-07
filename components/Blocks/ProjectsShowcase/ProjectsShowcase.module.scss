@@ -32,41 +32,35 @@
 .backButton {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 1.2rem 2.4rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  background: rgba(255, 215, 0, 0.1);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 10rem;
-  color: #FFD700;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease, color 0.25s ease;
   
   @include respond-below(md) {
-    padding: 1.1rem 2.2rem;
-    font-size: 1.4rem;
+    width: 4.2rem;
+    height: 4.2rem;
   }
   
   @include respond-below(sm) {
-    padding: 1rem 2rem;
-    font-size: 1.3rem;
-    gap: 0.6rem;
-  }
-  
-  @include respond-below(xs) {
-    padding: 0.9rem 1.8rem;
-    font-size: 1.2rem;
+    width: 4rem;
+    height: 4rem;
   }
   
   &:hover {
-    background: rgba(255, 215, 0, 0.2);
-    border-color: #FFD700;
-    transform: translateX(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #fff;
+    transform: translateX(-2px);
   }
   
   &:active {
-    transform: translateX(-3px);
+    transform: translateX(-1px) scale(0.98);
   }
   
   svg {

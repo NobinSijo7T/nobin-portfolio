@@ -6,6 +6,7 @@
   left: 50%;
   transform: translateX(-50%);
   transition: transform .3s ease-in-out;
+  z-index: 10;
 
   display: flex;
   justify-content: center;
@@ -25,41 +26,119 @@
   position: relative;
   z-index: 1;
   border-radius: 100vw;
-  backdrop-filter: blur(.4rem);
-  background-color: hsla(var(--color-black), .8);
-  border: .05rem solid hsla(var(--color-white), .16);
-  box-shadow: .01rem .01rem .07rem hsla(var(--color-black), .16);
+  overflow: hidden;
+  isolation: isolate;
+
+  /* ── Liquid glass layered background ── */
+  background-color: hsla(var(--color-black), .35);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: .05rem solid hsla(var(--color-white), .18);
+
+  /* Specular inner glow + subtle outer shadow */
+  box-shadow:
+    inset 1px 1px 0 0 hsla(var(--color-white), .22),
+    inset -1px -1px 0 0 hsla(var(--color-white), .08),
+    0 8px 32px hsla(var(--color-black), .28),
+    0 2px 8px hsla(var(--color-black), .12);
+
+  transition: box-shadow .4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              border-color .4s ease,
+              background-color .4s ease;
+
+  &:hover {
+    border-color: hsla(var(--color-white), .28);
+    box-shadow:
+      inset 1px 1px 0 0 hsla(var(--color-white), .28),
+      inset -1px -1px 0 0 hsla(var(--color-white), .12),
+      0 12px 48px hsla(var(--color-black), .35),
+      0 2px 8px hsla(var(--color-black), .15);
+  }
+
   @include respond-below(xs) {
-    background-color: hsla(var(--color-black), .95);
+    background-color: hsla(var(--color-black), .85);
+    backdrop-filter: blur(32px) saturate(1.4);
+    -webkit-backdrop-filter: blur(32px) saturate(1.4);
     border-radius: 0;
     width: 100%;
     padding-top: var(--header-height);
+    box-shadow: none;
+    border: none;
   }
+
+  /* ── Glass refraction overlay ── */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      hsla(var(--color-white), .12) 0%,
+      hsla(var(--color-white), .04) 30%,
+      transparent 50%,
+      hsla(var(--color-white), .02) 70%,
+      hsla(var(--color-white), .08) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ── Subtle top highlight edge ── */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsla(var(--color-white), .3) 20%,
+      hsla(var(--color-white), .45) 50%,
+      hsla(var(--color-white), .3) 80%,
+      transparent
+    );
+    pointer-events: none;
+    border-radius: 100vw;
+  }
+
   ul{
+    position: relative;
+    z-index: 2;
     display: flex;
-    padding: 0 1.5rem;
-    height: 6rem;
+    padding: 0 1rem;
+    height: 5.6rem;
     align-items: center;
+    gap: 0.2rem;
+
     @include respond-below(xs) {
       display: block;
+      padding: 0;
+      height: auto;
     }
     li{
       a, button{
         display: block;
-        padding: 1rem 1.5rem;
+        padding: 0.9rem 1.5rem;
         font-size: var(--fs-xxs);
-        color: hsl(var(--color-white));
+        color: hsla(var(--color-white), .88);
         text-decoration: none;
         transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         border-radius: 100vw;
         border: 0;
         background: transparent;
+        letter-spacing: 0.02em;
+
         @include respond-below(xs) {
           --fs-xxs: 2rem;
           display: block;
           width: 100%;
           padding: 2rem 3rem;
           text-align: left;
+          color: hsl(var(--color-white));
         }
         &:hover{
           cursor: pointer;
@@ -74,9 +153,21 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 1;
   background: hsl(var(--color-primary));
   pointer-events: none;
   border-radius: 100vw;
-  height: 4.6rem;
+  height: 4.2rem;
+  /* Glass-like highlight on hover indicator */
+  box-shadow:
+    inset 0 1px 1px hsla(var(--color-white), .3),
+    0 2px 8px hsla(var(--color-primary), .25);
+}
+
+/* ── Glass distortion SVG filter (injected by component) ── */
+.glassFilter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
 }

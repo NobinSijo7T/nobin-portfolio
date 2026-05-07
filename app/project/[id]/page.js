@@ -1,140 +1,272 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { StaggeredGrid } from '@/src/components/ui/staggered-grid';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import ProjectJourney from '@/database/ProjectJourney.json';
-import Button from '@/components/UI/Elements/Button/Button';
-import { IconBrandGithub, IconBrandDribbble, IconExternalLink, IconBrandBehance } from "@tabler/icons-react";
+import Link from 'next/link';
+import {
+    IconBrandGithub,
+    IconBrandDribbble,
+    IconExternalLink,
+    IconBrandBehance,
+    IconArrowLeft,
+    IconBrandReact,
+    IconBrandNextjs,
+    IconBrandNodejs,
+    IconBrandMongodb,
+    IconBrandJavascript,
+    IconBrandTypescript,
+    IconBrandCss3,
+    IconBrandPython,
+    IconBrandVue,
+    IconBrandFirebase,
+    IconBrandDocker,
+    IconBrandPrisma,
+    IconBrandStripe,
+    IconBrandGraphql,
+    IconBrandSpotify,
+    IconBrandTailwind,
+    IconDatabase,
+    IconCode,
+    IconBracketsAngle
+} from "@tabler/icons-react";
+import styles from './project-details.module.scss';
 
-// Technology icon mapping for display
-const getTechnologyStack = (technologies) => {
-    const iconMap = {
-        'React': { name: 'React', color: '#61DAFB' },
-        'Next.js': { name: 'Next.js', color: '#000000' },
-        'Node.js': { name: 'Node.js', color: '#68A063' },
-        'MongoDB': { name: 'MongoDB', color: '#47A248' },
-        'Express': { name: 'Express', color: '#000000' },
-        'JavaScript': { name: 'JavaScript', color: '#F7DF1E' },
-        'TypeScript': { name: 'TypeScript', color: '#3178C6' },
-        'CSS3': { name: 'CSS3', color: '#1572B6' },
-        'Python': { name: 'Python', color: '#3776AB' },
-        'PostgreSQL': { name: 'PostgreSQL', color: '#336791' },
-        'Vue.js': { name: 'Vue.js', color: '#4FC08D' },
-        'Mapbox': { name: 'Mapbox', color: '#000000' },
-        'Firebase': { name: 'Firebase', color: '#FFCA28' },
-        'Socket.io': { name: 'Socket.io', color: '#010101' },
-        'TensorFlow': { name: 'TensorFlow', color: '#FF6F00' },
-        'FastAPI': { name: 'FastAPI', color: '#009688' },
-        'Docker': { name: 'Docker', color: '#2496ED' },
-        'Prisma': { name: 'Prisma', color: '#2D3748' },
-        'Stripe': { name: 'Stripe', color: '#635BFF' },
-        'GraphQL': { name: 'GraphQL', color: '#E10098' },
-        'Canvas API': { name: 'Canvas API', color: '#FF6B6B' },
-        'Local Storage': { name: 'Local Storage', color: '#4CAF50' },
-        'Spotify API': { name: 'Spotify API', color: '#1DB954' }
-    };
+// Map tech name → icon component
+const getTechIcon = (name) => {
+    const lower = name.toLowerCase();
+    if (lower.includes('react')) return IconBrandReact;
+    if (lower.includes('next')) return IconBrandNextjs;
+    if (lower.includes('node')) return IconBrandNodejs;
+    if (lower.includes('mongo')) return IconBrandMongodb;
+    if (lower === 'javascript' || lower === 'js') return IconBrandJavascript;
+    if (lower.includes('typescript')) return IconBrandTypescript;
+    if (lower.includes('css')) return IconBrandCss3;
+    if (lower.includes('python')) return IconBrandPython;
+    if (lower.includes('vue')) return IconBrandVue;
+    if (lower.includes('firebase')) return IconBrandFirebase;
+    if (lower.includes('docker')) return IconBrandDocker;
+    if (lower.includes('prisma')) return IconBrandPrisma;
+    if (lower.includes('stripe')) return IconBrandStripe;
+    if (lower.includes('graphql')) return IconBrandGraphql;
+    if (lower.includes('spotify')) return IconBrandSpotify;
+    if (lower.includes('tailwind')) return IconBrandTailwind;
+    if (lower.includes('sql') || lower.includes('database') || lower.includes('postgre')) return IconDatabase;
+    return IconCode;
+};
 
-    return technologies.map(tech => iconMap[tech] || { name: tech, color: '#666666' });
+// Link config
+const linkConfig = {
+    github: { icon: IconBrandGithub, label: 'GitHub' },
+    dribbble: { icon: IconBrandDribbble, label: 'Dribbble' },
+    behance: { icon: IconBrandBehance, label: 'Behance' },
+    live: { icon: IconExternalLink, label: 'Live Site' },
 };
 
 export default function ProjectDetails({ params }) {
     const router = useRouter();
     const [project, setProject] = useState(null);
-    const [unwrappedParams, setUnwrappedParams] = useState(null);
+    const containerRef = useRef(null);
+    const heroRef = useRef(null);
+    const imageRef = useRef(null);
+    const detailsRef = useRef(null);
 
     useEffect(() => {
         params.then(p => {
-            setUnwrappedParams(p);
-            const foundProject = ProjectJourney.find(proj => proj.id === p.id);
-            setProject(foundProject);
+            const found = ProjectJourney.find(proj => proj.id === p.id);
+            setProject(found);
         });
     }, [params]);
 
-    if (!project) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-white text-center">
-                    <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
-                    <p className="text-gray-400 mb-8">The project you&apos;re looking for doesn&apos;t exist.</p>
-                    <button
-                        onClick={() => router.back()}
-                        className="px-6 py-3 bg-yellow-500 text-black rounded-full font-semibold hover:bg-yellow-400 transition-colors"
-                    >
-                        Back to Portfolio
-                    </button>
-                </div>
-            </div>
-        );
+    // Entrance animations
+    useGSAP(() => {
+        if (!project || !containerRef.current) return;
+
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+        // Hero elements
+        tl.from(heroRef.current?.querySelectorAll('[data-anim]') || [], {
+            y: 60,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 0.9,
+        });
+
+        // Image
+        if (imageRef.current) {
+            tl.from(imageRef.current, {
+                y: 80,
+                opacity: 0,
+                scale: 0.95,
+                duration: 1,
+            }, '-=0.5');
+        }
+
+        // Details section
+        if (detailsRef.current) {
+            tl.from(detailsRef.current.querySelectorAll('[data-anim-detail]') || [], {
+                y: 40,
+                opacity: 0,
+                stagger: 0.1,
+                duration: 0.7,
+            }, '-=0.6');
+        }
+    }, { scope: containerRef, dependencies: [project] });
+
+    // Not found
+    if (project === undefined) {
+        return null; // loading
     }
 
-    // Prepare images for StaggeredGrid - use project image multiple times
-    const images = Array(10).fill(project.image);
+    if (project === null) {
+        return null;
+    }
 
-    // Prepare bento items for technology stack and links
-    const technologyStack = getTechnologyStack(project.technologies);
+    // Collect active links
+    const activeLinks = project
+        ? Object.entries(project.links)
+            .filter(([, url]) => url)
+            .map(([key, url]) => ({ key, url, ...linkConfig[key] }))
+        : [];
 
-    const bentoItems = [
-        ...(project.links.github ? [{
-            id: 'github',
-            title: 'GitHub',
-            image: project.image,
-            icon: <IconBrandGithub className="w-8 h-8" />,
-            link: project.links.github,
-            type: 'link'
-        }] : []),
-        ...(project.links.dribbble ? [{
-            id: 'dribbble',
-            title: 'Dribbble',
-            image: project.image,
-            icon: <IconBrandDribbble className="w-8 h-8" />,
-            link: project.links.dribbble,
-            type: 'link'
-        }] : []),
-        ...(project.links.behance ? [{
-            id: 'behance',
-            title: 'Behance',
-            image: project.image,
-            icon: <IconBrandBehance className="w-8 h-8" />,
-            link: project.links.behance,
-            type: 'link'
-        }] : []),
-        ...(project.links.live ? [{
-            id: 'live',
-            title: 'Live Demo',
-            image: project.image,
-            icon: <IconExternalLink className="w-8 h-8" />,
-            link: project.links.live,
-            type: 'link'
-        }] : [])
-    ];
+    // Find adjacent projects for navigation
+    const currentIndex = ProjectJourney.findIndex(p => p.id === project?.id);
+    const prevProject = currentIndex > 0 ? ProjectJourney[currentIndex - 1] : null;
+    const nextProject = currentIndex < ProjectJourney.length - 1 ? ProjectJourney[currentIndex + 1] : null;
 
     return (
-        <div className="relative min-h-screen bg-black">
-            {/* Back to Projects Button */}
-            <div className="fixed top-6 left-6 z-50">
-                <Button
-                    element="link"
-                    link="/projects"
-                    theme="button-1"
-                    className="!h-12 !px-6 !text-xs md:!h-14 md:!px-8 md:!text-sm backdrop-blur-md"
-                >
-                    All Projects
-                </Button>
-            </div>
+        <div className={styles.page} ref={containerRef}>
+            {/* ═══ HERO ═══ */}
+            <section className={styles.hero} ref={heroRef}>
+                <div className={styles.heroInner}>
+                    {/* Back button */}
+                    <div className={styles.backRow} data-anim>
+                        <Link href="/projects" className={styles.backButton}>
+                            <IconArrowLeft size={20} />
+                            <span>All Projects</span>
+                        </Link>
+                    </div>
 
-            {/* Staggered Grid with Project Info */}
-            <StaggeredGrid
-                images={images}
-                bentoItems={bentoItems}
-                techStack={technologyStack}
-                centerText={project.title.split(' ')[0] || 'Project'}
-                showFooter={false}
-                className="min-h-screen"
-                projectTitle={project.title}
-                projectCompany={project.company}
-                projectDescription={project.description}
-            />
+                    {/* Company badge */}
+                    {project.company && (
+                        <span className={styles.companyBadge} data-anim>
+                            {project.company}
+                        </span>
+                    )}
+
+                    {/* Title */}
+                    <h1 className={styles.title} data-anim>
+                        {project.title}
+                    </h1>
+
+                    {/* Description */}
+                    <p className={styles.description} data-anim>
+                        {project.description}
+                    </p>
+
+                    {/* Quick links row */}
+                    {activeLinks.length > 0 && (
+                        <div className={styles.heroLinks} data-anim>
+                            {activeLinks.map(({ key, url, icon: Icon, label }) => (
+                                <a
+                                    key={key}
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.heroLink}
+                                    title={label}
+                                >
+                                    <Icon size={20} />
+                                    <span>{label}</span>
+                                </a>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </section>
+
+            {/* ═══ PROJECT IMAGE ═══ */}
+            <section className={styles.imageSection} ref={imageRef}>
+                <div className={styles.imageFrame}>
+                    <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        className={styles.projectImage}
+                        draggable="false"
+                    />
+                    <div className={styles.imageGlow} />
+                </div>
+            </section>
+
+            {/* ═══ DETAILS GRID ═══ */}
+            <section className={styles.details} ref={detailsRef}>
+                <div className={styles.detailsInner}>
+                    {/* Tech stack */}
+                    <div className={styles.detailBlock} data-anim-detail>
+                        <h2 className={styles.detailLabel}>Technology Stack</h2>
+                        <div className={styles.techGrid}>
+                            {project.technologies.map((tech, i) => {
+                                const Icon = getTechIcon(tech);
+                                return (
+                                    <div key={i} className={styles.techChip}>
+                                        <Icon size={18} stroke={1.5} />
+                                        <span>{tech}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* External links - expanded cards */}
+                    {activeLinks.length > 0 && (
+                        <div className={styles.detailBlock} data-anim-detail>
+                            <h2 className={styles.detailLabel}>External Links</h2>
+                            <div className={styles.linkCards}>
+                                {activeLinks.map(({ key, url, icon: Icon, label }) => (
+                                    <a
+                                        key={key}
+                                        href={url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.linkCard}
+                                    >
+                                        <div className={styles.linkCardIcon}>
+                                            <Icon size={24} />
+                                        </div>
+                                        <div className={styles.linkCardInfo}>
+                                            <span className={styles.linkCardLabel}>{label}</span>
+                                            <span className={styles.linkCardUrl}>
+                                                {url.replace(/^https?:\/\/(www\.)?/, '').split('/').slice(0, 2).join('/')}
+                                            </span>
+                                        </div>
+                                        <IconExternalLink size={16} className={styles.linkCardArrow} />
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </section>
+
+            {/* ═══ PROJECT NAVIGATION ═══ */}
+            <section className={styles.projectNav}>
+                <div className={styles.projectNavInner}>
+                    {prevProject ? (
+                        <a href={`/project/${prevProject.id}`} className={styles.navPrev}>
+                            <span className={styles.navDirection}>← Previous</span>
+                            <span className={styles.navTitle}>{prevProject.title}</span>
+                        </a>
+                    ) : <div />}
+                    {nextProject ? (
+                        <a href={`/project/${nextProject.id}`} className={styles.navNext}>
+                            <span className={styles.navDirection}>Next →</span>
+                            <span className={styles.navTitle}>{nextProject.title}</span>
+                        </a>
+                    ) : <div />}
+                </div>
+            </section>
         </div>
     );
 }

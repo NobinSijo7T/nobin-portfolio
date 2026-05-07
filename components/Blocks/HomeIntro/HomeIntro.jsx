@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { Button } from "@/src/components/ui/button";
+
 import styles from "./HomeIntro.module.scss";
 
 export default function HomeIntro({ children }) {
@@ -125,9 +127,53 @@ export default function HomeIntro({ children }) {
       </div>
 
       <div className={styles.controls}>
-        <button type="button" className={styles.continueButton} onClick={handleContinue}>
-          Continue
-        </button>
+        <div className={styles.continueShell}>
+          <Button
+            type="button"
+            onClick={handleContinue}
+            aria-label="Continue"
+            className={styles.continueOrb}
+          >
+            <span className={styles.continueRing} aria-hidden="true">
+              {Array.from("CONTINUE").map((char, i) => (
+                <span
+                  key={i}
+                  className={styles.continueLetter}
+                  style={{
+                    "--rotation": `${(360 / 8) * i}deg`,
+                  }}
+                >
+                  {char}
+                </span>
+              ))}
+            </span>
+
+            <span className={styles.continueIcon} aria-hidden="true">
+              <svg
+                viewBox="0 0 14 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className={styles.continueArrowPrimary}
+              >
+                <path
+                  d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                  fill="currentColor"
+                />
+              </svg>
+              <svg
+                viewBox="0 0 14 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className={styles.continueArrowSecondary}
+              >
+                <path
+                  d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </Button>
+        </div>
       </div>
     </section>
   );

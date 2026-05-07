@@ -18,6 +18,27 @@
   padding: 0 var(--x-spacing);
   height: var(--header-height);
 }
+
+.leftCluster {
+  display: flex;
+  align-items: center;
+}
+
+.rightCluster {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.rightTags {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @include respond-below(xs) {
+    display: none;
+  }
+}
 .logo{
   display: inline-block;
 }
@@ -102,10 +123,29 @@
   font-size: var(--fs-ms);
   color: hsla(var(--color-white), .9);
   line-height: 1;
-  border: 1px solid hsla(var(--color-white), .3);
-  padding: 0.8rem 1rem;
-  border-radius: 100rem;
   text-transform: uppercase;
+
+  /* ── Liquid glass pill ── */
+  padding: 0.8rem 1.2rem;
+  border-radius: 100rem;
+  background: hsla(var(--color-black), .25);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid hsla(var(--color-white), .16);
+  box-shadow:
+    inset 1px 1px 0 0 hsla(var(--color-white), .15),
+    inset -1px -1px 0 0 hsla(var(--color-white), .06),
+    0 4px 16px hsla(var(--color-black), .2);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: hsla(var(--color-white), .28);
+    box-shadow:
+      inset 1px 1px 0 0 hsla(var(--color-white), .2),
+      inset -1px -1px 0 0 hsla(var(--color-white), .1),
+      0 6px 24px hsla(var(--color-black), .25);
+  }
+
   @include respond-below(xs) {
     display: none;
   }
@@ -146,13 +186,43 @@
 }
 
 .location{
-  margin-left: auto;
-  margin-right: 3rem;
   font-size: var(--fs-ms);
   color: hsla(var(--color-white), .9);
   text-transform: uppercase;
+
+  /* ── Liquid glass pill ── */
+  padding: 0.8rem 1.2rem;
+  border-radius: 100rem;
+  background: hsla(var(--color-black), .25);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid hsla(var(--color-white), .16);
+  box-shadow:
+    inset 1px 1px 0 0 hsla(var(--color-white), .15),
+    inset -1px -1px 0 0 hsla(var(--color-white), .06),
+    0 4px 16px hsla(var(--color-black), .2);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: hsla(var(--color-white), .28);
+    box-shadow:
+      inset 1px 1px 0 0 hsla(var(--color-white), .2),
+      inset -1px -1px 0 0 hsla(var(--color-white), .1),
+      0 6px 24px hsla(var(--color-black), .25);
+  }
+
   @include respond-below(xs) {
     display: none;
+  }
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @include respond-below(xs) {
+    gap: 1rem;
   }
 }
 
@@ -162,38 +232,47 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid hsla(var(--color-white), .2);
   border-radius: 50%;
   color: hsl(var(--color-white));
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-right: 1.5rem;
   position: relative;
-  
+
+  /* ── Liquid glass circle ── */
+  background: hsla(var(--color-black), .25);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid hsla(var(--color-white), .18);
+  box-shadow:
+    inset 1px 1px 0 0 hsla(var(--color-white), .18),
+    inset -1px -1px 0 0 hsla(var(--color-white), .06),
+    0 4px 16px hsla(var(--color-black), .2);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
   @include respond-below(xs) {
     width: 4rem;
     height: 4rem;
-    margin-right: 1rem;
   }
-  
+
   svg {
     width: 2rem;
     height: 2rem;
     transition: transform 0.3s ease;
   }
-  
+
   &:hover {
     background: hsl(var(--color-primary));
     border-color: hsl(var(--color-primary));
     color: hsl(var(--color-black));
     transform: scale(1.1);
-    
+    box-shadow:
+      inset 1px 1px 0 0 hsla(var(--color-white), .3),
+      0 6px 24px hsla(var(--color-primary), .3);
+
     svg {
       transform: rotate(360deg);
     }
   }
-  
+
   &:active {
     transform: scale(0.95);
   }
@@ -202,7 +281,7 @@
 .audioButtonPlaying {
   border-color: hsl(var(--color-primary));
   animation: musicPulse 1.5s ease-in-out infinite;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -214,7 +293,7 @@
     border: 2px solid hsl(var(--color-primary));
     animation: musicRipple 2s ease-out infinite;
   }
-  
+
   svg {
     animation: musicBounce 0.8s ease-in-out infinite;
   }
@@ -255,14 +334,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid hsla(var(--color-white), .2);
   border-radius: 50%;
   color: hsl(var(--color-white));
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-left: 1.5rem;
   position: relative;
+
+  /* ── Liquid glass circle ── */
+  background: hsla(var(--color-black), .25);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid hsla(var(--color-white), .18);
+  box-shadow:
+    inset 1px 1px 0 0 hsla(var(--color-white), .18),
+    inset -1px -1px 0 0 hsla(var(--color-white), .06),
+    0 4px 16px hsla(var(--color-black), .2);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   svg {
     width: 2rem;
@@ -273,14 +359,15 @@
     border-color: hsl(var(--color-primary));
     color: hsl(var(--color-primary));
     transform: scale(1.05);
+    box-shadow:
+      inset 1px 1px 0 0 hsla(var(--color-white), .2),
+      0 6px 24px hsla(var(--color-primary), .15);
   }
 
   @include respond-below(xs) {
     width: 4rem;
     height: 4rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    
+
     svg {
       width: 1.8rem;
       height: 1.8rem;
