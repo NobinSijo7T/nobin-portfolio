@@ -1,0 +1,211 @@
+[
+  {
+    "company": "Prism Browser",
+    "companyLogo": "/assets/logos/prism.jpg",
+    "companySite": "https://prismbrowser.tech/",
+    "positions": [
+      {
+        "title": "Founder & CEO",
+        "type": "Self-employed",
+        "startDate": "2025-06",
+        "endDate": null,
+        "current": true,
+        "duration": "1 yr",
+        "location": "Hybrid",
+        "description": "Founded and lead Prism Browser, overseeing product vision, strategy, and execution. Responsible for defining the product roadmap, building and managing the core team, and driving business development. Spearhead UI/UX design decisions, manage stakeholder communications, and ensure the overall growth and direction of the company.",
+        "skills": []
+      }
+    ]
+  },
+  {
+    "company": "Sovrn",
+    "companyLogo": "/assets/logos/join_sovrn_logo.jpg",
+    "companySite": "https://www.sovrn.place/",
+    "positions": [
+      {
+        "title": "UI/UX Intern",
+        "type": "Internship",
+        "startDate": "2025-12",
+        "endDate": "2026-02",
+        "current": false,
+        "duration": "3 mos",
+        "location": "Remote",
+        "description": "Designed and iterated on user interface components and user experience flows for the platform. Collaborated with the product and engineering teams to translate wireframes into polished, pixel-perfect designs. Conducted user research and usability testing to inform design decisions, and contributed to the company's design system.",
+        "skills": []
+      }
+    ]
+  },
+  {
+    "company": "GTech MuLearn",
+    "companyLogo": "/assets/logos/mulearn_logo.jpg",
+    "companySite": "https://mulearn.org/",
+    "positions": [
+      {
+        "title": "UI Designer Intern",
+        "type": "Internship",
+        "startDate": "2024-05",
+        "endDate": "2025-06",
+        "current": false,
+        "duration": "1 yr 2 mos",
+        "location": "Hybrid",
+        "description": "Designed intuitive and visually appealing user interfaces for GTech MuLearn's platform and campaigns. Created graphics, illustrations, and marketing assets using Adobe Illustrator and Adobe Express. Worked closely with developers to ensure design consistency across products, and contributed to improving the overall visual identity of the platform.",
+        "skills": ["Adobe Illustrator", "Adobe Express"]
+      }
+    ]
+  },
+  {
+    "company": "TILTLABS",
+    "companyLogo": "/assets/logos/tiltlabs_logo.jpg",
+    "companySite": "https://tiltlabs.io/",
+    "positions": [
+      {
+        "title": "UI Developer Intern",
+        "type": "Internship",
+        "startDate": "2025-01",
+        "endDate": "2025-05",
+        "current": false,
+        "duration": "5 mos",
+        "location": "Hybrid",
+        "description": "Developed and implemented responsive UI components following modern graphic design principles and UX best practices. Collaborated with the design and development teams to bridge the gap between design concepts and functional front-end code. Applied user experience principles to enhance product usability and accessibility.",
+        "skills": ["Graphic Design Principles", "User Experience (UX)"]
+      }
+    ]
+  },
+  {
+    "company": "Mulearn KNP",
+    "companyLogo": "/assets/logos/mulearn_knp_logo.jpg",
+    "companySite": "https://www.linkedin.com/company/mulearn-knp/posts/?feedView=all",
+    "positions": [
+      {
+        "title": "Design Lead",
+        "type": "Volunteer",
+        "startDate": "2024-04",
+        "endDate": "2025-04",
+        "current": false,
+        "duration": "1 yr 1 mo",
+        "location": null,
+        "description": "Led the design team for the Karunagappally chapter of MuLearn, setting the visual direction for all chapter activities and events. Mentored junior designers, coordinated design tasks, and ensured brand consistency across digital and print materials. Drove creative initiatives to increase chapter engagement and visibility.",
+        "skills": []
+      }
+    ]
+  },
+  {
+    "company": "IEEE Student Branch College of Engineering Karunagappally",
+    "companyLogo": "/assets/logos/ieee_cek.jpg",
+    "companySite": "https://ieeesbcek.org/",
+    "positions": [
+      {
+        "title": "Web Designer",
+        "type": "Full-time",
+        "startDate": "2024-04",
+        "endDate": "2025-02",
+        "current": false,
+        "duration": "11 mos",
+        "location": null,
+        "description": "Designed and maintained the IEEE Student Branch website, ensuring a consistent and professional online presence. Created event banners, promotional graphics, and digital assets for branch activities. Collaborated with branch committees to reflect ongoing events and updates on the web platform."
+      },
+      {
+        "title": "Activity Coordinator",
+        "type": "Full-time",
+        "startDate": "2024-04",
+        "endDate": "2025-02",
+        "current": false,
+        "duration": "11 mos",
+        "location": null,
+        "description": "Planned, coordinated, and executed technical and non-technical activities and events for the IEEE Student Branch. Liaised between branch members and faculty advisors to ensure smooth execution of workshops, seminars, and competitions. Managed logistics, timelines, and communication for all branch activities."
+      },
+      {
+        "title": "Member",
+        "type": "Volunteer",
+        "startDate": "2023-11",
+        "endDate": "2025-02",
+        "current": false,
+        "duration": "1 yr 4 mos",
+        "location": null,
+        "description": "Active member of the IEEE Student Branch, participating in technical workshops, hackathons, and knowledge-sharing sessions. Supported branch activities and contributed to the growth of the student community through engagement in IEEE programs and initiatives."
+      }
+    ]
+  },
+  {
+    "company": "IEDC-CEK",
+    "companyLogo": "/assets/logos/iedc-cek.png",
+    "companySite": "https://www.linkedin.com/company/iedc-ceknpy/posts/?feedView=all",
+    "positions": [
+      {
+        "title": "Chief Technology Officer",
+        "type": "Part-time",
+        "startDate": "2024-08",
+        "endDate": "2025-01",
+        "current": false,
+        "duration": "6 mos",
+        "location": null,
+        "description": "Served as CTO for the Innovation and Entrepreneurship Development Centre at CEK, overseeing all technology strategy and implementation. Led the tech team, managed digital infrastructure, and guided the development of tools and platforms used by the innovation community. Mentored student developers and ensured technology alignment with the centre's entrepreneurial goals."
+      },
+      {
+        "title": "Media Lead",
+        "type": "Part-time",
+        "startDate": "2023-12",
+        "endDate": "2024-10",
+        "current": false,
+        "duration": "11 mos",
+        "location": "On-site",
+        "description": "Led all media and visual communication efforts for IEDC-CEK. Created and managed content for social media, events, and promotional campaigns using Adobe Illustrator and Adobe XD. Developed a cohesive visual identity for the centre's public presence, coordinated photography and videography for events, and grew the centre's digital audience.",
+        "skills": ["Adobe Illustrator", "Adobe XD"]
+      }
+    ]
+  },
+  {
+    "company": "TinkerHub",
+    "companyLogo": "/assets/logos/tinkerhub_logo.jpg",
+    "companySite": "https://tinkerhub.org/",
+    "positions": [
+      {
+        "title": "Product Designer",
+        "type": "Internship",
+        "startDate": "2024-05",
+        "endDate": "2024-10",
+        "current": false,
+        "duration": "6 mos",
+        "location": null,
+        "description": "Designed end-to-end product experiences for TinkerHub, from initial research and ideation through to high-fidelity prototypes. Collaborated with engineers and stakeholders to define product features and translate user needs into intuitive design solutions. Contributed to design sprints, user testing sessions, and iterative improvement of the product.",
+        "skills": []
+      }
+    ]
+  },
+  {
+    "company": "College of Engineering Karunagappally",
+    "companyLogo": "/assets/logos/placement_college_of_engineering_karunagappally_logo.jpg",
+    "companySite": "https://ceknpy.ac.in",
+    "positions": [
+      {
+        "title": "Placement Coordinator",
+        "type": "Volunteer",
+        "startDate": "2024-02",
+        "endDate": "2024-10",
+        "current": false,
+        "duration": "9 mos",
+        "location": null,
+        "description": "Coordinated campus placement activities for the College of Engineering Karunagappally, acting as a bridge between students and recruiting companies. Organized placement drives, pre-placement talks, and mock interview sessions. Maintained placement records, assisted students with resume preparation, and facilitated communication between the placement cell and prospective employers.",
+        "skills": ["Campus Placement", "Placement Services"]
+      }
+    ]
+  },
+  {
+    "company": "IIC CEKnpy",
+    "companyLogo": "/assets/logos/iic.jpg",
+    "companySite": "https://www.linkedin.com/company/iic-ceknpy/posts/?feedView=all",
+    "positions": [
+      {
+        "title": "Social Media Coordinator",
+        "type": "Part-time",
+        "startDate": "2024-03",
+        "endDate": "2024-09",
+        "current": false,
+        "duration": "7 mos",
+        "location": null,
+        "description": "Managed and grew the social media presence of the Institution's Innovation Council at CEK. Created engaging content calendars, designed posts and stories, and tracked analytics to optimise reach and engagement. Promoted IIC events, innovation challenges, and student achievements across platforms, helping to build an active and informed online community.",
+        "skills": []
+      }
+    ]
+  }
+]

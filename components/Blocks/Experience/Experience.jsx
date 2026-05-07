@@ -4,10 +4,13 @@ import React from 'react';
 import styles from './Experience.module.scss';
 import Item from "@/components/Blocks/Experience/Item/Item";
 import Title from "@/components/UI/Elements/Title/Title";
-import Companies from '@/database/Companies.json';
+import Button from "@/components/UI/Elements/Button/Button";
 import Blobs from "@/components/UI/Elements/Blobs/Blobs";
+import { getExperienceEntries } from "@/utils/experience";
 
 export default function ExperienceBlock() {
+    const experienceEntries = getExperienceEntries();
+    const featuredEntries = experienceEntries.slice(0, 4);
 
     return (
         <section className={styles.section} id={'experience'}>
@@ -15,20 +18,24 @@ export default function ExperienceBlock() {
             <header className={styles.header}>
                 <Title color={'white'}><span>Experience</span> <br/>History</Title>
             </header>
-            {Companies.map((item, index) => {
+            {featuredEntries.map((item) => {
+                const primaryPosition = item.positions?.[0];
                 return (
-                    <Item index={index}
-                          company={item.company}
-                          position={item.position}
-                          duration={item.duration}
-                          location={item.location}
-                          image={item.image}
-                          url={item.url}
-                          responsibilities={item.responsibilities}
-                          color={item.color}
-                          key={index}/>
+                    <Item
+                        company={item.company}
+                        position={primaryPosition?.title || item.company}
+                        duration={primaryPosition?.duration || ""}
+                        location={primaryPosition?.location || "Remote"}
+                        href={`/experience/${item.id}`}
+                        key={item.id}
+                    />
                 );
             })}
+            <div className={styles.action}>
+                <Button element="link" link="/experience" theme="button-1">
+                    Show More
+                </Button>
+            </div>
         </section>
     );
 }

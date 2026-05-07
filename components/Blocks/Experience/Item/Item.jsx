@@ -1,10 +1,11 @@
 'use client';
 import React from 'react'
+import Link from 'next/link';
 import styles from './Item.module.scss';
-export default function Item({position, company, duration, location, image, url, responsibilities, color}) {
+export default function Item({position, company, duration, location, href}) {
 
     return (
-        <div className={styles.item} style={{'--h': color.h, '--s': color.s, '--l': color.l}}>
+        <Link href={href} className={styles.item}>
           <div className={styles.left}>
             <div className={styles.title}>
               <h3 data-text={position}>{position}</h3>
@@ -15,6 +16,6 @@ export default function Item({position, company, duration, location, image, url,
             <span className={styles.info}>{duration}</span>
             <span className={styles.info}>{location}</span>
           </div>
-        </div>
+        </Link>
     )
 }

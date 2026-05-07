@@ -10,6 +10,7 @@
   transition: all 0.2s;
   padding: 4rem 0;
   gap: 3rem;
+  text-decoration: none;
   /*background: hsl(var(--h), var(--s), var(--l));*/
   @include respond-below(sm) {
     flex-direction: column;
@@ -28,6 +29,12 @@
         transform: translateY(-100%);
       }
     }
+  }
+
+  &:focus-visible {
+    outline: 1px solid hsl(var(--color-primary));
+    outline-offset: 0.6rem;
+    border-radius: 1rem;
   }
 }
 
