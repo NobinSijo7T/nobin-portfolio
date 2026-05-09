@@ -10,8 +10,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, FreeMode } from 'swiper/modules';
 
-import Image from "next/image";
-
 import styles from './Gallery.module.scss';
 
 import 'swiper/scss';
@@ -21,23 +19,20 @@ import 'swiper/scss/free-mode';
 import Title from "@/components/UI/Elements/Title/Title";
 import ImageTip from "@/components/UI/Elements/ImageTip/ImageTip";
 import FancyButton from "@/components/UI/Elements/Button/Button";
+import ProjectJourneyCard from "@/components/UI/Cards/ProjectJourneyCard/ProjectJourneyCard";
 
 import commonConfig from '@/database/config/metadata.json';
 import ProjectJourney from '@/database/ProjectJourney.json';
 import Container from "@/components/UI/Layout/Layout";
-import FadeIn from "@/components/UI/FadeIn/FadeIn";
 import Blobs from "@/components/UI/Elements/Blobs/Blobs";
-import { FloatingDock } from "@/src/components/ui/floating-dock";
 import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink, IconBrandBehance } from "@tabler/icons-react";
 export default function Gallery() {
     const swiperRef = useRef();
     const container = useRef();
-    const [hoveredCard, setHoveredCard] = useState(null);
-    const [clickedCard, setClickedCard] = useState(null);
     const { contextSafe } = useGSAP({ scope: container });
 
     const onEnterAnim = contextSafe((e) => {
-        let imageElement = e.currentTarget.querySelector(`.${styles.image}`);
+        let imageElement = e.currentTarget.querySelector('[data-project-image]');
 
         let rect = e.target.getBoundingClientRect();
 
@@ -53,20 +48,6 @@ export default function Gallery() {
             y: (mouse.y - rect.height / 2) / rect.height * -100
         });
     });
-    const handleCardInteraction = (projectId, type, e) => {
-        // Prevent event bubbling for touch devices
-        if (type === 'click' && e) {
-            e.preventDefault();
-        }
-
-        if (type === 'enter') {
-            setHoveredCard(projectId);
-        } else if (type === 'leave') {
-            setHoveredCard(null);
-        } else if (type === 'click') {
-            setClickedCard(clickedCard === projectId ? null : projectId);
-        }
-    };
 
     const getFloatingDockItems = (project) => {
         const items = [
@@ -113,7 +94,7 @@ export default function Gallery() {
     };
 
     const onLeaveAnim = contextSafe((e) => {
-        let imageElement = e.currentTarget.querySelector(`.${styles.image}`);
+        let imageElement = e.currentTarget.querySelector('[data-project-image]');
         gsap.to(imageElement, {
             x: 0,
             y: 0,
@@ -178,42 +159,12 @@ export default function Gallery() {
             >
                 {ProjectJourney.map((project, index) => (
                     <SwiperSlide key={project.id} className={`${styles.sliderItem}`}>
-                        <div
-                            className={`${styles.projectCard} ${hoveredCard === project.id || clickedCard === project.id ? styles.active : ''}`}
-                            onMouseEnter={() => handleCardInteraction(project.id, 'enter')}
-                            onMouseLeave={() => handleCardInteraction(project.id, 'leave')}
-                            onClick={(e) => handleCardInteraction(project.id, 'click', e)}
-                            onTouchEnd={(e) => handleCardInteraction(project.id, 'click', e)}
-                        >
-                            <figure
-                                className={styles.figure}
-                                onPointerMove={onEnterAnim}
-                                onPointerLeave={onLeaveAnim}>
-                                <FadeIn y={50} duration={1.6} autoAlpha={1}>
-                                    <Image
-                                        src={project.image}
-                                        quality={90}
-                                        alt={project.title}
-                                        width={1400}
-                                        height={1600}
-                                        loading={"lazy"}
-                                        className={`${styles.image} ${styles[project.direction]}`}
-                                    />
-                                </FadeIn>
-
-                                <div className={styles.floatingDockWrapper}>
-                                    <div className={styles.projectInfo}>
-                                        <span className={styles.projectCompany}>{project.company}</span>
-                                        <span className={styles.projectTitle}>{project.title}</span>
-                                    </div>
-                                    <FloatingDock
-                                        items={getFloatingDockItems(project)}
-                                        desktopClassName={styles.floatingDockDesktop}
-                                        mobileClassName={styles.floatingDockMobile}
-                                    />
-                                </div>
-                            </figure>
-                        </div>
+                        <ProjectJourneyCard
+                            project={project}
+                            dockItems={getFloatingDockItems(project)}
+                            onFigurePointerMove={onEnterAnim}
+                            onFigurePointerLeave={onLeaveAnim}
+                        />
                     </SwiperSlide>
                 ))}
                 <button onClick={() => swiperRef.current?.slidePrev()} className={styles.buttonPrev}>

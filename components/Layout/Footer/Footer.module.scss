@@ -6,6 +6,10 @@
   padding: var(--y-spacing) var(--x-spacing) 3rem;
   overflow: hidden;
   border-top: 1px solid hsla(var(--color-white), 0.1);
+
+  :global(body.homepage-hero-active) & {
+    background: transparent;
+  }
   @include respond-above(xs) {
     padding: var(--y-spacing) var(--x-spacing) 9rem;
   }

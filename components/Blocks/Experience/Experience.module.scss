@@ -3,7 +3,26 @@
 .section{
   position: relative;
   padding: var(--y-spacing) var(--x-spacing);
-  background-color: hsl(var(--color-bg-alt));
+  overflow: hidden;
+  isolation: isolate;
+  background: transparent;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 16% 18%, hsla(var(--color-primary), 0.18), transparent 34rem),
+      radial-gradient(circle at 84% 48%, hsla(var(--color-primary-alt), 0.16), transparent 44rem);
+    opacity: 0.74;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .header{

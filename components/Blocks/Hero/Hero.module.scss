@@ -29,9 +29,7 @@
 .heroReady {
   .title {
     h1 {
-      animation:
-        heroContentFade 0.8s ease-out both,
-        heroHeadingFloat 4s ease-in-out 0.8s infinite;
+      animation: heroContentFade 0.8s ease-out both;
     }
 
     .roleLine {
@@ -140,8 +138,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.6);
-      transform-origin: left center;
+      object-position: 78% 30%;
+      transform: scale(1);
+      transform-origin: center center;
       border-radius: 100vw;
     }
     .reveal {
@@ -197,7 +196,8 @@
     background-repeat: no-repeat;
     transform: translate3d(0, var(--hero-bg-y), 0) scale(var(--hero-bg-scale));
     transform-origin: center center;
-    will-change: transform;
+    opacity: var(--hero-bg-opacity, 1);
+    will-change: transform, opacity;
   }
 
   &::after {

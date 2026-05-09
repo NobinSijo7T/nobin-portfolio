@@ -119,7 +119,7 @@ function AnimatedBackground() {
         <PixelBlast
           variant="circle"
           pixelSize={5}
-          color="#D6CEFC"
+          color="#E8836A"
           patternScale={2.1}
           patternDensity={2.45}
           pixelSizeJitter={0.28}

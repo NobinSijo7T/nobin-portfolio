@@ -131,6 +131,21 @@ body {
   font-family: var(--font-primary);
 }
 
+body.homepage-hero-active {
+  background-color: hsl(var(--color-bg-alt));
+  background-image:
+    linear-gradient(hsla(var(--color-bg-alt), 0.72), hsla(var(--color-bg-alt), 0.72)),
+    url('/bg.jpg');
+  background-position: center, center top;
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto, cover;
+  background-attachment: fixed, fixed;
+}
+
+body.homepage-hero-active main {
+  background: transparent;
+}
+
 body.home-intro-active {
   overflow: hidden;
 

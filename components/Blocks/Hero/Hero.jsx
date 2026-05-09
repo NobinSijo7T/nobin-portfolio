@@ -47,6 +47,7 @@ export default function Hero() {
             hero.style.setProperty('--hero-bg-y', '0px');
             hero.style.setProperty('--hero-foreground-y', '0px');
             hero.style.setProperty('--hero-bg-scale', '1');
+            hero.style.setProperty('--hero-bg-opacity', '1');
         };
 
         const updateParallax = () => {
@@ -62,9 +63,12 @@ export default function Hero() {
             const scrollDistance = Math.min(Math.max(-rect.top, 0), heroHeight);
             const progress = heroHeight ? scrollDistance / heroHeight : 0;
 
-            hero.style.setProperty('--hero-bg-y', `${-(scrollDistance * 0.3).toFixed(2)}px`);
-            hero.style.setProperty('--hero-foreground-y', `${-(scrollDistance * 0.7).toFixed(2)}px`);
-            hero.style.setProperty('--hero-bg-scale', `${(1 + progress * 0.05).toFixed(3)}`);
+            const bgOpacity = Math.max(0, 1 - progress * 0.85);
+
+            hero.style.setProperty('--hero-bg-y', `${-(scrollDistance * 0.18).toFixed(2)}px`);
+            hero.style.setProperty('--hero-foreground-y', `${-(scrollDistance * 0.5).toFixed(2)}px`);
+            hero.style.setProperty('--hero-bg-scale', `${(1 + progress * 0.02).toFixed(3)}`);
+            hero.style.setProperty('--hero-bg-opacity', bgOpacity.toFixed(3));
         };
 
         const requestParallaxUpdate = () => {
@@ -130,8 +134,8 @@ export default function Hero() {
                     x: '-100%',
                 });
                 gsap.set(`.${styles.heroImg}`, {
-                    x: '-30%',
-                    scale: 1.3,
+                    x: '-8%',
+                    scale: 0.95,
                 });
                 return;
             }
@@ -184,8 +188,8 @@ export default function Hero() {
                 duration: 1,
                 onComplete: () => {
                     gsap.to(`.${styles.heroImg}`, {
-                        x: '-30%',
-                        scale: 1.3,
+                        x: '-8%',
+                        scale: 0.95,
                         scrollTrigger: {
                             trigger: fakeContainer.current,
                             scrub: true,
@@ -234,7 +238,7 @@ export default function Hero() {
                                 I&apos;m Nobin <span className={`${styles.icon}`}>
                                     <span className={styles.reveal}></span>
                                     <Image
-                                        src="/hero-image.jpg"
+                                        src="/img_home.jpeg"
                                         alt={commonConfig.metadata.title}
                                         width={640}
                                         height={300}

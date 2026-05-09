@@ -1,9 +1,45 @@
 @import '../../assets/media-queries.scss';
 
 .page {
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
-  background: hsl(var(--color-bg-alt));
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, hsla(var(--color-bg-alt), 0.54), hsla(var(--color-bg-alt), 0.76)),
+    url('/experience_bg.jpg') center / cover fixed no-repeat,
+    hsl(var(--color-bg-alt));
   color: hsl(var(--color-white));
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  &::before {
+    z-index: 0;
+    background:
+      radial-gradient(circle at 18% 16%, hsla(var(--color-primary), 0.22), transparent 34rem),
+      radial-gradient(circle at 82% 42%, hsla(var(--color-primary-alt), 0.18), transparent 42rem);
+    opacity: 0.76;
+  }
+
+  &::after {
+    z-index: 0;
+    background-image: url('/noise.png');
+    background-size: 18rem 18rem;
+    opacity: 0.035;
+    mix-blend-mode: screen;
+  }
+}
+
+.hero,
+.listSection {
+  position: relative;
+  z-index: 1;
 }
 
 .hero {
@@ -47,6 +83,9 @@
   border-bottom: 1px solid hsla(var(--color-white), 0.1);
   text-decoration: none;
   color: inherit;
+  background: hsla(var(--color-black), 0.08);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
   transition: transform 0.2s ease, border-color 0.2s ease;
 
   &:first-child {

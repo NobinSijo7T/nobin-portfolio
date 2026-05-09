@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import ProjectJourney from '@/database/ProjectJourney.json';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
     IconBrandGithub,
     IconBrandDribbble,
@@ -35,6 +35,23 @@ import {
 import styles from './project-details.module.scss';
 import PixelBlast from '@/components/UI/PixelBlast/PixelBlast';
 import ImageVideo from '@/database/ImageVideo.json';
+
+const FALLBACK_IMAGE = '/img_home.jpeg';
+
+const resolveImageSrc = (src) => {
+    if (!src) return FALLBACK_IMAGE;
+    const normalized = src.startsWith('/') ? src : `/${src}`;
+    return encodeURI(normalized);
+};
+
+const getProjectId = async (params) => {
+    if (!params) return null;
+    if (typeof params.then === 'function') {
+        const resolved = await params;
+        return resolved?.id ?? null;
+    }
+    return params?.id ?? null;
+};
 
 // Map tech name → icon component
 const getTechIcon = (name) => {
@@ -68,19 +85,30 @@ const linkConfig = {
 };
 
 export default function ProjectDetails({ params }) {
-    const router = useRouter();
-    const [project, setProject] = useState(null);
+    const [projectId, setProjectId] = useState(null);
     const containerRef = useRef(null);
     const heroRef = useRef(null);
     const imageRef = useRef(null);
     const detailsRef = useRef(null);
 
     useEffect(() => {
-        params.then(p => {
-            const found = ProjectJourney.find(proj => proj.id === p.id);
-            setProject(found);
+        let mounted = true;
+
+        getProjectId(params).then((id) => {
+            if (mounted) {
+                setProjectId(id);
+            }
         });
+
+        return () => {
+            mounted = false;
+        };
     }, [params]);
+
+    const project = useMemo(() => {
+        if (!projectId) return null;
+        return ProjectJourney.find((proj) => proj.id === projectId) ?? null;
+    }, [projectId]);
 
     // Entrance animations
     useGSAP(() => {
@@ -118,11 +146,11 @@ export default function ProjectDetails({ params }) {
     }, { scope: containerRef, dependencies: [project] });
 
     // Not found
-    if (project === undefined) {
-        return null; // loading
+    if (!projectId) {
+        return null;
     }
 
-    if (project === null) {
+    if (!project) {
         return null;
     }
 
@@ -138,9 +166,7 @@ export default function ProjectDetails({ params }) {
         : [];
     const gallery = galleryItems.length > 0
         ? galleryItems
-        : project
-            ? [{ url: project.image, location: project.title, direction: project.direction }]
-            : [];
+        : [{ url: project.image, location: project.title, direction: project.direction }];
 
     // Find adjacent projects for navigation
     const currentIndex = ProjectJourney.findIndex(p => p.id === project?.id);
@@ -162,18 +188,6 @@ export default function ProjectDetails({ params }) {
                     </div>
 
                     <div className={styles.heroGrid}>
-                        <div className={styles.heroMedia} ref={imageRef} data-anim>
-                            <div className={styles.imageFrame}>
-                                <img
-                                    src={project.image}
-                                    alt={`${project.title} preview`}
-                                    className={styles.projectImage}
-                                    draggable="false"
-                                />
-                                <div className={styles.imageGlow} />
-                            </div>
-                        </div>
-
                         <div className={styles.heroContent}>
                             {project.company && (
                                 <span className={styles.companyBadge} data-anim>
@@ -188,6 +202,21 @@ export default function ProjectDetails({ params }) {
                             <p className={styles.description} data-anim>
                                 {project.description}
                             </p>
+
+                            <div className={styles.metaRow} data-anim>
+                                <div className={styles.metaCard}>
+                                    <span>Focus</span>
+                                    <strong>{project.company || 'Independent'}</strong>
+                                </div>
+                                <div className={styles.metaCard}>
+                                    <span>Stack</span>
+                                    <strong>{project.technologies?.length || 0} tools</strong>
+                                </div>
+                                <div className={styles.metaCard}>
+                                    <span>Links</span>
+                                    <strong>{activeLinks.length}</strong>
+                                </div>
+                            </div>
 
                             {activeLinks.length > 0 && (
                                 <div className={styles.heroLinks} data-anim>
@@ -207,6 +236,28 @@ export default function ProjectDetails({ params }) {
                                 </div>
                             )}
                         </div>
+
+                        <div className={styles.heroMedia} ref={imageRef} data-anim>
+                            <div className={styles.mediaFrame}>
+                                <Image
+                                    src={resolveImageSrc(project.image)}
+                                    alt={`${project.title} preview`}
+                                    fill
+                                    sizes="(max-width: 900px) 100vw, 50vw"
+                                    className={styles.mediaImage}
+                                    priority
+                                    unoptimized
+                                    onError={(event) => {
+                                        const target = event.currentTarget;
+                                        if (!target.dataset.fallbackApplied) {
+                                            target.dataset.fallbackApplied = 'true';
+                                            target.src = FALLBACK_IMAGE;
+                                        }
+                                    }}
+                                />
+                                <div className={styles.mediaShade} />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -216,14 +267,25 @@ export default function ProjectDetails({ params }) {
                 <div className={styles.detailsInner}>
                     <div className={styles.detailsMain}>
                         <div className={styles.detailBlock} data-anim-detail>
-                            <h2 className={styles.detailLabel}>Overview</h2>
+                            <h2 className={styles.detailLabel}>Project overview</h2>
                             <p className={styles.detailText}>{project.description}</p>
+                        </div>
+
+                        <div className={styles.detailBlock} data-anim-detail>
+                            <h2 className={styles.detailLabel}>Capabilities</h2>
+                            <div className={styles.capabilityList}>
+                                {project.technologies.map((tech) => (
+                                    <span key={tech} className={styles.capabilityChip}>
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
                     <aside className={styles.detailsSidebar}>
                         <div className={styles.detailBlock} data-anim-detail>
-                            <h2 className={styles.detailLabel}>Technology Stack</h2>
+                            <h2 className={styles.detailLabel}>Technology stack</h2>
                             <div className={styles.techGrid}>
                                 {project.technologies.map((tech, i) => {
                                     const Icon = getTechIcon(tech);
@@ -239,7 +301,7 @@ export default function ProjectDetails({ params }) {
 
                         {activeLinks.length > 0 && (
                             <div className={styles.detailBlock} data-anim-detail>
-                                <h2 className={styles.detailLabel}>External Links</h2>
+                                <h2 className={styles.detailLabel}>External links</h2>
                                 <div className={styles.linkCards}>
                                     {activeLinks.map(({ key, url, icon: Icon, label }) => (
                                         <a
@@ -283,7 +345,21 @@ export default function ProjectDetails({ params }) {
                                         item.direction === 'vertical' ? styles.galleryPortrait : styles.galleryLandscape
                                     }`}
                                 >
-                                    <img src={item.url} alt={`${project.title} ${index + 1}`} loading="lazy" />
+                                    <Image
+                                        src={resolveImageSrc(item.url || project.image)}
+                                        alt={`${project.title} ${index + 1}`}
+                                        fill
+                                        sizes="(max-width: 900px) 100vw, 70vw"
+                                        className={styles.galleryImage}
+                                        unoptimized
+                                        onError={(event) => {
+                                            const target = event.currentTarget;
+                                            if (!target.dataset.fallbackApplied) {
+                                                target.dataset.fallbackApplied = 'true';
+                                                target.src = FALLBACK_IMAGE;
+                                            }
+                                        }}
+                                    />
                                 </div>
                             ))}
                         </div>
@@ -319,7 +395,7 @@ function ProjectPageBackground() {
                 <PixelBlast
                     variant="circle"
                     pixelSize={5}
-                    color="#D6CEFC"
+                    color="#E8836A"
                     patternScale={2.1}
                     patternDensity={2.25}
                     pixelSizeJitter={0.26}

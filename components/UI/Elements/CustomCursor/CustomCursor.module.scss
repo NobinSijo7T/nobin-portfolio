@@ -1,19 +1,54 @@
-.customCursor{
-  --cursor-size: 1.2rem;
+:global(body), :global(body *) {
+  cursor: none !important;
+}
+
+.customCursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: var(--cursor-size);
-  height: var(--cursor-size);
-  border-radius: 100%;
-  background-color: hsl(var(--color-primary));
-  mix-blend-mode: difference;
-  z-index: 99999999 !important;
-  user-select: none;
   pointer-events: none;
-
+  z-index: 99999999 !important;
+  will-change: transform;
+  transform-origin: top left;
+  
   @media (pointer: coarse), (pointer: none) {
     display: none;
   }
+}
 
+.cursorIcon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.cursorLabel {
+  position: absolute;
+  left: 16px;
+  top: 18px;
+  background-color: hsla(var(--color-primary), 1);
+  color: #121016; /* Dark background to contrast with primary */
+  padding: 5px 12px;
+  border-radius: 0 16px 16px 16px;
+  font-size: 0.85rem;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  white-space: nowrap;
+}
+
+.ripple {
+  position: fixed;
+  top: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid hsla(var(--color-primary), 1);
+  background-color: hsla(var(--color-primary), 0.2);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999998 !important;
+  will-change: transform, opacity;
 }

@@ -2,10 +2,11 @@
 
 .section {
   position: relative;
-  background-color: hsl(var(--color-bg-alt));
+  background: transparent;
   padding: var(--x-spacing) 0;
   max-width: 100dvw;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .grid{
@@ -57,5 +58,5 @@
   transform: translate(-50%, -50%);
   width: 30%;
   height: 30%;
-  background: conic-gradient(hsl(0, 0%, 0%), hsla(0, 0%, 100%, 0.1));
+  background: conic-gradient(hsla(var(--color-primary), 0.08), hsla(var(--color-bg-alt), 0.12));
 }

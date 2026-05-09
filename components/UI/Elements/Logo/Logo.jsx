@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './Logo.module.scss';
 import Link from 'next/link';
 import commonConfig from '@/database/config/metadata.json';
@@ -6,52 +6,6 @@ import MetallicPaint from '@/components/UI/Elements/MetallicPaint/MetallicPaint'
 
 export default function Logo({ classVariable }) {
     const [isHovered, setIsHovered] = useState(false);
-    const [currentFontIndex, setCurrentFontIndex] = useState(0);
-    const [isTransitioning, setIsTransitioning] = useState(false);
-
-    const fonts = [
-        'Orbitron',
-        'Audiowide',
-        'Space Grotesk',
-        'Syncopate',
-        'Rajdhani',
-        'Exo 2',
-        'Codystar',
-        'Permanent Marker',
-        'Bangers',
-        'Silkscreen',
-        'Doto',
-        'Rammetto One',
-        'Bruno Ace SC',
-        'Sixtyfour',
-        'Zen Tokyo Zoo',
-        'Kablammo',
-        'Playwrite México',
-        'Stint Ultra Expanded',
-        'Yuji Boku',
-        'Darumadrop One',
-        'Jacquard 24',
-        'Geostar Fill',
-        'Workbench'
-    ];
-
-    useEffect(() => {
-        const fontInterval = setInterval(() => {
-            setIsTransitioning(true);
-            
-            // Wait for text to fade out before changing font
-            setTimeout(() => {
-                setCurrentFontIndex((prevIndex) => (prevIndex + 1) % fonts.length);
-            }, 400);
-            
-            // Remove transition class to fade back in
-            setTimeout(() => {
-                setIsTransitioning(false);
-            }, 800);
-        }, 3500);
-
-        return () => clearInterval(fontInterval);
-    }, []);
 
     return (
         <Link
@@ -88,8 +42,7 @@ export default function Logo({ classVariable }) {
                     />
                 </div>
                 <div
-                    className={`${styles.logoText} ${isHovered ? styles.textHovered : ''} ${isTransitioning ? styles.fontTransition : ''}`}
-                    style={{ fontFamily: `${fonts[currentFontIndex]}, sans-serif` }}
+                    className={`${styles.logoText} ${isHovered ? styles.textHovered : ''}`}
                     suppressHydrationWarning
                 >
                     <span>Nobin Sijo</span>

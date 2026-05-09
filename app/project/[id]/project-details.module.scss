@@ -20,15 +20,20 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: auto;
+  background:
+    linear-gradient(180deg, hsla(var(--color-bg-alt), 0.56), hsla(var(--color-bg-alt), 0.78)),
+    url('/single_pro_bg.jpg') center / cover fixed no-repeat,
+    hsl(var(--color-bg-alt));
 
   &::before {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 24% 22%, hsla(var(--color-primary), 0.1), transparent 30rem),
-      radial-gradient(circle at 80% 42%, hsla(var(--color-primary-alt), 0.07), transparent 36rem);
-    opacity: 0.75;
+      radial-gradient(circle at 24% 22%, hsla(var(--color-primary), 0.22), transparent 34rem),
+      radial-gradient(circle at 80% 42%, hsla(var(--color-primary-alt), 0.17), transparent 42rem),
+      radial-gradient(circle at 50% 86%, hsla(var(--color-primary), 0.1), transparent 50rem);
+    opacity: 0.82;
     pointer-events: none;
   }
 
@@ -60,8 +65,8 @@
   inset: 0;
   z-index: 2;
   background:
-    linear-gradient(to bottom, hsla(var(--color-bg-alt), 0.08), hsla(var(--color-bg-alt), 0.62) 72%, hsl(var(--color-bg-alt))),
-    radial-gradient(circle at 50% 12%, transparent 0, hsla(var(--color-bg-alt), 0.2) 64%);
+    linear-gradient(to bottom, hsla(var(--color-bg-alt), 0.16), hsla(var(--color-bg-alt), 0.54) 72%, hsla(var(--color-bg-alt), 0.68)),
+    radial-gradient(circle at 50% 12%, transparent 0, hsla(var(--color-bg-alt), 0.28) 64%);
   pointer-events: none;
 }
 
@@ -126,8 +131,8 @@
 
 .heroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 4rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4.5rem;
   align-items: center;
 
   @include respond-below(md) {
@@ -140,13 +145,50 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  min-height: 36rem;
 }
 
-.heroMedia .imageFrame {
+.mediaFrame {
+  position: relative;
   width: 100%;
   max-width: 56rem;
   margin: 0;
-  min-height: 28rem;
+  aspect-ratio: 16 / 10;
+  border-radius: 2.4rem;
+  overflow: hidden;
+  border: 1px solid hsla(var(--color-white), 0.08);
+  background: hsla(var(--color-black), 0.2);
+  box-shadow: 0 4rem 8rem -3rem hsla(var(--color-black), 0.6);
+}
+
+.mediaImage {
+  object-fit: cover;
+  object-position: center 18%;
+  border-radius: 2.4rem;
+}
+
+@include respond-below(md) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroMedia {
+    order: -1;
+  }
+
+  .mediaFrame {
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.mediaShade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, hsla(var(--color-bg-alt), 0.05), hsla(var(--color-bg-alt), 0.55)),
+    radial-gradient(circle at 20% 20%, hsla(var(--color-primary), 0.12), transparent 45%);
 }
 
 .heroContent {
@@ -232,6 +274,40 @@
   margin-bottom: 3.5rem;
 }
 
+.metaRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 3.2rem;
+
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metaCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: 1.2rem;
+  background: hsla(var(--color-white), 0.03);
+  border: 1px solid hsla(var(--color-white), 0.08);
+
+  span {
+    font-size: 1.1rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: hsla(var(--color-white), 0.45);
+  }
+
+  strong {
+    font-size: 1.6rem;
+    font-weight: var(--fw-medium);
+    color: hsl(var(--color-white));
+  }
+}
+
 /* Quick links in hero */
 .heroLinks {
   display: flex;
@@ -286,8 +362,10 @@
   margin: 0 auto;
   border-radius: 2rem;
   overflow: hidden;
-  background: hsla(var(--color-white), 0.02);
-  border: 1px solid hsla(var(--color-white), 0.08);
+  background: hsla(var(--color-black), 0.16);
+  border: 1px solid hsla(var(--color-white), 0.1);
+  backdrop-filter: blur(18px) saturate(1.12);
+  -webkit-backdrop-filter: blur(18px) saturate(1.12);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -390,6 +468,24 @@
   font-size: clamp(1.6rem, 1.6vw, 2rem);
   line-height: 1.7;
   color: hsla(var(--color-white), 0.7);
+}
+
+.capabilityList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.capabilityChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem 1.6rem;
+  border-radius: 100rem;
+  font-size: 1.3rem;
+  font-weight: var(--fw-medium);
+  color: hsl(var(--color-text-pearl));
+  border: 1px solid hsla(var(--color-white), 0.12);
+  background: hsla(var(--color-black), 0.22);
 }
 
 /* Tech chips */
@@ -545,18 +641,17 @@
 }
 
 .galleryItem {
+  position: relative;
   border-radius: 1.4rem;
   overflow: hidden;
   border: 1px solid hsla(var(--color-white), 0.08);
   background: hsla(var(--color-white), 0.02);
   box-shadow: 0 2rem 5rem hsla(var(--color-black), 0.25);
+}
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+.galleryImage {
+  object-fit: cover;
+  object-position: center;
 }
 
 .galleryPortrait {

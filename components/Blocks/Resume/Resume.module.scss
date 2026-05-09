@@ -3,6 +3,8 @@
 .section {
   position: relative;
   padding: var(--y-spacing) 0 var(--y-spacing);
+  overflow: hidden;
+  background: transparent;
 }
 
 .content {
@@ -12,8 +14,11 @@
   flex-direction: column;
   position: relative;
 
-  background: url("/gradient-blob.svg") center top no-repeat;
-  background-size: contain;
+  background:
+    radial-gradient(ellipse at 50% 30%, hsla(var(--color-primary), 0.34), transparent 34rem),
+    radial-gradient(ellipse at 58% 52%, hsla(var(--color-primary-alt), 0.16), transparent 30rem),
+    radial-gradient(ellipse at 42% 60%, hsla(var(--color-ambient-glow), 0.34), transparent 38rem);
+  background-size: 100% 100%;
   padding-top: 3rem;
   @include respond-below(xs) {
     align-items: flex-start;

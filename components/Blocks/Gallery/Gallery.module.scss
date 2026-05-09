@@ -3,7 +3,26 @@
 .section{
   position: relative;
   padding: var(--y-spacing) 0;
-  background: hsl(var(--color-bg-alt));
+  overflow: hidden;
+  isolation: isolate;
+  background: transparent;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 20%, hsla(var(--color-primary), 0.2), transparent 34rem),
+      radial-gradient(circle at 82% 34%, hsla(var(--color-primary-alt), 0.16), transparent 40rem);
+    opacity: 0.72;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .header{
@@ -271,7 +290,7 @@
 }
 
 .image{
-  background: hsl(var(--color-bg-alt));
+  background: transparent;
   object-fit: cover;
   filter: contrast(1.1);
   transform-origin: center center;

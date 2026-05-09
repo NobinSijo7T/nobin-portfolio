@@ -1,6 +1,8 @@
 .section {
+  position: relative;
   padding: var(--y-spacing) 0 var(--x-spacing);
   overflow: hidden;
+  background: transparent;
 }
 
 .ticker__text {

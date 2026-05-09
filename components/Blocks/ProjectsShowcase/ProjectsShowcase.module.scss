@@ -7,9 +7,7 @@
   min-height: 100vh;
   overflow: hidden;
   padding: calc(var(--header-height) - 3rem) 0 var(--y-spacing);
-  background:
-    radial-gradient(circle at 50% 10%, hsla(var(--color-primary), 0.08), transparent 42rem),
-    hsl(var(--color-bg-alt));
+  background: hsl(var(--color-bg-alt));
   color: hsl(var(--color-text-pearl));
   font-family: var(--font-primary);
 
@@ -34,7 +32,8 @@
   overflow: hidden;
   pointer-events: auto;
   background:
-    radial-gradient(circle at 50% 12%, hsla(var(--color-primary), 0.1), transparent 40rem),
+    linear-gradient(180deg, hsla(var(--color-bg-alt), 0.58), hsla(var(--color-bg-alt), 0.76)),
+    url('/project_bg.jpg') center / cover fixed no-repeat,
     hsl(var(--color-bg-alt));
   transition: background-position 0.6s ease;
 
@@ -43,13 +42,12 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 24% 48%, hsla(var(--color-primary), 0.14) 0 0.32rem, transparent 0.36rem),
-      radial-gradient(circle at 66% 34%, hsla(var(--color-primary-alt), 0.12) 0 0.24rem, transparent 0.28rem),
-      radial-gradient(circle at 18% 18%, hsla(var(--color-primary), 0.12), transparent 30rem),
-      radial-gradient(circle at 82% 28%, hsla(var(--color-primary-alt), 0.07), transparent 34rem);
-    background-size: 120% 120%, 120% 120%, 140% 140%, 140% 140%;
-    background-position: 30% 40%, 70% 30%, 20% 10%, 80% 20%;
-    opacity: 0.8;
+      radial-gradient(circle at 18% 18%, hsla(var(--color-primary), 0.24), transparent 34rem),
+      radial-gradient(circle at 82% 28%, hsla(var(--color-primary-alt), 0.18), transparent 42rem),
+      radial-gradient(circle at 50% 92%, hsla(var(--color-primary), 0.12), transparent 46rem);
+    background-size: 140% 140%, 140% 140%, 140% 140%;
+    background-position: 20% 10%, 80% 20%, 50% 80%;
+    opacity: 0.78;
     pointer-events: none;
     transition: opacity 0.4s ease;
   }
@@ -73,13 +71,13 @@
 
 @keyframes backgroundDrift {
   0% {
-    background-position: 30% 40%, 70% 30%, 20% 10%, 80% 20%;
+    background-position: 20% 10%, 80% 20%, 50% 80%;
   }
   50% {
-    background-position: 40% 55%, 60% 45%, 30% 20%, 70% 35%;
+    background-position: 28% 18%, 72% 28%, 48% 72%;
   }
   100% {
-    background-position: 30% 40%, 70% 30%, 20% 10%, 80% 20%;
+    background-position: 20% 10%, 80% 20%, 50% 80%;
   }
 }
 
@@ -99,8 +97,8 @@
   inset: 0;
   z-index: 2;
   background:
-    linear-gradient(to bottom, hsla(var(--color-bg-alt), 0.02), hsla(var(--color-bg-alt), 0.48) 78%, hsl(var(--color-bg-alt))),
-    radial-gradient(circle at 50% 14%, transparent 0, hsla(var(--color-bg-alt), 0.22) 66%);
+    linear-gradient(to bottom, hsla(var(--color-bg-alt), 0.2), hsla(var(--color-bg-alt), 0.46) 78%, hsla(var(--color-bg-alt), 0.62)),
+    radial-gradient(circle at 50% 14%, transparent 0, hsla(var(--color-bg-alt), 0.28) 66%);
   pointer-events: none;
 }
 
@@ -262,7 +260,9 @@
   overflow: hidden;
   border: 1px solid hsla(var(--color-primary), 0.14);
   border-radius: 0.8rem;
-  background: linear-gradient(180deg, hsla(var(--color-surface), 0.72), hsla(var(--color-black), 0.2));
+  background: linear-gradient(180deg, hsla(var(--color-surface), 0.52), hsla(var(--color-black), 0.18));
+  backdrop-filter: blur(18px) saturate(1.18);
+  -webkit-backdrop-filter: blur(18px) saturate(1.18);
   box-shadow:
     inset 1px 1px 0 hsla(var(--color-white), 0.06),
     0 2.4rem 7rem hsla(var(--color-black), 0.18);
