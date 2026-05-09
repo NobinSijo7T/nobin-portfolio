@@ -3,7 +3,9 @@
 import React, { useEffect, useMemo, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ProjectJourney from '@/database/ProjectJourney.json';
+import ImageVideo from '@/database/ImageVideo.json';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -12,6 +14,7 @@ import {
     IconExternalLink,
     IconBrandBehance,
     IconArrowLeft,
+    IconArrowRight,
     IconBrandReact,
     IconBrandNextjs,
     IconBrandNodejs,
@@ -30,13 +33,16 @@ import {
     IconBrandTailwind,
     IconDatabase,
     IconCode,
-    IconBracketsAngle
+    IconPalette,
+    IconVectorBezier2,
 } from "@tabler/icons-react";
 import styles from './project-details.module.scss';
-import PixelBlast from '@/components/UI/PixelBlast/PixelBlast';
-import ImageVideo from '@/database/ImageVideo.json';
 
-const FALLBACK_IMAGE = '/img_home.jpeg';
+gsap.registerPlugin(ScrollTrigger);
+
+// ─── Helpers ────────────────────────────────────────────────────────────────
+
+const FALLBACK_IMAGE = '/reveal-image.png';
 
 const resolveImageSrc = (src) => {
     if (!src) return FALLBACK_IMAGE;
@@ -44,192 +50,164 @@ const resolveImageSrc = (src) => {
     return encodeURI(normalized);
 };
 
-const getProjectId = async (params) => {
-    if (!params) return null;
-    if (typeof params.then === 'function') {
-        const resolved = await params;
-        return resolved?.id ?? null;
-    }
-    return params?.id ?? null;
-};
-
-// Map tech name → icon component
 const getTechIcon = (name) => {
-    const lower = name.toLowerCase();
-    if (lower.includes('react')) return IconBrandReact;
-    if (lower.includes('next')) return IconBrandNextjs;
-    if (lower.includes('node')) return IconBrandNodejs;
-    if (lower.includes('mongo')) return IconBrandMongodb;
-    if (lower === 'javascript' || lower === 'js') return IconBrandJavascript;
-    if (lower.includes('typescript')) return IconBrandTypescript;
-    if (lower.includes('css')) return IconBrandCss3;
-    if (lower.includes('python')) return IconBrandPython;
-    if (lower.includes('vue')) return IconBrandVue;
-    if (lower.includes('firebase')) return IconBrandFirebase;
-    if (lower.includes('docker')) return IconBrandDocker;
-    if (lower.includes('prisma')) return IconBrandPrisma;
-    if (lower.includes('stripe')) return IconBrandStripe;
-    if (lower.includes('graphql')) return IconBrandGraphql;
-    if (lower.includes('spotify')) return IconBrandSpotify;
-    if (lower.includes('tailwind')) return IconBrandTailwind;
-    if (lower.includes('sql') || lower.includes('database') || lower.includes('postgre')) return IconDatabase;
+    const l = name.toLowerCase();
+    if (l.includes('react')) return IconBrandReact;
+    if (l.includes('next')) return IconBrandNextjs;
+    if (l.includes('node')) return IconBrandNodejs;
+    if (l.includes('mongo')) return IconBrandMongodb;
+    if (l === 'javascript' || l === 'js') return IconBrandJavascript;
+    if (l.includes('typescript')) return IconBrandTypescript;
+    if (l.includes('css')) return IconBrandCss3;
+    if (l.includes('python')) return IconBrandPython;
+    if (l.includes('vue')) return IconBrandVue;
+    if (l.includes('firebase')) return IconBrandFirebase;
+    if (l.includes('docker')) return IconBrandDocker;
+    if (l.includes('prisma')) return IconBrandPrisma;
+    if (l.includes('stripe')) return IconBrandStripe;
+    if (l.includes('graphql')) return IconBrandGraphql;
+    if (l.includes('spotify')) return IconBrandSpotify;
+    if (l.includes('tailwind')) return IconBrandTailwind;
+    if (l.includes('figma') || l.includes('ui') || l.includes('design') || l.includes('branding') || l.includes('identity')) return IconPalette;
+    if (l.includes('web3') || l.includes('visual')) return IconVectorBezier2;
+    if (l.includes('sql') || l.includes('database') || l.includes('postgre')) return IconDatabase;
     return IconCode;
 };
 
-// Link config
 const linkConfig = {
-    github: { icon: IconBrandGithub, label: 'GitHub' },
+    github:   { icon: IconBrandGithub,   label: 'GitHub' },
     dribbble: { icon: IconBrandDribbble, label: 'Dribbble' },
-    behance: { icon: IconBrandBehance, label: 'Behance' },
-    live: { icon: IconExternalLink, label: 'Live Site' },
+    behance:  { icon: IconBrandBehance,  label: 'Behance' },
+    live:     { icon: IconExternalLink,  label: 'Live Site' },
 };
+
+// ─── Component ───────────────────────────────────────────────────────────────
 
 export default function ProjectDetails({ params }) {
     const [projectId, setProjectId] = useState(null);
-    const containerRef = useRef(null);
-    const heroRef = useRef(null);
-    const imageRef = useRef(null);
-    const detailsRef = useRef(null);
+    const pageRef    = useRef(null);
+    const heroRef    = useRef(null);
+    const contentRef = useRef(null);
 
+    // Resolve async params (Next.js 15)
     useEffect(() => {
-        let mounted = true;
-
-        getProjectId(params).then((id) => {
-            if (mounted) {
-                setProjectId(id);
-            }
+        let alive = true;
+        Promise.resolve(params).then((p) => {
+            if (alive) setProjectId(p?.id ?? null);
         });
-
-        return () => {
-            mounted = false;
-        };
+        return () => { alive = false; };
     }, [params]);
 
-    const project = useMemo(() => {
-        if (!projectId) return null;
-        return ProjectJourney.find((proj) => proj.id === projectId) ?? null;
-    }, [projectId]);
+    const project = useMemo(
+        () => ProjectJourney.find((p) => p.id === projectId) ?? null,
+        [projectId]
+    );
 
     // Entrance animations
     useGSAP(() => {
-        if (!project || !containerRef.current) return;
-
+        if (!project || !pageRef.current) return;
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-        // Hero elements
-        tl.from(heroRef.current?.querySelectorAll('[data-anim]') || [], {
-            y: 60,
-            opacity: 0,
-            stagger: 0.12,
-            duration: 0.9,
+        tl.from(heroRef.current?.querySelectorAll('[data-anim]') ?? [], {
+            y: 50, opacity: 0, stagger: 0.1, duration: 0.8,
         });
 
-        // Image
-        if (imageRef.current) {
-            tl.from(imageRef.current, {
-                y: 80,
-                opacity: 0,
-                scale: 0.95,
-                duration: 1,
-            }, '-=0.5');
-        }
+        tl.from(contentRef.current?.querySelectorAll('[data-block]') ?? [], {
+            y: 40, opacity: 0, stagger: 0.08, duration: 0.7,
+        }, '-=0.4');
+    }, { scope: pageRef, dependencies: [project] });
 
-        // Details section
-        if (detailsRef.current) {
-            tl.from(detailsRef.current.querySelectorAll('[data-anim-detail]') || [], {
-                y: 40,
-                opacity: 0,
-                stagger: 0.1,
-                duration: 0.7,
-            }, '-=0.6');
-        }
-    }, { scope: containerRef, dependencies: [project] });
+    // Loading / not-found states
+    if (!projectId) return null;
+    if (!project)   return (
+        <div className={styles.notFound}>
+            <p>Project not found.</p>
+            <Link href="/projects" className={styles.backButton}>
+                <IconArrowLeft size={18} /> Back to projects
+            </Link>
+        </div>
+    );
 
-    // Not found
-    if (!projectId) {
-        return null;
-    }
+    // Derived data
+    const activeLinks = Object.entries(project.links ?? {})
+        .filter(([, url]) => Boolean(url))
+        .map(([key, url]) => ({ key, url, ...linkConfig[key] }));
 
-    if (!project) {
-        return null;
-    }
+    const galleryItems = ImageVideo.filter(
+        (item) => item.location?.toLowerCase() === project.title?.toLowerCase()
+    );
+    const gallery = galleryItems.length > 0 ? galleryItems : [];
 
-    // Collect active links
-    const activeLinks = project
-        ? Object.entries(project.links)
-            .filter(([, url]) => url)
-            .map(([key, url]) => ({ key, url, ...linkConfig[key] }))
-        : [];
-
-    const galleryItems = project
-        ? ImageVideo.filter((item) => item.location?.toLowerCase() === project.title?.toLowerCase())
-        : [];
-    const gallery = galleryItems.length > 0
-        ? galleryItems
-        : [{ url: project.image, location: project.title, direction: project.direction }];
-
-    // Find adjacent projects for navigation
-    const currentIndex = ProjectJourney.findIndex(p => p.id === project?.id);
-    const prevProject = currentIndex > 0 ? ProjectJourney[currentIndex - 1] : null;
-    const nextProject = currentIndex < ProjectJourney.length - 1 ? ProjectJourney[currentIndex + 1] : null;
+    const currentIndex  = ProjectJourney.findIndex((p) => p.id === project.id);
+    const prevProject   = currentIndex > 0 ? ProjectJourney[currentIndex - 1] : null;
+    const nextProject   = currentIndex < ProjectJourney.length - 1 ? ProjectJourney[currentIndex + 1] : null;
 
     return (
-        <div className={styles.page} ref={containerRef}>
-            <ProjectPageBackground />
+        <div className={styles.page} ref={pageRef}>
+            {/* ── Background ── */}
+            <div className={styles.bg} aria-hidden="true">
+                <div className={styles.bgGlow1} />
+                <div className={styles.bgGlow2} />
+                <div className={styles.bgNoise} />
+            </div>
 
-            {/* ═══ HERO ═══ */}
+            {/* ══════════════════════════════
+                HERO
+            ══════════════════════════════ */}
             <section className={styles.hero} ref={heroRef}>
-                <div className={styles.heroInner}>
-                    <div className={styles.backRow} data-anim>
-                        <Link href="/projects" className={styles.backButton}>
-                            <IconArrowLeft size={20} />
-                            <span>All Projects</span>
-                        </Link>
-                    </div>
+                <div className={styles.inner}>
 
+                    {/* Back button */}
+                    <Link href="/projects" className={styles.backButton} data-anim>
+                        <IconArrowLeft size={16} />
+                        <span>All projects</span>
+                    </Link>
+
+                    {/* Two-column hero */}
                     <div className={styles.heroGrid}>
-                        <div className={styles.heroContent}>
+
+                        {/* Left: text */}
+                        <div className={styles.heroText}>
                             {project.company && (
-                                <span className={styles.companyBadge} data-anim>
-                                    {project.company}
-                                </span>
+                                <span className={styles.badge} data-anim>{project.company}</span>
                             )}
 
-                            <h1 className={styles.title} data-anim>
-                                {project.title}
-                            </h1>
+                            <h1 className={styles.heroTitle} data-anim>{project.title}</h1>
 
-                            <p className={styles.description} data-anim>
-                                {project.description}
-                            </p>
+                            <p className={styles.heroDesc} data-anim>{project.description}</p>
 
-                            <div className={styles.metaRow} data-anim>
-                                <div className={styles.metaCard}>
-                                    <span>Focus</span>
-                                    <strong>{project.company || 'Independent'}</strong>
+                            {/* Stat pills */}
+                            <div className={styles.statRow} data-anim>
+                                <div className={styles.statPill}>
+                                    <span className={styles.statLabel}>Stack</span>
+                                    <span className={styles.statValue}>{project.technologies?.length ?? 0} tools</span>
                                 </div>
-                                <div className={styles.metaCard}>
-                                    <span>Stack</span>
-                                    <strong>{project.technologies?.length || 0} tools</strong>
-                                </div>
-                                <div className={styles.metaCard}>
-                                    <span>Links</span>
-                                    <strong>{activeLinks.length}</strong>
-                                </div>
+                                {activeLinks.length > 0 && (
+                                    <div className={styles.statPill}>
+                                        <span className={styles.statLabel}>Links</span>
+                                        <span className={styles.statValue}>{activeLinks.length}</span>
+                                    </div>
+                                )}
+                                {project.company && (
+                                    <div className={styles.statPill}>
+                                        <span className={styles.statLabel}>For</span>
+                                        <span className={styles.statValue}>{project.company}</span>
+                                    </div>
+                                )}
                             </div>
 
+                            {/* CTA links */}
                             {activeLinks.length > 0 && (
-                                <div className={styles.heroLinks} data-anim>
+                                <div className={styles.ctaRow} data-anim>
                                     {activeLinks.map(({ key, url, icon: Icon, label }) => (
                                         <a
                                             key={key}
                                             href={url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className={styles.heroLink}
-                                            title={label}
+                                            className={key === 'live' ? styles.ctaPrimary : styles.ctaSecondary}
                                         >
-                                            <Icon size={20} />
+                                            <Icon size={18} />
                                             <span>{label}</span>
                                         </a>
                                     ))}
@@ -237,126 +215,145 @@ export default function ProjectDetails({ params }) {
                             )}
                         </div>
 
-                        <div className={styles.heroMedia} ref={imageRef} data-anim>
-                            <div className={styles.mediaFrame}>
+                        {/* Right: image */}
+                        <div className={styles.heroImage} data-anim>
+                            <div className={styles.imageFrame}>
                                 <Image
                                     src={resolveImageSrc(project.image)}
                                     alt={`${project.title} preview`}
                                     fill
-                                    sizes="(max-width: 900px) 100vw, 50vw"
-                                    className={styles.mediaImage}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    className={styles.img}
                                     priority
                                     unoptimized
-                                    onError={(event) => {
-                                        const target = event.currentTarget;
-                                        if (!target.dataset.fallbackApplied) {
-                                            target.dataset.fallbackApplied = 'true';
-                                            target.src = FALLBACK_IMAGE;
+                                    onError={(e) => {
+                                        if (!e.currentTarget.dataset.fb) {
+                                            e.currentTarget.dataset.fb = '1';
+                                            e.currentTarget.src = FALLBACK_IMAGE;
                                         }
                                     }}
                                 />
-                                <div className={styles.mediaShade} />
+                                <div className={styles.imageSheen} />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* ═══ DETAILS GRID ═══ */}
-            <section className={styles.details} ref={detailsRef}>
-                <div className={styles.detailsInner}>
-                    <div className={styles.detailsMain}>
-                        <div className={styles.detailBlock} data-anim-detail>
-                            <h2 className={styles.detailLabel}>Project overview</h2>
-                            <p className={styles.detailText}>{project.description}</p>
-                        </div>
+            {/* ══════════════════════════════
+                CONTENT GRID
+            ══════════════════════════════ */}
+            <section className={styles.content} ref={contentRef}>
+                <div className={styles.inner}>
+                    <div className={styles.contentGrid}>
 
-                        <div className={styles.detailBlock} data-anim-detail>
-                            <h2 className={styles.detailLabel}>Capabilities</h2>
-                            <div className={styles.capabilityList}>
-                                {project.technologies.map((tech) => (
-                                    <span key={tech} className={styles.capabilityChip}>
-                                        {tech}
-                                    </span>
-                                ))}
+                        {/* ── Main column ── */}
+                        <div className={styles.mainCol}>
+
+                            {/* Overview */}
+                            <div className={styles.block} data-block>
+                                <h2 className={styles.blockTitle}>Overview</h2>
+                                <p className={styles.blockText}>{project.description}</p>
                             </div>
-                        </div>
-                    </div>
 
-                    <aside className={styles.detailsSidebar}>
-                        <div className={styles.detailBlock} data-anim-detail>
-                            <h2 className={styles.detailLabel}>Technology stack</h2>
-                            <div className={styles.techGrid}>
-                                {project.technologies.map((tech, i) => {
-                                    const Icon = getTechIcon(tech);
-                                    return (
-                                        <div key={i} className={styles.techChip}>
-                                            <Icon size={18} stroke={1.5} />
-                                            <span>{tech}</span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-
-                        {activeLinks.length > 0 && (
-                            <div className={styles.detailBlock} data-anim-detail>
-                                <h2 className={styles.detailLabel}>External links</h2>
-                                <div className={styles.linkCards}>
-                                    {activeLinks.map(({ key, url, icon: Icon, label }) => (
-                                        <a
-                                            key={key}
-                                            href={url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className={styles.linkCard}
-                                        >
-                                            <div className={styles.linkCardIcon}>
-                                                <Icon size={24} />
-                                            </div>
-                                            <div className={styles.linkCardInfo}>
-                                                <span className={styles.linkCardLabel}>{label}</span>
-                                                <span className={styles.linkCardUrl}>
-                                                    {url.replace(/^https?:\/\/(www\.)?/, '').split('/').slice(0, 2).join('/')}
-                                                </span>
-                                            </div>
-                                            <IconExternalLink size={16} className={styles.linkCardArrow} />
-                                        </a>
-                                    ))}
+                            {/* Tech tags */}
+                            <div className={styles.block} data-block>
+                                <h2 className={styles.blockTitle}>Technologies</h2>
+                                <div className={styles.techWrap}>
+                                    {project.technologies.map((tech) => {
+                                        const Icon = getTechIcon(tech);
+                                        return (
+                                            <span key={tech} className={styles.techChip}>
+                                                <Icon size={15} stroke={1.5} />
+                                                {tech}
+                                            </span>
+                                        );
+                                    })}
                                 </div>
                             </div>
-                        )}
-                    </aside>
+                        </div>
+
+                        {/* ── Sidebar ── */}
+                        <aside className={styles.sidebar}>
+
+                            {/* External links */}
+                            {activeLinks.length > 0 && (
+                                <div className={styles.block} data-block>
+                                    <h2 className={styles.blockTitle}>Links</h2>
+                                    <div className={styles.linkList}>
+                                        {activeLinks.map(({ key, url, icon: Icon, label }) => (
+                                            <a
+                                                key={key}
+                                                href={url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={styles.linkItem}
+                                            >
+                                                <div className={styles.linkIcon}><Icon size={20} /></div>
+                                                <div className={styles.linkMeta}>
+                                                    <span className={styles.linkLabel}>{label}</span>
+                                                    <span className={styles.linkUrl}>
+                                                        {url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]}
+                                                    </span>
+                                                </div>
+                                                <IconExternalLink size={14} className={styles.linkArrow} />
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Project info card */}
+                            <div className={styles.infoCard} data-block>
+                                <div className={styles.infoRow}>
+                                    <span>Client</span>
+                                    <strong>{project.company || 'Independent'}</strong>
+                                </div>
+                                <div className={styles.infoRow}>
+                                    <span>Tools used</span>
+                                    <strong>{project.technologies?.length ?? 0}</strong>
+                                </div>
+                                <div className={styles.infoRow}>
+                                    <span>Category</span>
+                                    <strong>
+                                        {project.technologies?.some(t =>
+                                            ['figma','ui','design','branding','ux'].some(k => t.toLowerCase().includes(k))
+                                        ) ? 'Design' : 'Development'}
+                                    </strong>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
                 </div>
             </section>
 
+            {/* ══════════════════════════════
+                GALLERY
+            ══════════════════════════════ */}
             {gallery.length > 0 && (
-                <section className={styles.gallery} aria-label="Project gallery">
-                    <div className={styles.galleryInner}>
-                        <div className={styles.galleryHeader}>
+                <section className={styles.gallery}>
+                    <div className={styles.inner}>
+                        <div className={styles.galleryHeader} data-block>
                             <h2 className={styles.galleryTitle}>Gallery</h2>
-                            <p className={styles.gallerySubtitle}>Selected screens and visual moments.</p>
+                            <p className={styles.gallerySubtitle}>Selected screens &amp; visual moments</p>
                         </div>
                         <div className={styles.galleryGrid}>
-                            {gallery.map((item, index) => (
+                            {gallery.map((item, i) => (
                                 <div
-                                    key={`${item.url}-${index}`}
-                                    className={`${styles.galleryItem} ${
-                                        item.direction === 'vertical' ? styles.galleryPortrait : styles.galleryLandscape
-                                    }`}
+                                    key={`${item.url}-${i}`}
+                                    className={`${styles.galleryItem} ${item.direction === 'vertical' ? styles.portrait : styles.landscape}`}
                                 >
                                     <Image
                                         src={resolveImageSrc(item.url || project.image)}
-                                        alt={`${project.title} ${index + 1}`}
+                                        alt={`${project.title} – screen ${i + 1}`}
                                         fill
-                                        sizes="(max-width: 900px) 100vw, 70vw"
-                                        className={styles.galleryImage}
+                                        sizes="(max-width: 768px) 100vw, 60vw"
+                                        className={styles.galleryImg}
                                         unoptimized
-                                        onError={(event) => {
-                                            const target = event.currentTarget;
-                                            if (!target.dataset.fallbackApplied) {
-                                                target.dataset.fallbackApplied = 'true';
-                                                target.src = FALLBACK_IMAGE;
+                                        onError={(e) => {
+                                            if (!e.currentTarget.dataset.fb) {
+                                                e.currentTarget.dataset.fb = '1';
+                                                e.currentTarget.src = FALLBACK_IMAGE;
                                             }
                                         }}
                                     />
@@ -367,52 +364,34 @@ export default function ProjectDetails({ params }) {
                 </section>
             )}
 
-            {/* ═══ PROJECT NAVIGATION ═══ */}
-            <section className={styles.projectNav}>
-                <div className={styles.projectNavInner}>
-                    {prevProject ? (
-                        <a href={`/project/${prevProject.id}`} className={styles.navPrev}>
-                            <span className={styles.navDirection}>← Previous</span>
-                            <span className={styles.navTitle}>{prevProject.title}</span>
-                        </a>
-                    ) : <div />}
-                    {nextProject ? (
-                        <a href={`/project/${nextProject.id}`} className={styles.navNext}>
-                            <span className={styles.navDirection}>Next →</span>
-                            <span className={styles.navTitle}>{nextProject.title}</span>
-                        </a>
-                    ) : <div />}
-                </div>
-            </section>
-        </div>
-    );
-}
+            {/* ══════════════════════════════
+                PREV / NEXT NAV
+            ══════════════════════════════ */}
+            <nav className={styles.projectNav} aria-label="Project navigation">
+                <div className={styles.inner}>
+                    <div className={styles.navRow}>
+                        {prevProject ? (
+                            <Link href={`/project/${prevProject.id}`} className={styles.navCard}>
+                                <IconArrowLeft size={18} />
+                                <div>
+                                    <span className={styles.navDir}>Previous</span>
+                                    <span className={styles.navName}>{prevProject.title}</span>
+                                </div>
+                            </Link>
+                        ) : <div />}
 
-function ProjectPageBackground() {
-    return (
-        <div className={styles.background} aria-hidden="true">
-            <div className={styles.pixelBlastLayer}>
-                <PixelBlast
-                    variant="circle"
-                    pixelSize={5}
-                    color="#E8836A"
-                    patternScale={2.1}
-                    patternDensity={2.25}
-                    pixelSizeJitter={0.26}
-                    enableRipples
-                    rippleSpeed={0.22}
-                    rippleThickness={0.08}
-                    rippleIntensityScale={0.42}
-                    liquid
-                    liquidStrength={0.026}
-                    liquidRadius={0.85}
-                    liquidWobbleSpeed={2.5}
-                    speed={0.3}
-                    edgeFade={0.38}
-                    transparent
-                />
-            </div>
-            <div className={styles.backgroundShade} />
+                        {nextProject ? (
+                            <Link href={`/project/${nextProject.id}`} className={`${styles.navCard} ${styles.navCardRight}`}>
+                                <div>
+                                    <span className={styles.navDir}>Next</span>
+                                    <span className={styles.navName}>{nextProject.title}</span>
+                                </div>
+                                <IconArrowRight size={18} />
+                            </Link>
+                        ) : <div />}
+                    </div>
+                </div>
+            </nav>
         </div>
     );
 }
