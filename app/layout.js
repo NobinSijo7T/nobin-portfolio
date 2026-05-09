@@ -20,7 +20,7 @@ export const metadata = {
 }
 
 export const viewport = {
-    themeColor: '#FFD600',
+    themeColor: '#C8B8F8',
     width: 'device-width',
     initialScale: 1,
     maximumScale: 1,
@@ -33,7 +33,7 @@ export default function RootLayout({children}) {
         <head>
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-            <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400&family=Manrope:wght@300;400;500;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
         </head>
         <body>
         <AudioPlayerWrapper>

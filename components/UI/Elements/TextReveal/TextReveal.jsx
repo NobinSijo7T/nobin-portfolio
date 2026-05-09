@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,9 +10,16 @@ import styles from './TextReveal.module.scss';
 
 export default function TextReveal({className, children}) {
     const textRef = useRef();
+    const [fontsLoaded, setFontsLoaded] = useState(false);
+
+    useEffect(() => {
+        document.fonts.ready.then(() => {
+            setFontsLoaded(true);
+        });
+    }, []);
 
     useGSAP(() => {
-        if(textRef.current){
+        if(textRef.current && fontsLoaded){
             gsap.registerPlugin(ScrollTrigger, SplitText);
 
             const splitText = new SplitText(textRef.current, {
@@ -36,7 +43,7 @@ export default function TextReveal({className, children}) {
             });
         }
 
-    }, { scope: textRef });
+    }, { scope: textRef, dependencies: [fontsLoaded] });
 
     return (
         (

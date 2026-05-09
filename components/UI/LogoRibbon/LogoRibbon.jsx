@@ -45,6 +45,7 @@ export default function LogoRibbon() {
                     width={120}
                     height={60}
                     className={styles.logoImage}
+                    style={{ width: 'auto', height: 'auto' }}
                   />
                 </div>
               ))}
@@ -62,6 +63,7 @@ export default function LogoRibbon() {
                     width={120}
                     height={60}
                     className={styles.logoImage}
+                    style={{ width: 'auto', height: 'auto' }}
                   />
                 </div>
               ))}

@@ -143,19 +143,25 @@
 }
 
 .ribbon {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-top: 2px solid rgba(255, 215, 0, 0.3);
-  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+  background: linear-gradient(
+    90deg,
+    hsla(var(--color-surface), 0.3) 0%,
+    hsla(var(--color-surface), 0.7) 50%,
+    hsla(var(--color-surface), 0.3) 100%
+  );
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid hsla(var(--color-primary), 0.15);
+  border-bottom: 1px solid hsla(var(--color-primary), 0.15);
   padding: 3rem 0;
   overflow: hidden;
   position: absolute;
   width: 150%;
   left: -25%;
   box-shadow: 
-    0 8px 32px rgba(255, 215, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 12px 40px hsla(var(--color-ambient-glow), 0.6),
+    inset 0 1px 0 hsla(var(--color-primary), 0.1),
+    inset 0 -1px 0 hsla(var(--color-primary), 0.1);
   
   &::before {
     content: '';

@@ -33,6 +33,8 @@ import {
     IconBracketsAngle
 } from "@tabler/icons-react";
 import styles from './project-details.module.scss';
+import PixelBlast from '@/components/UI/PixelBlast/PixelBlast';
+import ImageVideo from '@/database/ImageVideo.json';
 
 // Map tech name → icon component
 const getTechIcon = (name) => {
@@ -131,6 +133,15 @@ export default function ProjectDetails({ params }) {
             .map(([key, url]) => ({ key, url, ...linkConfig[key] }))
         : [];
 
+    const galleryItems = project
+        ? ImageVideo.filter((item) => item.location?.toLowerCase() === project.title?.toLowerCase())
+        : [];
+    const gallery = galleryItems.length > 0
+        ? galleryItems
+        : project
+            ? [{ url: project.image, location: project.title, direction: project.direction }]
+            : [];
+
     // Find adjacent projects for navigation
     const currentIndex = ProjectJourney.findIndex(p => p.id === project?.id);
     const prevProject = currentIndex > 0 ? ProjectJourney[currentIndex - 1] : null;
@@ -138,10 +149,11 @@ export default function ProjectDetails({ params }) {
 
     return (
         <div className={styles.page} ref={containerRef}>
+            <ProjectPageBackground />
+
             {/* ═══ HERO ═══ */}
             <section className={styles.hero} ref={heroRef}>
                 <div className={styles.heroInner}>
-                    {/* Back button */}
                     <div className={styles.backRow} data-anim>
                         <Link href="/projects" className={styles.backButton}>
                             <IconArrowLeft size={20} />
@@ -149,106 +161,135 @@ export default function ProjectDetails({ params }) {
                         </Link>
                     </div>
 
-                    {/* Company badge */}
-                    {project.company && (
-                        <span className={styles.companyBadge} data-anim>
-                            {project.company}
-                        </span>
-                    )}
-
-                    {/* Title */}
-                    <h1 className={styles.title} data-anim>
-                        {project.title}
-                    </h1>
-
-                    {/* Description */}
-                    <p className={styles.description} data-anim>
-                        {project.description}
-                    </p>
-
-                    {/* Quick links row */}
-                    {activeLinks.length > 0 && (
-                        <div className={styles.heroLinks} data-anim>
-                            {activeLinks.map(({ key, url, icon: Icon, label }) => (
-                                <a
-                                    key={key}
-                                    href={url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={styles.heroLink}
-                                    title={label}
-                                >
-                                    <Icon size={20} />
-                                    <span>{label}</span>
-                                </a>
-                            ))}
+                    <div className={styles.heroGrid}>
+                        <div className={styles.heroMedia} ref={imageRef} data-anim>
+                            <div className={styles.imageFrame}>
+                                <img
+                                    src={project.image}
+                                    alt={`${project.title} preview`}
+                                    className={styles.projectImage}
+                                    draggable="false"
+                                />
+                                <div className={styles.imageGlow} />
+                            </div>
                         </div>
-                    )}
-                </div>
-            </section>
 
-            {/* ═══ PROJECT IMAGE ═══ */}
-            <section className={styles.imageSection} ref={imageRef}>
-                <div className={styles.imageFrame}>
-                    <img
-                        src={project.image}
-                        alt={`${project.title} preview`}
-                        className={styles.projectImage}
-                        draggable="false"
-                    />
-                    <div className={styles.imageGlow} />
+                        <div className={styles.heroContent}>
+                            {project.company && (
+                                <span className={styles.companyBadge} data-anim>
+                                    {project.company}
+                                </span>
+                            )}
+
+                            <h1 className={styles.title} data-anim>
+                                {project.title}
+                            </h1>
+
+                            <p className={styles.description} data-anim>
+                                {project.description}
+                            </p>
+
+                            {activeLinks.length > 0 && (
+                                <div className={styles.heroLinks} data-anim>
+                                    {activeLinks.map(({ key, url, icon: Icon, label }) => (
+                                        <a
+                                            key={key}
+                                            href={url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={styles.heroLink}
+                                            title={label}
+                                        >
+                                            <Icon size={20} />
+                                            <span>{label}</span>
+                                        </a>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </section>
 
             {/* ═══ DETAILS GRID ═══ */}
             <section className={styles.details} ref={detailsRef}>
                 <div className={styles.detailsInner}>
-                    {/* Tech stack */}
-                    <div className={styles.detailBlock} data-anim-detail>
-                        <h2 className={styles.detailLabel}>Technology Stack</h2>
-                        <div className={styles.techGrid}>
-                            {project.technologies.map((tech, i) => {
-                                const Icon = getTechIcon(tech);
-                                return (
-                                    <div key={i} className={styles.techChip}>
-                                        <Icon size={18} stroke={1.5} />
-                                        <span>{tech}</span>
-                                    </div>
-                                );
-                            })}
+                    <div className={styles.detailsMain}>
+                        <div className={styles.detailBlock} data-anim-detail>
+                            <h2 className={styles.detailLabel}>Overview</h2>
+                            <p className={styles.detailText}>{project.description}</p>
                         </div>
                     </div>
 
-                    {/* External links - expanded cards */}
-                    {activeLinks.length > 0 && (
+                    <aside className={styles.detailsSidebar}>
                         <div className={styles.detailBlock} data-anim-detail>
-                            <h2 className={styles.detailLabel}>External Links</h2>
-                            <div className={styles.linkCards}>
-                                {activeLinks.map(({ key, url, icon: Icon, label }) => (
-                                    <a
-                                        key={key}
-                                        href={url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={styles.linkCard}
-                                    >
-                                        <div className={styles.linkCardIcon}>
-                                            <Icon size={24} />
+                            <h2 className={styles.detailLabel}>Technology Stack</h2>
+                            <div className={styles.techGrid}>
+                                {project.technologies.map((tech, i) => {
+                                    const Icon = getTechIcon(tech);
+                                    return (
+                                        <div key={i} className={styles.techChip}>
+                                            <Icon size={18} stroke={1.5} />
+                                            <span>{tech}</span>
                                         </div>
-                                        <div className={styles.linkCardInfo}>
-                                            <span className={styles.linkCardLabel}>{label}</span>
-                                            <span className={styles.linkCardUrl}>
-                                                {url.replace(/^https?:\/\/(www\.)?/, '').split('/').slice(0, 2).join('/')}
-                                            </span>
-                                        </div>
-                                        <IconExternalLink size={16} className={styles.linkCardArrow} />
-                                    </a>
-                                ))}
+                                    );
+                                })}
                             </div>
                         </div>
-                    )}
+
+                        {activeLinks.length > 0 && (
+                            <div className={styles.detailBlock} data-anim-detail>
+                                <h2 className={styles.detailLabel}>External Links</h2>
+                                <div className={styles.linkCards}>
+                                    {activeLinks.map(({ key, url, icon: Icon, label }) => (
+                                        <a
+                                            key={key}
+                                            href={url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={styles.linkCard}
+                                        >
+                                            <div className={styles.linkCardIcon}>
+                                                <Icon size={24} />
+                                            </div>
+                                            <div className={styles.linkCardInfo}>
+                                                <span className={styles.linkCardLabel}>{label}</span>
+                                                <span className={styles.linkCardUrl}>
+                                                    {url.replace(/^https?:\/\/(www\.)?/, '').split('/').slice(0, 2).join('/')}
+                                                </span>
+                                            </div>
+                                            <IconExternalLink size={16} className={styles.linkCardArrow} />
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </aside>
                 </div>
             </section>
+
+            {gallery.length > 0 && (
+                <section className={styles.gallery} aria-label="Project gallery">
+                    <div className={styles.galleryInner}>
+                        <div className={styles.galleryHeader}>
+                            <h2 className={styles.galleryTitle}>Gallery</h2>
+                            <p className={styles.gallerySubtitle}>Selected screens and visual moments.</p>
+                        </div>
+                        <div className={styles.galleryGrid}>
+                            {gallery.map((item, index) => (
+                                <div
+                                    key={`${item.url}-${index}`}
+                                    className={`${styles.galleryItem} ${
+                                        item.direction === 'vertical' ? styles.galleryPortrait : styles.galleryLandscape
+                                    }`}
+                                >
+                                    <img src={item.url} alt={`${project.title} ${index + 1}`} loading="lazy" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* ═══ PROJECT NAVIGATION ═══ */}
             <section className={styles.projectNav}>
@@ -267,6 +308,35 @@ export default function ProjectDetails({ params }) {
                     ) : <div />}
                 </div>
             </section>
+        </div>
+    );
+}
+
+function ProjectPageBackground() {
+    return (
+        <div className={styles.background} aria-hidden="true">
+            <div className={styles.pixelBlastLayer}>
+                <PixelBlast
+                    variant="circle"
+                    pixelSize={5}
+                    color="#D6CEFC"
+                    patternScale={2.1}
+                    patternDensity={2.25}
+                    pixelSizeJitter={0.26}
+                    enableRipples
+                    rippleSpeed={0.22}
+                    rippleThickness={0.08}
+                    rippleIntensityScale={0.42}
+                    liquid
+                    liquidStrength={0.026}
+                    liquidRadius={0.85}
+                    liquidWobbleSpeed={2.5}
+                    speed={0.3}
+                    edgeFade={0.38}
+                    transparent
+                />
+            </div>
+            <div className={styles.backgroundShade} />
         </div>
     );
 }

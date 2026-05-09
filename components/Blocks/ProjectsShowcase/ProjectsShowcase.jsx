@@ -1,127 +1,157 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { IconInfoCircle, IconBrandGithub, IconBrandDribbble, IconExternalLink, IconArrowLeft, IconHeart, IconBrandBehance } from "@tabler/icons-react";
+import { motion } from 'framer-motion';
+import {
+  IconArrowLeft,
+  IconArrowUpRight,
+  IconBrandBehance,
+  IconBrandDribbble,
+  IconBrandGithub,
+  IconExternalLink,
+  IconInfoCircle,
+  IconX,
+} from "@tabler/icons-react";
 import styles from './ProjectsShowcase.module.scss';
 import ProjectJourney from '@/database/ProjectJourney.json';
 import graphicWorks from '@/database/config/graphic-works.json';
 import Container from "@/components/UI/Layout/Layout";
-import Title from "@/components/UI/Elements/Title/Title";
-import GooeyNav from '@/components/GooeyNav';
-import Particles from '@/components/UI/Particles/Particles';
-import ScrambledText from '@/components/ScrambledText/ScrambledText';
+import PixelBlast from '@/components/UI/PixelBlast/PixelBlast';
 
-const categoryItems = [
-  { label: '🔥 All Designs', href: '#' },
-  { label: '🌐 Websites', href: '#' },
-  { label: '📱 Applications', href: '#' },
-  { label: '💚 Dashboards', href: '#' }
+const categories = [
+  { label: 'All Work', value: 'all' },
+  { label: 'Web Platforms', value: 'web' },
+  { label: 'Applications', value: 'app' },
+  { label: 'Design Systems', value: 'design' },
 ];
 
+const categoryMatchers = {
+  all: () => true,
+  web: (project) => {
+    const haystack = `${project.company} ${project.description} ${project.technologies?.join(' ')}`.toLowerCase();
+    return ['web', 'next', 'react', 'vue', 'platform', 'browser', 'site'].some((word) => haystack.includes(word));
+  },
+  app: (project) => {
+    const haystack = `${project.title} ${project.description} ${project.technologies?.join(' ')}`.toLowerCase();
+    return ['app', 'mobile', 'canvas', 'task', 'streaming', 'gaming', 'application'].some((word) => haystack.includes(word));
+  },
+  design: (project) => {
+    const haystack = `${project.description} ${project.technologies?.join(' ')}`.toLowerCase();
+    return ['figma', 'ui/ux', 'branding', 'identity', 'interface', 'design'].some((word) => haystack.includes(word));
+  },
+};
+
 export default function ProjectsShowcase() {
-  const [activeCategory, setActiveCategory] = useState(0);
+  const [activeCategory, setActiveCategory] = useState('all');
   const router = useRouter();
 
-  const handleBackClick = () => {
-    router.back();
-  };
-
-  // Override the GooeyNav click to update our state
-  const handleCategoryChange = (index) => {
-    setActiveCategory(index);
-  };
+  const filteredProjects = useMemo(() => {
+    const matcher = categoryMatchers[activeCategory] || categoryMatchers.all;
+    return ProjectJourney.filter(matcher);
+  }, [activeCategory]);
 
   return (
     <section className={styles.section}>
-      {/* Particles Background */}
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: 0,
-        pointerEvents: 'none'
-      }}>
-        <Particles
-          particleCount={200}
-          spread={10}
-          speed={0.1}
-          particleColors={['#FFD700', '#FFA500', '#FF8C00', '#FFFFFF']}
-          hover={true}
-          alpha={0.8}
-          size={10}
-          rotation={true}
-        />
-      </div>
+      <AnimatedBackground />
 
-      <Container>
-        {/* Back Button */}
+      <Container className={styles.container}>
         <div className={styles.backButtonWrapper}>
           <button
-            onClick={handleBackClick}
+            onClick={() => router.back()}
             className={styles.backButton}
             aria-label="Back to portfolio"
             title="Back"
           >
-            <IconArrowLeft size={20} />
+            <IconArrowLeft size={20} strokeWidth={1.8} />
           </button>
         </div>
 
-        <header className={styles.header}>
-          <Title color={'white'}>
-            <span>Showcasing</span> the best! 🚀
-          </Title>
+        <header className={styles.hero}>
+          <p className={styles.eyebrow}>Selected archive</p>
+          <h1 className={styles.heroTitle}>
+            <span className={styles.heroTitleLine}>
+              <span className={styles.heroTitleMuted}>Projects</span> shaped for
+            </span>
+            <span className={styles.heroTitleLine}>useful interfaces.</span>
+          </h1>
+          <p className={styles.heroDescription}>
+            A compact archive of product interfaces, experiments, visual systems, and shipped web experiences.
+          </p>
+          <div className={styles.heroMeta} aria-label="Project archive statistics">
+            <span>{ProjectJourney.length} case studies</span>
+            <span>{graphicWorks.length} visual works</span>
+            <span>Design + development</span>
+          </div>
         </header>
 
-        {/* Category Filter with GooeyNav */}
-        <div className={styles.categoryFilter}>
-          <GooeyNav
-            items={categoryItems.map((item, idx) => ({
-              ...item,
-              href: '#',
-              onClick: (e) => {
-                e.preventDefault();
-                handleCategoryChange(idx);
-              }
-            }))}
-            particleCount={15}
-            particleDistances={[90, 10]}
-            particleR={100}
-            initialActiveIndex={activeCategory}
-            animationTime={600}
-            timeVariance={300}
-            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-          />
-        </div>
-
-        {/* Projects Grid */}
-        <div className={styles.projectsGrid}>
-          {ProjectJourney.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+        <div className={styles.categoryFilter} aria-label="Project categories">
+          {categories.map((category) => (
+            <button
+              key={category.value}
+              type="button"
+              className={`${styles.categoryButton} ${activeCategory === category.value ? styles.categoryButtonActive : ''}`}
+              onClick={() => setActiveCategory(category.value)}
+            >
+              {category.label}
+            </button>
           ))}
         </div>
 
-        {/* Graphic Works Section */}
+        <div className={styles.projectsGrid}>
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </div>
+
         <GraphicWorksSection />
       </Container>
     </section>
   );
 }
 
-function ProjectCard({ project }) {
-  const [isHovered, setIsHovered] = useState(false);
-
+function AnimatedBackground() {
   return (
-    <div
+    <div className={styles.background} aria-hidden="true">
+      <div className={styles.pixelBlastLayer}>
+        <PixelBlast
+          variant="circle"
+          pixelSize={5}
+          color="#D6CEFC"
+          patternScale={2.1}
+          patternDensity={2.45}
+          pixelSizeJitter={0.28}
+          enableRipples
+          rippleSpeed={0.22}
+          rippleThickness={0.08}
+          rippleIntensityScale={0.45}
+          liquid
+          liquidStrength={0.028}
+          liquidRadius={0.85}
+          liquidWobbleSpeed={2.6}
+          speed={0.32}
+          edgeFade={0.38}
+          transparent
+          style={{ width: '100%', height: '100%' }}
+        />
+      </div>
+      <div className={styles.backgroundShade} />
+    </div>
+  );
+}
+
+function ProjectCard({ project, index }) {
+  return (
+    <motion.article
       className={styles.projectCard}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.5, delay: Math.min(index * 0.04, 0.24), ease: 'easeOut' }}
     >
-      <div className={styles.imageWrapper}>
+      <Link href={`/project/${project.id}`} className={styles.imageWrapper} aria-label={`View ${project.title} case study`}>
         <Image
           src={project.image}
           alt={project.title}
@@ -131,141 +161,109 @@ function ProjectCard({ project }) {
           loading="lazy"
           className={styles.projectImage}
         />
-        <div className={styles.overlay}>
-          <div className={styles.projectInfo}>
-            <h3 className={styles.projectTitle}>{project.title}</h3>
-            <p className={styles.projectCompany}>{project.company}</p>
-            <p className={styles.projectDescription}>{project.description}</p>
-          </div>
+        <div className={styles.imageScrim}>
+          <IconArrowUpRight size={22} strokeWidth={1.7} />
         </div>
-      </div>
+      </Link>
 
       <div className={styles.cardFooter}>
         <div className={styles.projectMeta}>
-          <h4 className={styles.cardTitle}>{project.title}</h4>
           <span className={styles.cardCompany}>{project.company}</span>
+          <h2 className={styles.cardTitle}>{project.title}</h2>
+          <p className={styles.projectDescription}>{project.description}</p>
+        </div>
+
+        <div className={styles.techList} aria-label={`${project.title} technologies`}>
+          {project.technologies?.slice(0, 3).map((technology) => (
+            <span key={technology}>{technology}</span>
+          ))}
         </div>
 
         <div className={styles.actionButtons}>
-          <Link href={`/project/${project.id}`} className={styles.actionButton}>
-            <IconInfoCircle size={18} />
+          <Link href={`/project/${project.id}`} className={styles.actionButton} aria-label={`${project.title} details`}>
+            <IconInfoCircle size={18} strokeWidth={1.7} />
           </Link>
 
           {project.links.github && (
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.actionButton}
-            >
-              <IconBrandGithub size={18} />
+            <a href={project.links.github} target="_blank" rel="noopener noreferrer" className={styles.actionButton} aria-label={`${project.title} GitHub`}>
+              <IconBrandGithub size={18} strokeWidth={1.7} />
             </a>
           )}
 
           {project.links.dribbble && (
-            <a
-              href={project.links.dribbble}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.actionButton}
-            >
-              <IconBrandDribbble size={18} />
+            <a href={project.links.dribbble} target="_blank" rel="noopener noreferrer" className={styles.actionButton} aria-label={`${project.title} Dribbble`}>
+              <IconBrandDribbble size={18} strokeWidth={1.7} />
             </a>
           )}
 
           {project.links.behance && (
-            <a
-              href={project.links.behance}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.actionButton}
-            >
-              <IconBrandBehance size={18} />
+            <a href={project.links.behance} target="_blank" rel="noopener noreferrer" className={styles.actionButton} aria-label={`${project.title} Behance`}>
+              <IconBrandBehance size={18} strokeWidth={1.7} />
             </a>
           )}
 
           {project.links.live && (
-            <a
-              href={project.links.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.actionButton}
-            >
-              <IconExternalLink size={18} />
+            <a href={project.links.live} target="_blank" rel="noopener noreferrer" className={styles.actionButton} aria-label={`${project.title} live site`}>
+              <IconExternalLink size={18} strokeWidth={1.7} />
             </a>
           )}
         </div>
       </div>
-    </div>
+    </motion.article>
   );
 }
 
 function GraphicWorksSection() {
   const [showAll, setShowAll] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const displayedWorks = showAll ? graphicWorks : graphicWorks.slice(0, 4);
+  const displayedWorks = showAll ? graphicWorks : graphicWorks.slice(0, 8);
 
   return (
-    <div className={styles.graphicWorksSection}>
+    <section className={styles.graphicWorksSection}>
       <div className={styles.sectionHeader}>
-        <ScrambledText
-          className={styles.scrambledGraphicTitle}
-          radius={100}
-          duration={1.2}
-          speed={0.5}
-          scrambleChars=".:"
-          style={{
-            fontSize: 'clamp(32px, 6vw, 72px)',
-            fontWeight: 'bold',
-            color: '#FFD700',
-            textAlign: 'center',
-            margin: '0 auto',
-            width: '100%',
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em'
-          }}
-        >
-          Graphic Works ✨
-        </ScrambledText>
+        <p className={styles.eyebrow}>Visual explorations</p>
+        <h2 className={styles.sectionTitle}>Graphic works</h2>
       </div>
 
       <div className={styles.graphicWorksGrid}>
         {displayedWorks.map((work) => (
-          <div
+          <button
+            type="button"
             key={work.id}
             className={styles.graphicWorkCard}
             onClick={() => setSelectedImage(work)}
+            aria-label={`Open ${work.title}`}
           >
             <Image
               src={work.image}
               alt={work.title}
-              width={400}
-              height={400}
+              width={500}
+              height={500}
               sizes="(max-width: 768px) 50vw, 25vw"
               loading="lazy"
               className={styles.graphicWorkImage}
             />
-          </div>
+          </button>
         ))}
       </div>
 
       <div className={styles.viewMoreWrapper}>
         <button
+          type="button"
           className={styles.viewMoreButton}
           onClick={() => setShowAll(!showAll)}
         >
-          {showAll ? 'Show Less' : 'View More'}
-          <span className={styles.viewMoreArrow}>→</span>
+          {showAll ? 'Show less' : 'View more'}
+          <IconArrowUpRight size={18} strokeWidth={1.8} />
         </button>
       </div>
 
-      {/* Image Overlay */}
       {selectedImage && (
         <div className={styles.imageOverlay} onClick={() => setSelectedImage(null)}>
-          <button className={styles.closeButton} onClick={() => setSelectedImage(null)}>
-            ✕
+          <button type="button" className={styles.closeButton} onClick={() => setSelectedImage(null)} aria-label="Close image">
+            <IconX size={22} strokeWidth={1.8} />
           </button>
-          <div className={styles.overlayContent} onClick={(e) => e.stopPropagation()}>
+          <div className={styles.overlayContent} onClick={(event) => event.stopPropagation()}>
             <Image
               src={selectedImage.image}
               alt={selectedImage.title}
@@ -277,6 +275,6 @@ function GraphicWorksSection() {
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }

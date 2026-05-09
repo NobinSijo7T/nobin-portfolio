@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 20;
 
   /*&.menuOpen{
 
@@ -121,28 +121,27 @@
   align-items: center;
   gap: 1rem;
   font-size: var(--fs-ms);
-  color: hsla(var(--color-white), .9);
+  font-family: var(--font-mono);
+  color: hsl(var(--color-accent-mint));
   line-height: 1;
   text-transform: uppercase;
 
-  /* ── Liquid glass pill ── */
+  /* ── Crystal mint pill ── */
   padding: 0.8rem 1.2rem;
   border-radius: 100rem;
-  background: hsla(var(--color-black), .25);
+  background: hsla(var(--color-accent-mint), .12);
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  border: 1px solid hsla(var(--color-white), .16);
+  border: 0.5px solid hsl(var(--color-accent-mint));
   box-shadow:
-    inset 1px 1px 0 0 hsla(var(--color-white), .15),
-    inset -1px -1px 0 0 hsla(var(--color-white), .06),
+    inset 1px 1px 0 0 hsla(var(--color-accent-mint), .1),
     0 4px 16px hsla(var(--color-black), .2);
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: hsla(var(--color-white), .28);
+    border-color: hsl(var(--color-accent-mint));
     box-shadow:
-      inset 1px 1px 0 0 hsla(var(--color-white), .2),
-      inset -1px -1px 0 0 hsla(var(--color-white), .1),
+      inset 1px 1px 0 0 hsla(var(--color-accent-mint), .15),
       0 6px 24px hsla(var(--color-black), .25);
   }
 
@@ -187,28 +186,24 @@
 
 .location{
   font-size: var(--fs-ms);
-  color: hsla(var(--color-white), .9);
+  font-family: var(--font-mono);
+  color: hsl(var(--color-text-muted));
   text-transform: uppercase;
 
-  /* ── Liquid glass pill ── */
+  /* ── Crystal surface pill ── */
   padding: 0.8rem 1.2rem;
   border-radius: 100rem;
   background: hsla(var(--color-black), .25);
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  border: 1px solid hsla(var(--color-white), .16);
+  border: 0.5px solid hsla(var(--color-primary), .2);
   box-shadow:
-    inset 1px 1px 0 0 hsla(var(--color-white), .15),
-    inset -1px -1px 0 0 hsla(var(--color-white), .06),
+    inset 1px 1px 0 0 hsla(var(--color-white), .08),
     0 4px 16px hsla(var(--color-black), .2);
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: hsla(var(--color-white), .28);
-    box-shadow:
-      inset 1px 1px 0 0 hsla(var(--color-white), .2),
-      inset -1px -1px 0 0 hsla(var(--color-white), .1),
-      0 6px 24px hsla(var(--color-black), .25);
+    border-color: hsla(var(--color-primary), .3);
   }
 
   @include respond-below(xs) {
@@ -233,18 +228,17 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  color: hsl(var(--color-white));
+  color: hsl(var(--color-primary));
   cursor: pointer;
   position: relative;
 
-  /* ── Liquid glass circle ── */
+  /* ── Crystal glass circle ── */
   background: hsla(var(--color-black), .25);
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  border: 1px solid hsla(var(--color-white), .18);
+  border: 0.5px solid hsla(var(--color-primary), .3);
   box-shadow:
-    inset 1px 1px 0 0 hsla(var(--color-white), .18),
-    inset -1px -1px 0 0 hsla(var(--color-white), .06),
+    inset 1px 1px 0 0 hsla(var(--color-white), .1),
     0 4px 16px hsla(var(--color-black), .2);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
@@ -260,13 +254,13 @@
   }
 
   &:hover {
-    background: hsl(var(--color-primary));
-    border-color: hsl(var(--color-primary));
-    color: hsl(var(--color-black));
+    background: hsla(var(--color-primary), .15);
+    border-color: hsla(var(--color-primary), .5);
+    color: hsl(var(--color-text-pearl));
     transform: scale(1.1);
     box-shadow:
-      inset 1px 1px 0 0 hsla(var(--color-white), .3),
-      0 6px 24px hsla(var(--color-primary), .3);
+      inset 1px 1px 0 0 hsla(var(--color-white), .15),
+      0 6px 24px hsla(var(--color-primary), .2);
 
     svg {
       transform: rotate(360deg);
@@ -335,18 +329,17 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  color: hsl(var(--color-white));
+  color: hsl(var(--color-primary));
   cursor: pointer;
   position: relative;
 
-  /* ── Liquid glass circle ── */
+  /* ── Crystal glass circle ── */
   background: hsla(var(--color-black), .25);
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  border: 1px solid hsla(var(--color-white), .18);
+  border: 0.5px solid hsla(var(--color-primary), .3);
   box-shadow:
-    inset 1px 1px 0 0 hsla(var(--color-white), .18),
-    inset -1px -1px 0 0 hsla(var(--color-white), .06),
+    inset 1px 1px 0 0 hsla(var(--color-white), .1),
     0 4px 16px hsla(var(--color-black), .2);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
@@ -356,11 +349,12 @@
   }
 
   &:hover {
-    border-color: hsl(var(--color-primary));
-    color: hsl(var(--color-primary));
+    border-color: hsla(var(--color-primary), .5);
+    color: hsl(var(--color-text-pearl));
+    background: hsla(var(--color-primary), .15);
     transform: scale(1.05);
     box-shadow:
-      inset 1px 1px 0 0 hsla(var(--color-white), .2),
+      inset 1px 1px 0 0 hsla(var(--color-white), .12),
       0 6px 24px hsla(var(--color-primary), .15);
   }
 

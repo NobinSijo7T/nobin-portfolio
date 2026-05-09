@@ -2,18 +2,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Codystar&family=Permanent+Marker&family=Bangers&family=Silkscreen&family=Rammetto+One&family=Bruno+Ace+SC&family=Zen+Tokyo+Zoo&family=Kablammo&family=Stint+Ultra+Expanded&family=Yuji+Boku&family=Darumadrop+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@400;700&family=Audiowide&family=Bangers&family=Silkscreen&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Libre+Baskerville:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400&display=swap');
 @import "tailwindcss";
 @import 'media-queries.scss';
 
 :root {
-  --font-alt: 'Libre Baskerville', serif;
-  --font-primary: 'Manrope', sans-serif;
+  --font-alt: 'Syne', sans-serif;
+  --font-primary: 'DM Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 
   --color-bg: 210, 75%, 98%; //#F8FBFE; Off White
-  --color-bg-alt: 240, 10%, 5%; //#121216 Smoke;
+  --color-bg-alt: 243, 28%, 6%; //#0C0D14 Deep midnight;
 
-  --color-primary: 50, 100%, 50%; //#FFD600; Yellow
-  --color-primary-alt: 50, 32%, 42%; //#8E8349; Rusty Yellow
+  --color-primary: 255, 86%, 85%; //#C8B8F8; Soft lavender
+  --color-primary-alt: 46, 37%, 47%; //#D4C47A; Muted gold
 
   --color-alert: 0, 88%, 45%; //#da0d0d; Red
   --color-success: 135, 85%, 55%; //#2BEE5B; Green
@@ -22,7 +24,16 @@
   --color-black: 0, 0%, 0%; //#000; Black
 
   --color-title: 0, 0%, 0%; //#000; Black
-  --color-body: 213, 9%, 45%; //#69727E; Pale Sky
+  --color-body: 252, 9%, 46%; //#6B6880; Dusty violet-gray
+
+  /* Crystal palette extensions */
+  --color-surface: 237, 29%, 11%; /* #151624 – cards, surfaces */
+  --color-text-pearl: 264, 25%, 92%; /* #E8E4F0 – body text */
+  --color-text-muted: 248, 9%, 46%; /* #6B6880 – secondary text */
+  --color-text-subtitle: 250, 12%, 65%; /* #9996B0 – subtitle text */
+  --color-hero-secondary: 253, 80%, 89%; /* #D6CEFC – hero line 2 */
+  --color-accent-mint: 150, 38%, 75%; /* #A8D8C0 – open to work */
+  --color-ambient-glow: 261, 53%, 13%; /* #1A1035 – background glows */
 
   --fs-ms: 1.2rem;
   --fs-xxs: 1.6rem;
@@ -164,7 +175,7 @@ input, button, textarea, select {
 }
 
 ::selection {
-  color: hsl(var(--color-black));
+  color: hsl(var(--color-bg-alt));
   background: hsl(var(--color-primary));
 }
 

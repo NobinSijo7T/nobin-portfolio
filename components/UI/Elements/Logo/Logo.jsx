@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Logo.module.scss';
 import Link from 'next/link';
-import Image from 'next/image';
 import commonConfig from '@/database/config/metadata.json';
+import MetallicPaint from '@/components/UI/Elements/MetallicPaint/MetallicPaint';
 
 export default function Logo({ classVariable }) {
     const [isHovered, setIsHovered] = useState(false);
@@ -38,11 +38,17 @@ export default function Logo({ classVariable }) {
     useEffect(() => {
         const fontInterval = setInterval(() => {
             setIsTransitioning(true);
+            
+            // Wait for text to fade out before changing font
             setTimeout(() => {
                 setCurrentFontIndex((prevIndex) => (prevIndex + 1) % fonts.length);
+            }, 400);
+            
+            // Remove transition class to fade back in
+            setTimeout(() => {
                 setIsTransitioning(false);
-            }, 300);
-        }, 3000);
+            }, 800);
+        }, 3500);
 
         return () => clearInterval(fontInterval);
     }, []);
@@ -57,14 +63,28 @@ export default function Logo({ classVariable }) {
         >
             <div className={styles.logoContainer}>
                 <div className={`${styles.logoImageWrapper} ${isHovered ? styles.logoHovered : ''}`}>
-                    <Image
-                        src="/Logo.png"
-                        alt="Logo"
-                        width={120}
-                        height={120}
-                        className={styles.logoImage}
-                        priority
-                        suppressHydrationWarning
+                    <MetallicPaint
+                        imageSrc="/Logo.svg"
+                        seed={42}
+                        scale={4}
+                        patternSharpness={1}
+                        noiseScale={0.5}
+                        speed={0.3}
+                        liquid={0.75}
+                        mouseAnimation={false}
+                        brightness={2}
+                        contrast={0.5}
+                        refraction={0.01}
+                        blur={0.015}
+                        chromaticSpread={2}
+                        fresnel={1}
+                        angle={0}
+                        waveAmplitude={1}
+                        distortion={1}
+                        contour={0.2}
+                        lightColor="#ffffff"
+                        darkColor="#000000"
+                        tintColor="#feb3ff"
                     />
                 </div>
                 <div

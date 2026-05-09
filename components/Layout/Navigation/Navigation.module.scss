@@ -29,16 +29,16 @@
   overflow: hidden;
   isolation: isolate;
 
-  /* ── Liquid glass layered background ── */
-  background-color: hsla(var(--color-black), .35);
+  /* ── Crystal glass layered background ── */
+  background-color: hsla(var(--color-surface), .85);
   backdrop-filter: blur(24px) saturate(1.6);
   -webkit-backdrop-filter: blur(24px) saturate(1.6);
-  border: .05rem solid hsla(var(--color-white), .18);
+  border: .05rem solid hsla(var(--color-primary), .2);
 
   /* Specular inner glow + subtle outer shadow */
   box-shadow:
-    inset 1px 1px 0 0 hsla(var(--color-white), .22),
-    inset -1px -1px 0 0 hsla(var(--color-white), .08),
+    inset 1px 1px 0 0 hsla(var(--color-white), .1),
+    inset -1px -1px 0 0 hsla(var(--color-white), .04),
     0 8px 32px hsla(var(--color-black), .28),
     0 2px 8px hsla(var(--color-black), .12);
 
@@ -47,10 +47,10 @@
               background-color .4s ease;
 
   &:hover {
-    border-color: hsla(var(--color-white), .28);
+    border-color: hsla(var(--color-primary), .35);
     box-shadow:
-      inset 1px 1px 0 0 hsla(var(--color-white), .28),
-      inset -1px -1px 0 0 hsla(var(--color-white), .12),
+      inset 1px 1px 0 0 hsla(var(--color-white), .15),
+      inset -1px -1px 0 0 hsla(var(--color-white), .06),
       0 12px 48px hsla(var(--color-black), .35),
       0 2px 8px hsla(var(--color-black), .15);
   }
@@ -123,8 +123,9 @@
       a, button{
         display: block;
         padding: 0.9rem 1.5rem;
-        font-size: var(--fs-xxs);
-        color: hsla(var(--color-white), .88);
+        font-size: 1.3rem;
+        font-family: var(--font-mono);
+        color: hsl(var(--color-primary));
         text-decoration: none;
         transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         border-radius: 100vw;
@@ -133,16 +134,16 @@
         letter-spacing: 0.02em;
 
         @include respond-below(xs) {
-          --fs-xxs: 2rem;
+          font-size: 2rem;
           display: block;
           width: 100%;
           padding: 2rem 3rem;
           text-align: left;
-          color: hsl(var(--color-white));
+          color: hsl(var(--color-primary));
         }
         &:hover{
           cursor: pointer;
-          color: hsl(var(--color-black));
+          color: hsl(var(--color-text-pearl));
         }
       }
     }

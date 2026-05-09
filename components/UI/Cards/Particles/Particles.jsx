@@ -46,13 +46,13 @@ const Particles = ({ className }) => {
             positions[i + 2] = (Math.random() - 0.5) * 10;
 
             if (i % 2 === 0) {
-                colors[i] = 1;
-                colors[i + 1] = 1;
-                colors[i + 2] = 1;
+                colors[i] = 0.7;
+                colors[i + 1] = 0.7;
+                colors[i + 2] = 0.7;
             } else {
-                colors[i] = 66 / 255;
-                colors[i + 1] = 118 / 255;
-                colors[i + 2] = 195 / 255;
+                colors[i] = 200 / 255;
+                colors[i + 1] = 184 / 255;
+                colors[i + 2] = 248 / 255;
             }
         }
 

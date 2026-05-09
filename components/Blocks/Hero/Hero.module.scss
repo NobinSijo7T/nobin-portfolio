@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import '../../../assets/media-queries.scss';
 
 .hero {
@@ -30,7 +31,7 @@
     padding: 2rem 0;
     &:nth-child(2) {
       .splitWords{
-        background: -webkit-linear-gradient(hsl(var(--color-white)), hsl(200, 60, 82));
+        background: -webkit-linear-gradient(hsl(var(--color-text-pearl)), hsl(var(--color-hero-secondary)));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -38,15 +39,29 @@
   }
 
   h1 {
-    font-weight: var(--fw-bold);
-    font-size: var(--fs-xml);
+    font-family: var(--font-alt);
+    font-weight: 800;
+    font-size: calc(var(--fs-xml) * 0.7);
     line-height: 1;
     opacity: 0;
     transition: all 0.3s ease-in;
-    color: hsl(var(--color-white));
+    color: hsl(var(--color-text-pearl));
     @include respond-above(xl) {
       max-width: 68vw;
       line-height: 0.9;
+    }
+  }
+
+  .roleLine {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 0.55em;
+    @include respond-below(md) {
+      font-size: 0.6em;
+      white-space: normal;
     }
   }
 
@@ -56,6 +71,22 @@
     align-items: center;
     width: 30rem;
     height: 9rem;
+    border: 1.5px solid transparent;
+    background-clip: padding-box;
+    background-origin: border-box;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -1.5px;
+      border-radius: 100vw;
+      padding: 1.5px;
+      background: conic-gradient(#C8B8F8, #D4C47A, #A8D8C0, #C8B8F8);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
     border-radius: 100vw;
     vertical-align: baseline;
     overflow: hidden;
@@ -87,16 +118,17 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, #b9b5db, hsl(var(--color-bg)));
+      background: linear-gradient(90deg, hsl(var(--color-ambient-glow)), hsl(var(--color-surface)));
       z-index: 1;
       border-radius: 100vw;
     }
   }
 
   p{
-    font-size: var(--fs-md);
-    font-weight: var(--fw-light);
-    color: hsl(var(--color-white));
+    font-size: 1.55rem;
+    font-weight: 300;
+    color: hsl(var(--color-text-subtitle));
+    line-height: 1.7;
     max-width: 70rem;
     margin: 6rem auto 0;
   }
