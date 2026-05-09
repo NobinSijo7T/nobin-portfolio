@@ -39,10 +39,10 @@
   align-items: center;
   gap: 1rem;
   padding: 1.4rem 3rem;
-  background: rgba(255, 215, 0, 0.1);
-  border: 1px solid rgba(255, 215, 0, 0.3);
+  background: hsla(var(--color-primary), 0.1);
+  border: 1px solid hsla(var(--color-primary), 0.3);
   border-radius: 10rem;
-  color: #FFD700;
+  color: hsl(var(--color-primary));
   font-size: 1.6rem;
   font-weight: 600;
   text-decoration: none;
@@ -70,10 +70,10 @@
   }
   
   &:hover {
-    background: rgba(255, 215, 0, 0.2);
-    border-color: #FFD700;
+    background: hsla(var(--color-primary), 0.2);
+    border-color: hsl(var(--color-primary));
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 4px 20px hsla(var(--color-primary), 0.2);
     
     svg {
       transform: translateX(4px);
@@ -364,7 +364,7 @@
   backdrop-filter: blur(12px);
   padding: 1rem 2rem;
   border-radius: 1rem;
-  border: 1px solid rgba(255, 215, 0, 0.3);
+  border: 1px solid hsla(var(--color-primary), 0.3);
   
   @include respond-below(md) {
     padding: 0.9rem 1.8rem;
@@ -378,7 +378,7 @@
 
 .projectCompany {
   font-size: 1.4rem;
-  color: #FFD700;
+  color: hsl(var(--color-primary));
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -395,7 +395,7 @@
 
 .projectTitle {
   font-size: 2rem;
-  color: #fff;
+  color: hsl(var(--color-text-pearl));
   font-weight: 700;
   text-align: center;
   
@@ -411,43 +411,43 @@
 .floatingDockDesktop {
   background: rgba(0, 0, 0, 0.95) !important;
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 215, 0, 0.2);
+  border: 1px solid hsla(var(--color-primary), 0.2);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   
   :global(.dark) & {
     background: rgba(0, 0, 0, 0.95) !important;
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid hsla(var(--color-primary), 0.2);
   }
 }
 
 .floatingDockMobile {
   background: rgba(0, 0, 0, 0.95) !important;
-  border: 1px solid rgba(255, 215, 0, 0.2);
+  border: 1px solid hsla(var(--color-primary), 0.2);
   padding: 0.5rem;
   border-radius: 3rem;
   backdrop-filter: blur(12px);
   
   :global(.dark) & {
     background: rgba(0, 0, 0, 0.95) !important;
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid hsla(var(--color-primary), 0.2);
     
     button {
       background: rgba(0, 0, 0, 0.8) !important;
-      border: 1px solid rgba(255, 215, 0, 0.15);
+      border: 1px solid hsla(var(--color-primary), 0.15);
       
       &:hover {
-        background: rgba(255, 215, 0, 1) !important;
-        border-color: rgba(255, 215, 0, 0.3);
+        background: hsl(var(--color-primary)) !important;
+        border-color: hsla(var(--color-primary), 0.3);
       }
     }
     
     a {
       background: rgba(0, 0, 0, 0.8) !important;
-      border: 1px solid rgba(255, 215, 0, 0.15);
+      border: 1px solid hsla(var(--color-primary), 0.15);
       
       &:hover {
-        background: rgba(255, 215, 0, 1) !important;
-        border-color: rgba(255, 215, 0, 0.3);
+        background: hsl(var(--color-primary)) !important;
+        border-color: hsla(var(--color-primary), 0.3);
       }
     }
   }

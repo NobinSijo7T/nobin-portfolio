@@ -46,6 +46,16 @@
               border-color .4s ease,
               background-color .4s ease;
 
+  :global(body.homepage-hero-active) & {
+    background-color: hsla(var(--color-bg-alt), .18);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    border-color: hsla(var(--color-primary), .16);
+    box-shadow:
+      inset 1px 1px 0 0 hsla(var(--color-white), .08),
+      0 8px 32px hsla(var(--color-black), .18);
+  }
+
   &:hover {
     border-color: hsla(var(--color-primary), .35);
     box-shadow:

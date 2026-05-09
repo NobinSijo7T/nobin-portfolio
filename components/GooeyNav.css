@@ -25,11 +25,11 @@
     1.001 85%,
     1
   );
-  --color-1: #FFD700;
-  --color-2: #FFA500;
-  --color-3: #FF8C00;
-  --color-4: #FFED4E;
-  --gooey-active-color: #FFD700;
+  --color-1: hsl(var(--color-primary));
+  --color-2: hsl(var(--color-primary-alt));
+  --color-3: hsl(var(--color-text-subtitle));
+  --color-4: hsl(var(--color-text-pearl));
+  --gooey-active-color: hsl(var(--color-primary));
 }
 
 .gooey-nav-container {

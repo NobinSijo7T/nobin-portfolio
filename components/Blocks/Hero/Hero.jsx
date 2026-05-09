@@ -32,8 +32,82 @@ export default function Hero() {
         setPreloaderComplete(true);
     }, []);
 
+    useEffect(() => {
+        const root = container.current;
+        const hero = root?.closest(`.${styles.hero}`);
+
+        if (!hero) return;
+
+        document.body.classList.add('homepage-hero-active');
+
+        const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let frameId = null;
+
+        const resetParallax = () => {
+            hero.style.setProperty('--hero-bg-y', '0px');
+            hero.style.setProperty('--hero-foreground-y', '0px');
+            hero.style.setProperty('--hero-bg-scale', '1');
+        };
+
+        const updateParallax = () => {
+            frameId = null;
+
+            if (motionQuery.matches) {
+                resetParallax();
+                return;
+            }
+
+            const rect = hero.getBoundingClientRect();
+            const heroHeight = hero.offsetHeight || window.innerHeight;
+            const scrollDistance = Math.min(Math.max(-rect.top, 0), heroHeight);
+            const progress = heroHeight ? scrollDistance / heroHeight : 0;
+
+            hero.style.setProperty('--hero-bg-y', `${-(scrollDistance * 0.3).toFixed(2)}px`);
+            hero.style.setProperty('--hero-foreground-y', `${-(scrollDistance * 0.7).toFixed(2)}px`);
+            hero.style.setProperty('--hero-bg-scale', `${(1 + progress * 0.05).toFixed(3)}`);
+        };
+
+        const requestParallaxUpdate = () => {
+            if (frameId === null) {
+                frameId = requestAnimationFrame(updateParallax);
+            }
+        };
+
+        const handleMotionPreferenceChange = () => requestParallaxUpdate();
+
+        requestParallaxUpdate();
+        window.addEventListener('scroll', requestParallaxUpdate, {passive: true});
+        window.addEventListener('resize', requestParallaxUpdate);
+
+        if (motionQuery.addEventListener) {
+            motionQuery.addEventListener('change', handleMotionPreferenceChange);
+        } else {
+            motionQuery.addListener(handleMotionPreferenceChange);
+        }
+
+        return () => {
+            document.body.classList.remove('homepage-hero-active');
+            window.removeEventListener('scroll', requestParallaxUpdate);
+            window.removeEventListener('resize', requestParallaxUpdate);
+
+            if (motionQuery.removeEventListener) {
+                motionQuery.removeEventListener('change', handleMotionPreferenceChange);
+            } else {
+                motionQuery.removeListener(handleMotionPreferenceChange);
+            }
+
+            if (frameId !== null) {
+                cancelAnimationFrame(frameId);
+            }
+
+            resetParallax();
+        };
+    }, []);
+
     // GSAP Animations
     useGSAP(() => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         gsap.set(`.${styles.line} svg path`, {
             drawSVG: '0%',
         });
@@ -42,6 +116,26 @@ export default function Hero() {
         })
 
         if (preloaderComplete) {
+            if (prefersReducedMotion) {
+                gsap.set(`.${styles.line} svg path`, {
+                    drawSVG: '100%',
+                });
+                gsap.set(textRef.current, {
+                    autoAlpha: 1,
+                });
+                gsap.set(descRef.current, {
+                    autoAlpha: 1,
+                });
+                gsap.set(`.${styles.reveal}`, {
+                    x: '-100%',
+                });
+                gsap.set(`.${styles.heroImg}`, {
+                    x: '-30%',
+                    scale: 1.3,
+                });
+                return;
+            }
+
             // Line Animation
             gsap.to(`.${styles.lineRight} svg path`, {
                 drawSVG: '100%',
@@ -132,7 +226,7 @@ export default function Hero() {
     return (
         <>
             <PreLoader onComplete={handlePreloaderComplete}/>
-            <section className={styles.hero}>
+            <section className={`${styles.hero} ${preloaderComplete ? styles.heroReady : ''}`}>
                 <div ref={container}>
                     <div className={styles.inner}>
                         <div className={styles.title}>

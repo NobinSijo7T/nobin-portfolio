@@ -1,129 +1,148 @@
-import React, { useRef, useEffect, memo } from 'react';
-import * as THREE from 'three';
-import gsap from 'gsap';
+import React, {useEffect, useRef, memo} from 'react';
 
-import './Particles.module.scss';
-
-const Particles = ({ className }) => {
+const Particles = ({className}) => {
     const sceneRef = useRef(null);
 
     useEffect(() => {
-        if (!sceneRef.current) return;
+        const root = sceneRef.current;
+        const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-        // Set up scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ 
-            alpha: true, 
-            antialias: false,
-            powerPreference: 'default'
-        });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        if (!root || motionQuery.matches) return;
 
-        // Append renderer's DOM element to the sceneRef
-        sceneRef.current.appendChild(renderer.domElement);
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d', {alpha: true});
 
-        // Set transparent background
-        renderer.setClearAlpha(0);
+        if (!context) return;
 
-        // Create particles
-        const particles = new THREE.Group();
-        const particleGeometry = new THREE.BufferGeometry();
-        const particleMaterial = new THREE.PointsMaterial({
-            size: 0.02,
-            vertexColors: true,
-            sizeAttenuation: true,
-        });
+        canvas.setAttribute('aria-hidden', 'true');
+        canvas.style.display = 'block';
+        root.appendChild(canvas);
 
-        const numParticles = 500;
-        const positions = new Float32Array(numParticles * 3);
-        const colors = new Float32Array(numParticles * 3);
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+        let animationFrameId = null;
+        let previousTime = performance.now();
+        let particles = [];
+        let isStopped = false;
 
-        for (let i = 0; i < positions.length; i += 3) {
-            positions[i] = (Math.random() - 0.5) * 10;
-            positions[i + 1] = (Math.random() - 0.5) * 10;
-            positions[i + 2] = (Math.random() - 0.5) * 10;
-
-            if (i % 2 === 0) {
-                colors[i] = 0.7;
-                colors[i + 1] = 0.7;
-                colors[i + 2] = 0.7;
-            } else {
-                colors[i] = 200 / 255;
-                colors[i + 1] = 184 / 255;
-                colors[i + 2] = 248 / 255;
-            }
-        }
-
-        particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-        const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
-        particles.add(particleSystem);
-        scene.add(particles);
-
-        // Set up camera position
-        camera.position.z = 5;
-
-        // Mouse movement interaction
-        const mouse = new THREE.Vector2(0, 0);
-        const targetMouse = new THREE.Vector2(0, 0);
-        let animationFrameId;
-
-        const onMouseMove = (event) => {
-            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        const resetParticle = (particle, startAnywhere = false) => {
+            particle.x = Math.random() * width;
+            particle.y = startAnywhere ? Math.random() * height : height + Math.random() * height * 0.2;
+            particle.radius = 0.6 + Math.random() * 1.7;
+            particle.glow = particle.radius * (4 + Math.random() * 4);
+            particle.speed = 0.08 + Math.random() * 0.18;
+            particle.drift = (Math.random() - 0.5) * 0.16;
+            particle.life = startAnywhere ? Math.random() : 0;
+            particle.decay = 0.0018 + Math.random() * 0.0024;
+            particle.alpha = 0.4 + Math.random() * 0.2;
         };
 
-        window.addEventListener('mousemove', onMouseMove);
+        const resize = () => {
+            const bounds = root.getBoundingClientRect();
+            width = Math.max(bounds.width, window.innerWidth);
+            height = Math.max(bounds.height, window.innerHeight);
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-        // Add animation
-        const animate = () => {
-            animationFrameId = requestAnimationFrame(animate);
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+            context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-            const time = Date.now() * 0.0001;
-            const positions = particleGeometry.attributes.position.array;
+            const particleCount = Math.min(90, Math.max(38, Math.floor(width / 20)));
+            particles = Array.from({length: particleCount}, () => {
+                const particle = {};
+                resetParticle(particle, true);
+                return particle;
+            });
+        };
 
-            for (let i = 0; i < positions.length; i += 3) {
-                positions[i + 1] = Math.sin(i / 100 + time);
-            }
+        const drawParticle = (particle) => {
+            const opacity = particle.alpha * Math.sin(particle.life * Math.PI);
 
-            particleGeometry.attributes.position.needsUpdate = true;
+            if (opacity <= 0) return;
 
-            targetMouse.x += (mouse.x * 0.2 - targetMouse.x) * 0.02;
-            targetMouse.y += (-mouse.y * 0.2 - targetMouse.y) * 0.02;
+            const gradient = context.createRadialGradient(
+                particle.x,
+                particle.y,
+                0,
+                particle.x,
+                particle.y,
+                particle.glow
+            );
 
-            gsap.to(particles.rotation, {
-                x: targetMouse.x,
-                y: targetMouse.y,
-                duration: 1,
+            gradient.addColorStop(0, `rgba(255, 205, 138, ${opacity})`);
+            gradient.addColorStop(0.35, `rgba(232, 131, 106, ${opacity * 0.55})`);
+            gradient.addColorStop(1, 'rgba(232, 131, 106, 0)');
+
+            context.fillStyle = gradient;
+            context.beginPath();
+            context.arc(particle.x, particle.y, particle.glow, 0, Math.PI * 2);
+            context.fill();
+        };
+
+        const animate = (time) => {
+            if (isStopped) return;
+
+            const delta = Math.min((time - previousTime) / 16.67, 2);
+            previousTime = time;
+
+            context.clearRect(0, 0, width, height);
+            context.globalCompositeOperation = 'lighter';
+
+            particles.forEach((particle) => {
+                particle.y -= particle.speed * delta;
+                particle.x += particle.drift * delta;
+                particle.life += particle.decay * delta;
+
+                if (particle.life >= 1 || particle.y < -particle.glow || particle.x < -particle.glow || particle.x > width + particle.glow) {
+                    resetParticle(particle);
+                }
+
+                drawParticle(particle);
             });
 
-            renderer.render(scene, camera);
+            animationFrameId = requestAnimationFrame(animate);
         };
 
-        animate();
+        resize();
+        animationFrameId = requestAnimationFrame(animate);
+        window.addEventListener('resize', resize);
 
-        // Resize handling
-        const handleResize = () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        const stop = () => {
+            if (isStopped) return;
+
+            isStopped = true;
+            window.removeEventListener('resize', resize);
+
+            if (animationFrameId !== null) {
+                cancelAnimationFrame(animationFrameId);
+            }
+
+            canvas.remove();
         };
 
-        window.addEventListener('resize', handleResize);
+        const handleMotionPreferenceChange = () => {
+            if (motionQuery.matches) {
+                stop();
+            }
+        };
 
-        // Clean up Three.js resources on component unmount
+        if (motionQuery.addEventListener) {
+            motionQuery.addEventListener('change', handleMotionPreferenceChange);
+        } else {
+            motionQuery.addListener(handleMotionPreferenceChange);
+        }
+
         return () => {
-            window.removeEventListener('resize', handleResize);
-            window.removeEventListener('mousemove', onMouseMove);
-            cancelAnimationFrame(animationFrameId);
-            renderer.dispose();
-            particleGeometry.dispose();
-            particleMaterial.dispose();
-            scene.remove(particles);
+            if (motionQuery.removeEventListener) {
+                motionQuery.removeEventListener('change', handleMotionPreferenceChange);
+            } else {
+                motionQuery.removeListener(handleMotionPreferenceChange);
+            }
+
+            stop();
         };
     }, []);
 

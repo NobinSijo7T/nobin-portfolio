@@ -2,7 +2,13 @@
 @import '../../../assets/media-queries.scss';
 
 .hero {
+  --hero-bg-y: 0px;
+  --hero-bg-scale: 1;
+  --hero-foreground-y: 0px;
   position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: hsl(var(--color-bg-alt));
 
   .inner {
     position: relative;
@@ -20,8 +26,28 @@
   }
 }
 
+.heroReady {
+  .title {
+    h1 {
+      animation:
+        heroContentFade 0.8s ease-out both,
+        heroHeadingFloat 4s ease-in-out 0.8s infinite;
+    }
+
+    .roleLine {
+      animation: heroContentFade 0.8s ease-out 0.2s both;
+    }
+
+    p {
+      animation: heroContentFade 0.8s ease-out 0.4s both;
+    }
+  }
+}
+
 .title {
   margin-bottom: 3rem;
+  transform: translate3d(0, var(--hero-foreground-y), 0);
+  will-change: transform;
   @include respond-above(xl) {
     max-width: 68vw;
   }
@@ -31,7 +57,7 @@
     padding: 2rem 0;
     &:nth-child(2) {
       .splitWords{
-        background: -webkit-linear-gradient(hsl(var(--color-text-pearl)), hsl(var(--color-hero-secondary)));
+        background: -webkit-linear-gradient(hsl(var(--color-text-pearl)), hsl(var(--color-primary)));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -81,7 +107,12 @@
       inset: -1.5px;
       border-radius: 100vw;
       padding: 1.5px;
-      background: conic-gradient(#C8B8F8, #D4C47A, #A8D8C0, #C8B8F8);
+      background: conic-gradient(
+        hsl(var(--color-primary)),
+        hsl(var(--color-primary-alt)),
+        hsl(var(--color-text-subtitle)),
+        hsl(var(--color-primary))
+      );
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -118,7 +149,7 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, hsl(var(--color-ambient-glow)), hsl(var(--color-surface)));
+      background: linear-gradient(90deg, hsl(var(--color-bg-alt)), hsl(var(--color-surface)));
       z-index: 1;
       border-radius: 100vw;
     }
@@ -148,6 +179,32 @@
   height: 100%;
   inset: 0;
   z-index: -1;
+  isolation: isolate;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &::before {
+    inset: -10dvh 0;
+    z-index: 0;
+    background-image: url('/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translate3d(0, var(--hero-bg-y), 0) scale(var(--hero-bg-scale));
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  &::after {
+    inset: 0;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.35);
+  }
 
   > * {
     position: absolute;
@@ -157,8 +214,10 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 3;
     background: url('/noise.png') repeat;
+    opacity: 0.16;
+    mix-blend-mode: soft-light;
     pointer-events: none;
   }
 
@@ -166,6 +225,9 @@
     width: 50%;
     height: 100%;
     display: flex;
+    z-index: 4;
+    opacity: 0.28;
+    mix-blend-mode: screen;
 
     &.lineLeft {
       left: 0;
@@ -179,6 +241,20 @@
       width: 100%;
       height: auto;
       margin-top: auto;
+    }
+
+    path {
+      stroke: hsla(var(--color-primary), 0.22);
+    }
+
+    stop {
+      stop-color: hsl(var(--color-primary));
+      stop-opacity: 0.35;
+
+      &:last-child {
+        stop-color: hsl(var(--color-bg-alt));
+        stop-opacity: 1;
+      }
     }
   }
 }
@@ -199,12 +275,62 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 5;
   pointer-events: none;
   user-select: none;
 
   > * {
     width: 100% !important;
     height: 100% !important;
+  }
+}
+
+@keyframes heroContentFade {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.8rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes heroHeadingFloat {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    --hero-bg-y: 0px !important;
+    --hero-bg-scale: 1 !important;
+    --hero-foreground-y: 0px !important;
+  }
+
+  .title {
+    transform: none;
+    will-change: auto;
+  }
+
+  .background {
+    &::before {
+      transform: none;
+      will-change: auto;
+    }
+  }
+
+  .heroReady {
+    .title {
+      h1,
+      .roleLine,
+      p {
+        animation: none;
+      }
+    }
   }
 }

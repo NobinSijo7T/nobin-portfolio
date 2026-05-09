@@ -56,7 +56,7 @@ const FloatingDockMobile = ({
                   <Link
                     href={item.href}
                     key={item.title}
-                    className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-800 hover:bg-[#FFD700] transition-colors group">
+                    className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-800 hover:bg-[hsl(var(--color-primary))] transition-colors group">
                     <div className="h-7 w-7 text-gray-400 group-hover:text-black transition-colors">{item.icon}</div>
                   </Link>
                 ) : (
@@ -65,7 +65,7 @@ const FloatingDockMobile = ({
                     key={item.title}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-800 hover:bg-[#FFD700] transition-colors group">
+                    className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-800 hover:bg-[hsl(var(--color-primary))] transition-colors group">
                     <div className="h-7 w-7 text-gray-400 group-hover:text-black transition-colors">{item.icon}</div>
                   </a>
                 )}
@@ -76,7 +76,7 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-800 hover:bg-[#FFD700] transition-colors group">
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-800 hover:bg-[hsl(var(--color-primary))] transition-colors group">
         <IconLayoutNavbarCollapse className="h-7 w-7 text-gray-400 group-hover:text-black transition-colors" />
       </button>
     </div>
@@ -157,7 +157,7 @@ function IconContainer({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={`relative flex aspect-square items-center justify-center rounded-full transition-colors duration-300 ${
-        hovered ? 'bg-[#FFD700]' : 'bg-gray-800'
+        hovered ? 'bg-[hsl(var(--color-primary))]' : 'bg-gray-800'
       }`}>
       <AnimatePresence>
         {hovered && (
@@ -165,7 +165,7 @@ function IconContainer({
             initial={{ opacity: 0, y: 10, x: "-50%" }}
             animate={{ opacity: 1, y: 0, x: "-50%" }}
             exit={{ opacity: 0, y: 2, x: "-50%" }}
-            className="absolute -top-8 left-1/2 w-fit rounded-md border border-[#FFD700] bg-black px-2 py-0.5 text-xs whitespace-pre text-[#FFD700] font-semibold">
+            className="absolute -top-8 left-1/2 w-fit rounded-md border border-[hsl(var(--color-primary))] bg-black px-2 py-0.5 text-xs whitespace-pre text-[hsl(var(--color-primary))] font-semibold">
             {title}
           </motion.div>
         )}
