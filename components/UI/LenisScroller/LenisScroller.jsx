@@ -2,10 +2,16 @@
 
 import React, { useEffect } from 'react';
 import Lenis from "@studio-freight/lenis";
+import { isMobileDevice, isTouchDevice } from '@/utils/deviceDetection';
 
 export default function LenisScroller() {
 
     useEffect(() => {
+        // Disable smooth scroll on mobile devices for better performance
+        if (isMobileDevice() || isTouchDevice()) {
+            return;
+        }
+
         const lenisScroll = new Lenis({
             lerp: 0.1,
             duration: 1.2,

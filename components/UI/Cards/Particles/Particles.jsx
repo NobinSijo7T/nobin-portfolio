@@ -1,13 +1,14 @@
 import React, {useEffect, useRef, memo} from 'react';
+import { isMobileDevice, shouldReduceMotion } from '@/utils/deviceDetection';
 
 const Particles = ({className}) => {
     const sceneRef = useRef(null);
 
     useEffect(() => {
         const root = sceneRef.current;
-        const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-        if (!root || motionQuery.matches) return;
+        
+        // Disable on mobile devices for better performance
+        if (!root || isMobileDevice() || shouldReduceMotion()) return;
 
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d', {alpha: true});

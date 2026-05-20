@@ -4,6 +4,7 @@ import { Effect, EffectComposer, EffectPass, RenderPass } from 'postprocessing';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import './PixelBlast.css';
+import { isMobileDevice } from '@/utils/deviceDetection';
 
 const createTouchTexture = () => {
   const size = 64;
@@ -345,6 +346,12 @@ const PixelBlast = ({
 
   useEffect(() => {
     const container = containerRef.current;
+    
+    // Disable on mobile devices for better performance
+    if (isMobileDevice()) {
+      return;
+    }
+    
     if (!autoPauseOffscreen || !container || typeof IntersectionObserver === 'undefined') return undefined;
 
     const observer = new IntersectionObserver(

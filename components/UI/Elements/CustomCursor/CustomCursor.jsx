@@ -3,18 +3,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from "gsap";
 import styles from './CustomCursor.module.scss';
+import { isMobileDevice, isTouchDevice } from '@/utils/deviceDetection';
 
 export default function CustomCursor() {
     const cursorRef = useRef(null);
     const [isClient, setIsClient] = useState(false);
+    const [shouldRender, setShouldRender] = useState(false);
 
-    // Prevent SSR issues
+    // Prevent SSR issues and disable on mobile
     useEffect(() => {
         setIsClient(true);
+        // Don't render cursor on mobile or touch devices
+        setShouldRender(!isMobileDevice() && !isTouchDevice());
     }, []);
 
     useEffect(() => {
-        if (!isClient || !cursorRef.current) return;
+        if (!isClient || !cursorRef.current || !shouldRender) return;
 
         const cursor = cursorRef.current;
         
@@ -74,8 +78,8 @@ export default function CustomCursor() {
         };
     }, [isClient]);
 
-    // Don't render on server to avoid hydration mismatch
-    if (!isClient) return null;
+    // Don't render on server or mobile devices
+    if (!isClient || !shouldRender) return null;
 
     return (
         <div ref={cursorRef} className={styles.customCursor}>

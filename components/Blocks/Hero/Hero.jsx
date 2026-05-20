@@ -14,6 +14,7 @@ import FadeIn from "@/components/UI/FadeIn/FadeIn";
 import PreLoader from "@/components/Blocks/PreLoader/PreLoader";
 import Blobs from "@/components/UI/Elements/Blobs/Blobs";
 import Particles from "@/components/UI/Cards/Particles/Particles";
+import { isMobileDevice, shouldReduceMotion } from '@/utils/deviceDetection';
 
 // Register GSAP plugins once outside component
 if (typeof window !== 'undefined') {
@@ -40,6 +41,8 @@ export default function Hero() {
 
         document.body.classList.add('homepage-hero-active');
 
+        // Disable parallax on mobile devices for better performance
+        const isMobile = isMobileDevice();
         const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
         let frameId = null;
 
@@ -49,6 +52,14 @@ export default function Hero() {
             hero.style.setProperty('--hero-bg-scale', '1');
             hero.style.setProperty('--hero-bg-opacity', '1');
         };
+
+        // Skip parallax entirely on mobile
+        if (isMobile) {
+            resetParallax();
+            return () => {
+                document.body.classList.remove('homepage-hero-active');
+            };
+        }
 
         const updateParallax = () => {
             frameId = null;
@@ -110,7 +121,8 @@ export default function Hero() {
 
     // GSAP Animations
     useGSAP(() => {
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const prefersReducedMotion = shouldReduceMotion();
+        const isMobile = isMobileDevice();
 
         gsap.set(`.${styles.line} svg path`, {
             drawSVG: '0%',
@@ -120,7 +132,8 @@ export default function Hero() {
         })
 
         if (preloaderComplete) {
-            if (prefersReducedMotion) {
+            // Simplified animations for mobile and reduced motion
+            if (prefersReducedMotion || isMobile) {
                 gsap.set(`.${styles.line} svg path`, {
                     drawSVG: '100%',
                 });
