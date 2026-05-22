@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/react';
 import '@/assets/globals.scss';
 import commonConfig from '@/database/config/metadata.json';
 import LenisScroller from '@/components/UI/LenisScroller/LenisScroller';
@@ -6,6 +5,7 @@ import Header from "@/components/Layout/Header/Header";
 import Footer from "@/components/Layout/Footer/Footer";
 import CustomCursor from "@/components/UI/Elements/CustomCursor/CustomCursor";
 import AudioPlayerWrapper from '@/components/UI/Elements/AudioPlayer/AudioPlayerWrapper';
+import AnalyticsWrapper from '@/components/AnalyticsWrapper';
 
 // Temporary workaround for Turbopack font loading issue
 // Using CSS imports instead of next/font/google
@@ -45,7 +45,7 @@ export default function RootLayout({children}) {
             <CustomCursor/>
             <LenisScroller/>
         </AudioPlayerWrapper>
-        <Analytics/>
+        <AnalyticsWrapper />
 
         </body>
         </html>

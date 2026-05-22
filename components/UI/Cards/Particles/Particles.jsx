@@ -26,6 +26,7 @@ const Particles = ({className}) => {
         let previousTime = performance.now();
         let particles = [];
         let isStopped = false;
+        const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
         const resetParticle = (particle, startAnywhere = false) => {
             particle.x = Math.random() * width;
