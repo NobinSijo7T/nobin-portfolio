@@ -9,10 +9,13 @@ import CustomScrollbar from '@/components/CustomScrollbar';
 import LogoRibbon from '@/components/UI/LogoRibbon/LogoRibbon';
 import HomeIntro from "@/components/Blocks/HomeIntro/HomeIntro";
 
-export default function Home() {
+export default async function Home({ searchParams }) {
+    const params = await searchParams;
+    const skipIntro = params?.skipIntro === '1';
+
     return (
-        <HomeIntro>
-            <Hero/>
+        <HomeIntro skipIntro={skipIntro}>
+            <Hero skipPreloader={skipIntro}/>
             <SkillSet/>
             <ExperienceBlock/>
             <BoldTitle/>

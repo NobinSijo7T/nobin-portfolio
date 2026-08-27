@@ -60,16 +60,53 @@
   margin-bottom: 2.2rem;
 }
 
+.backLinkBeam {
+  position: relative;
+  display: inline-flex;
+  padding: 2px;
+  overflow: hidden;
+  border-radius: 100rem;
+  isolation: isolate;
+  background: hsl(var(--color-black));
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -180%;
+    z-index: 0;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg 285deg,
+      hsl(var(--color-primary)) 315deg,
+      hsl(var(--color-white)) 330deg,
+      transparent 350deg 360deg
+    );
+    animation: experienceBorderBeam 2.8s linear infinite;
+  }
+}
+
 .backLink {
-  display: inline-block;
-  color: hsla(var(--color-white), 0.7);
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  padding: 0.9rem 1.5rem;
+  color: hsla(var(--color-white), 0.82);
+  background: hsla(var(--color-black), 0.3);
+  border-radius: 100rem;
   text-decoration: none;
-  font-size: var(--fs-xs);
+  font-size: 1.4rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  backdrop-filter: blur(10px);
 
   &:hover {
     color: hsl(var(--color-primary));
+  }
+}
+
+@keyframes experienceBorderBeam {
+  to {
+    transform: rotate(360deg);
   }
 }
 

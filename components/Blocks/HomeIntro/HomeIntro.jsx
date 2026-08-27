@@ -6,8 +6,8 @@ import { Button } from "@/src/components/ui/button";
 
 import styles from "./HomeIntro.module.scss";
 
-export default function HomeIntro({ children }) {
-  const [showIntro, setShowIntro] = useState(true);
+export default function HomeIntro({ children, skipIntro = false }) {
+  const [showIntro, setShowIntro] = useState(!skipIntro);
   const [trails, setTrails] = useState([]);
   const trailIdRef = useRef(0);
   const lastTrailRef = useRef({ time: 0, x: 0, y: 0 });
@@ -171,6 +171,7 @@ export default function HomeIntro({ children }) {
               </svg>
             </span>
           </Button>
+          <span className={styles.continueBadge} aria-hidden="true">CLICK HERE</span>
         </div>
       </div>
     </section>

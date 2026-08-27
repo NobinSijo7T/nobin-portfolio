@@ -16,12 +16,16 @@ export default async function ExperienceDetailsPage({ params }) {
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <div className={styles.backLinks}>
-            <Link href="/" className={styles.backLink}>
-              Back Home
-            </Link>
-            <Link href="/experience" className={styles.backLink}>
-              All Experience
-            </Link>
+            <span className={styles.backLinkBeam}>
+              <Link href="/?skipIntro=1#hero" className={styles.backLink}>
+                Back Home
+              </Link>
+            </span>
+            <span className={styles.backLinkBeam}>
+              <Link href="/experience" className={styles.backLink}>
+                All Experience
+              </Link>
+            </span>
           </div>
           <div className={styles.companyRow}>
             <img

@@ -25,6 +25,41 @@
   }
 }
 
+.resumeButtonBeam {
+  position: relative;
+  display: inline-flex;
+  padding: 2px;
+  overflow: hidden;
+  border-radius: 100rem;
+  isolation: isolate;
+  background: hsl(var(--color-black));
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -180%;
+    z-index: 0;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg 285deg,
+      hsl(var(--color-primary)) 315deg,
+      hsl(var(--color-white)) 330deg,
+      transparent 350deg 360deg
+    );
+    animation: resumeBorderBeam 2.8s linear infinite;
+  }
+
+  :global(.button) {
+    z-index: 1;
+  }
+}
+
+@keyframes resumeBorderBeam {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .cardGroup{
   position: relative;
   z-index: 1;

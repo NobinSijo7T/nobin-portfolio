@@ -55,10 +55,16 @@ html {
   }
 }
 
-// Firefox custom scrollbar
+// Keep scrolling functional without showing a native scrollbar.
 * {
-  scrollbar-width: thin;
-  scrollbar-color: #ffd700 #f1f1f1;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
 }
 
 .progress-bar-container {

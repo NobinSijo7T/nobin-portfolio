@@ -18,7 +18,7 @@ export default function About() {
                         Creative Frontend Developer
                     </Title>
                     <TextReveal className={styles.description}>
-                        I would describe myself as a creative web developer with over 2 years of experience in development.
+                        I would describe myself as a creative web developer with over 3 years of experience in development.
                     </TextReveal>
                 </header>
 

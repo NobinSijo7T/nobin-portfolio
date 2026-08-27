@@ -52,7 +52,7 @@ export default function Resume() {
                                 <div className={styles.cardTitle}>Nobin Sijo</div>
                                 <div className={styles.cardDesc}>UI/UX Designer|Frontend Developer</div>
                                 <hr/>
-                                <p>I'm Nobin, a frontend developer with over 2 years of professional experience. Successfully designing websites and apps with Figma, then building user-friendly websites with ReactJS & NextJS. I pay attention to small details, enjoy technical problems, and work well in teams. I like learning new technologies and always aim to improve my skills.
+                                <p>I'm Nobin, a frontend developer with over 3 years of professional experience. Successfully designing websites and apps with Figma, then building user-friendly websites with ReactJS & NextJS. I pay attention to small details, enjoy technical problems, and work well in teams. I like learning new technologies and always aim to improve my skills.
                                 </p>
                                 <div>
                                     <Link href={`mailto:${commonConfig.personal.email}`} target={'_blank'}>
@@ -80,8 +80,10 @@ export default function Resume() {
                     </div>
 
                     <div className={styles.cta}>
-                        <FancyButton theme='button-1' target={'_blank'} link={commonConfig.personal.resumeURL}>View
-                            Resume</FancyButton>
+                        <span className={styles.resumeButtonBeam}>
+                            <FancyButton theme='button-1' target={'_blank'} link={commonConfig.personal.resumeURL}>View
+                                Resume</FancyButton>
+                        </span>
                     </div>
                     <div className={styles.links}>
                         <Link href={`${commonConfig.social.linkedin}`} target={'_blank'}>LinkedIn</Link>

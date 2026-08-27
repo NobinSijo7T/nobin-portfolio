@@ -21,8 +21,8 @@ if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, SplitText);
 }
 
-export default function Hero() {
-    const [preloaderComplete, setPreloaderComplete] = useState(false);
+export default function Hero({ skipPreloader = false }) {
+    const [preloaderComplete, setPreloaderComplete] = useState(skipPreloader);
     const container = useRef();
     const fakeContainer = useRef();
     const textRef = useRef(null);
@@ -242,8 +242,8 @@ export default function Hero() {
 
     return (
         <>
-            <PreLoader onComplete={handlePreloaderComplete}/>
-            <section className={`${styles.hero} ${preloaderComplete ? styles.heroReady : ''}`}>
+            {!skipPreloader && <PreLoader onComplete={handlePreloaderComplete} />}
+            <section id="hero" className={`${styles.hero} ${preloaderComplete ? styles.heroReady : ''}`}>
                 <div ref={container}>
                     <div className={styles.inner}>
                         <div className={styles.title}>
