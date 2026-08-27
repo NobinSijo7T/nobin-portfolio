@@ -15,9 +15,14 @@ export default async function ExperienceDetailsPage({ params }) {
     <main className={styles.page}>
       <section className={styles.hero}>
         <div className={styles.heroInner}>
-          <Link href="/experience" className={styles.backLink}>
-            All Experience
-          </Link>
+          <div className={styles.backLinks}>
+            <Link href="/" className={styles.backLink}>
+              Back Home
+            </Link>
+            <Link href="/experience" className={styles.backLink}>
+              All Experience
+            </Link>
+          </div>
           <div className={styles.companyRow}>
             <img
               src={experience.resolvedCompanyLogo}
@@ -29,14 +34,16 @@ export default async function ExperienceDetailsPage({ params }) {
               <h1 className={styles.company}>{experience.company}</h1>
             </div>
           </div>
-          <a
-            href={experience.companySite}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.siteLink}
-          >
-            Visit Company Site
-          </a>
+          {experience.companySite && (
+            <a
+              href={experience.companySite}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.siteLink}
+            >
+              Visit Company Site
+            </a>
+          )}
         </div>
       </section>
 

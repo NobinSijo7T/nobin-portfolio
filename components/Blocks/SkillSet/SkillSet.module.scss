@@ -51,6 +51,24 @@
   left: calc(50% - var(--size) / 2);
   margin-bottom: -2rem; // Changed from -0.8rem to reduce space more
   z-index: 2; // Added to ensure sphere stays on top
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 220%;
+    height: 160%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: hsla(var(--color-bg-alt), 0.12);
+    backdrop-filter: blur(1.5rem);
+    -webkit-backdrop-filter: blur(1.5rem);
+    pointer-events: none;
+    z-index: -1;
+  }
+
   .sphere{
     transition: all .3s ease-in-out;
     transform-origin: 50% 50%;
@@ -185,7 +203,9 @@
     border-radius: 2rem;
 
     .image{
-      max-width: calc(var(--cardSize) - (var(--cardSize) / 2));
+      width: calc(var(--cardSize) * 0.72);
+      height: calc(var(--cardSize) * 0.72);
+      object-fit: contain;
     }
   }
   .collisionDiv{

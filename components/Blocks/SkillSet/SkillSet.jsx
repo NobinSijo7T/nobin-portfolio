@@ -108,7 +108,6 @@ export default function SkillSet() {
                                      className={`${styles.box} ${activeIndex === index ? styles.isActive : ''}`}>
                                     <Image className={styles.image} src={skill.image} alt={skill.title} width={80}
                                            height={80}
-                                           style={{ width: 'auto', height: 'auto' }}
                                            loading={'lazy'}/>
                                 </div>
                             ))}

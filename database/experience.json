@@ -18,6 +18,24 @@
     ]
   },
   {
+    "company": "DobYob",
+    "companyLogo": "/assets/logos/dobyob.jpg",
+    "companySite": null,
+    "positions": [
+      {
+        "title": "UI/UX Designer",
+        "type": "Internship",
+        "startDate": "2026-06",
+        "endDate": "2026-07",
+        "current": false,
+        "duration": "2 mos",
+        "location": "Mumbai, Maharashtra, India · Remote",
+        "description": "Completed a full redesign of DobYob, an app for connecting people with the same date of birth. Reworked the user flow, visual hierarchy, and core screens to make the experience clearer, more engaging, and easier to use. Created a polished interface aligned with the product goals and delivered the redesign as part of the internship.",
+        "skills": ["UI/UX Design", "Product Redesign", "Figma"]
+      }
+    ]
+  },
+  {
     "company": "Sovrn",
     "companyLogo": "/assets/logos/join_sovrn_logo.jpg",
     "companySite": "https://www.sovrn.place/",

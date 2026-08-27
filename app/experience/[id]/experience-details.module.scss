@@ -53,9 +53,15 @@
   margin: 0 auto;
 }
 
+.backLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.4rem;
+  margin-bottom: 2.2rem;
+}
+
 .backLink {
   display: inline-block;
-  margin-bottom: 2.2rem;
   color: hsla(var(--color-white), 0.7);
   text-decoration: none;
   font-size: var(--fs-xs);

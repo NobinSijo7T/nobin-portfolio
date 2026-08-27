@@ -106,7 +106,6 @@ export default function HomeIntro({ children }) {
     <section className={styles.intro} aria-label="Portfolio intro">
       <div className={styles.scene} onPointerMove={handlePointerMove} onPointerDown={handlePointerMove} aria-hidden="true">
         <img className={styles.baseImage} src="/base-image.png" alt="" draggable="false" />
-
         {trails.map((trail) => (
           <span
             key={trail.id}
@@ -125,7 +124,6 @@ export default function HomeIntro({ children }) {
         <span className={styles.grain} />
         <span className={styles.vignette} />
       </div>
-
       <div className={styles.controls}>
         <div className={styles.continueShell}>
           <Button
