@@ -10,11 +10,18 @@ import Image from "next/image";
 import Container from "@/components/UI/Layout/Layout";
 import FancyButton from "@/components/UI/Elements/Button/Button";
 import commonConfig from "@/database/config/metadata.json";
+import { getExperienceEntries } from "@/utils/experience";
 import Link from "next/link";
 
 export default function Resume() {
     const container = useRef();
     const cardGroup = useRef();
+    const resumeExperiences = getExperienceEntries()
+        .flatMap((experience) => experience.positions.map((position) => ({
+            title: position.title,
+            company: experience.company,
+        })))
+        .slice(0, 6);
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -63,9 +70,12 @@ export default function Resume() {
                                 <hr/>
                                 <div className={styles.cardSectionTitle}>WORK EXPERIENCE</div>
                                 <p>
-                                    UI Developer | TiltLabs <br/>
-                                    UI & Frontend Developer | MuLearn Foundation <br/>
-                                    Product Designer | TinkerHub Foundation
+                                    {resumeExperiences.map((experience, index) => (
+                                        <React.Fragment key={`${experience.title}-${experience.company}`}>
+                                            {experience.title} | {experience.company}
+                                            {index < resumeExperiences.length - 1 && <br/>}
+                                        </React.Fragment>
+                                    ))}
                                 </p>
                             </div>
                             <figure className={styles.figure}>

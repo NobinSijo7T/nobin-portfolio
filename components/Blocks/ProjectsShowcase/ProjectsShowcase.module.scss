@@ -32,74 +32,9 @@
   overflow: hidden;
   pointer-events: auto;
   background:
-    linear-gradient(180deg, hsla(var(--color-bg-alt), 0.58), hsla(var(--color-bg-alt), 0.76)),
-    url('/project_bg.jpg') center / cover fixed no-repeat,
-    hsl(var(--color-bg-alt));
+    linear-gradient(180deg, hsla(var(--color-bg-alt), 0.36), hsla(var(--color-bg-alt), 0.58)),
+    url('/project_bg.jpg') center / cover fixed no-repeat;
   transition: background-position 0.6s ease;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 18% 18%, hsla(var(--color-primary), 0.24), transparent 34rem),
-      radial-gradient(circle at 82% 28%, hsla(var(--color-primary-alt), 0.18), transparent 42rem),
-      radial-gradient(circle at 50% 92%, hsla(var(--color-primary), 0.12), transparent 46rem);
-    background-size: 140% 140%, 140% 140%, 140% 140%;
-    background-position: 20% 10%, 80% 20%, 50% 80%;
-    opacity: 0.78;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/noise.png');
-    background-size: 18rem 18rem;
-    opacity: 0.035;
-    mix-blend-mode: screen;
-    pointer-events: none;
-  }
-
-  &:hover::before {
-    opacity: 1;
-    animation: backgroundDrift 10s ease-in-out infinite;
-  }
-}
-
-@keyframes backgroundDrift {
-  0% {
-    background-position: 20% 10%, 80% 20%, 50% 80%;
-  }
-  50% {
-    background-position: 28% 18%, 72% 28%, 48% 72%;
-  }
-  100% {
-    background-position: 20% 10%, 80% 20%, 50% 80%;
-  }
-}
-
-.pixelBlastLayer {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  opacity: 0.46;
-  filter: saturate(1.08);
-  mix-blend-mode: screen;
-  transform: scale(1.02);
-  pointer-events: auto;
-}
-
-.backgroundShade {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background:
-    linear-gradient(to bottom, hsla(var(--color-bg-alt), 0.2), hsla(var(--color-bg-alt), 0.46) 78%, hsla(var(--color-bg-alt), 0.62)),
-    radial-gradient(circle at 50% 14%, transparent 0, hsla(var(--color-bg-alt), 0.28) 66%);
-  pointer-events: none;
 }
 
 .backButtonWrapper {

@@ -19,7 +19,6 @@ import styles from './ProjectsShowcase.module.scss';
 import ProjectJourney from '@/database/ProjectJourney.json';
 import graphicWorks from '@/database/config/graphic-works.json';
 import Container from "@/components/UI/Layout/Layout";
-import PixelBlast from '@/components/UI/PixelBlast/PixelBlast';
 
 const categories = [
   { label: 'All Work', value: 'all' },
@@ -114,31 +113,7 @@ export default function ProjectsShowcase() {
 
 function AnimatedBackground() {
   return (
-    <div className={styles.background} aria-hidden="true">
-      <div className={styles.pixelBlastLayer}>
-        <PixelBlast
-          variant="circle"
-          pixelSize={5}
-          color="#E8836A"
-          patternScale={2.1}
-          patternDensity={2.45}
-          pixelSizeJitter={0.28}
-          enableRipples
-          rippleSpeed={0.22}
-          rippleThickness={0.08}
-          rippleIntensityScale={0.45}
-          liquid
-          liquidStrength={0.028}
-          liquidRadius={0.85}
-          liquidWobbleSpeed={2.6}
-          speed={0.32}
-          edgeFade={0.38}
-          transparent
-          style={{ width: '100%', height: '100%' }}
-        />
-      </div>
-      <div className={styles.backgroundShade} />
-    </div>
+    <div className={styles.background} aria-hidden="true" />
   );
 }
 
