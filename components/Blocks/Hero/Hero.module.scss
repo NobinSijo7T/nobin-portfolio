@@ -83,6 +83,7 @@
     display: inline-block;
     white-space: nowrap;
     font-size: 0.55em;
+    padding: 0 0.2em;
     @include respond-below(md) {
       font-size: 0.6em;
       white-space: normal;
