@@ -23,6 +23,7 @@ if (typeof window !== 'undefined') {
 
 export default function Hero({ skipPreloader = false }) {
     const [preloaderComplete, setPreloaderComplete] = useState(skipPreloader);
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
     const container = useRef();
     const fakeContainer = useRef();
     const textRef = useRef(null);
@@ -31,6 +32,14 @@ export default function Hero({ skipPreloader = false }) {
 
     const handlePreloaderComplete = useCallback(() => {
         setPreloaderComplete(true);
+    }, []);
+
+    const handleImageClick = useCallback(() => {
+        setIsImageModalOpen(true);
+    }, []);
+
+    const handleCloseModal = useCallback(() => {
+        setIsImageModalOpen(false);
     }, []);
 
     useEffect(() => {
@@ -243,6 +252,38 @@ export default function Hero({ skipPreloader = false }) {
     return (
         <>
             {!skipPreloader && <PreLoader onComplete={handlePreloaderComplete} />}
+            
+            {/* Image Modal */}
+            {isImageModalOpen && (
+                <div 
+                    className={styles.imageModal} 
+                    onClick={handleCloseModal}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Full profile image"
+                >
+                    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                        <button 
+                            className={styles.closeButton}
+                            onClick={handleCloseModal}
+                            aria-label="Close modal"
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                        <Image
+                            src="/img_home.jpeg"
+                            alt={commonConfig.metadata.title}
+                            width={1920}
+                            height={1080}
+                            className={styles.fullImage}
+                        />
+                    </div>
+                </div>
+            )}
+
             <section id="hero" className={`${styles.hero} ${preloaderComplete ? styles.heroReady : ''}`}>
                 <div ref={container}>
                     <div className={styles.inner}>
@@ -250,15 +291,29 @@ export default function Hero({ skipPreloader = false }) {
                             <h1 ref={textRef}>
                                 I&apos;m Nobin <span className={`${styles.icon}`}>
                                     <span className={styles.reveal}></span>
-                                    <Image
-                                        src="/img_home.jpeg"
-                                        alt={commonConfig.metadata.title}
-                                        width={640}
-                                        height={300}
-                                        priority
-                                        sizes="100vw"
-                                        className={styles.heroImg}
-                                    />
+                                    <div 
+                                        className={styles.imageWrapper}
+                                        onClick={handleImageClick}
+                                        role="button"
+                                        tabIndex={0}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault();
+                                                handleImageClick();
+                                            }
+                                        }}
+                                        aria-label="View full profile image"
+                                    >
+                                        <Image
+                                            src="/img_home.jpeg"
+                                            alt={commonConfig.metadata.title}
+                                            width={640}
+                                            height={300}
+                                            priority
+                                            sizes="100vw"
+                                            className={styles.heroImg}
+                                        />
+                                    </div>
                                 </span> <br/> <span className={styles.roleLine}>UI/UX Designer . Frontend Engineer . AI Builder.</span>
                             </h1>
                             <p ref={descRef}>{commonConfig.metadata.description}</p>
