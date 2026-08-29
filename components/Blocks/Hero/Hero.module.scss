@@ -96,27 +96,6 @@
     align-items: center;
     width: 30rem;
     height: 9rem;
-    border: 1.5px solid transparent;
-    background-clip: padding-box;
-    background-origin: border-box;
-    position: relative;
-    &::before {
-      content: '';
-      position: absolute;
-      inset: -1.5px;
-      border-radius: 100vw;
-      padding: 1.5px;
-      background: conic-gradient(
-        hsl(var(--color-primary)),
-        hsl(var(--color-primary-alt)),
-        hsl(var(--color-text-subtitle)),
-        hsl(var(--color-primary))
-      );
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
     border-radius: 100vw;
     vertical-align: baseline;
     overflow: hidden;
