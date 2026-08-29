@@ -46,15 +46,18 @@
   margin-bottom: 3rem;
   transform: translate3d(0, var(--hero-foreground-y), 0);
   will-change: transform;
+
   @include respond-above(xl) {
     max-width: 68vw;
   }
+
   .splitLine {
     overflow: hidden;
     margin: calc(-1 * 4rem) 0;
     padding: 2rem 0;
+
     &:nth-child(2) {
-      .splitWords{
+      .splitWords {
         background: -webkit-linear-gradient(hsl(var(--color-text-pearl)), hsl(var(--color-primary)));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -70,6 +73,7 @@
     opacity: 0;
     transition: all 0.3s ease-in;
     color: hsl(var(--color-text-pearl));
+
     @include respond-above(xl) {
       max-width: 68vw;
       line-height: 0.9;
@@ -84,6 +88,7 @@
     white-space: nowrap;
     font-size: 0.55em;
     padding: 0 0.2em;
+
     @include respond-below(md) {
       font-size: 0.6em;
       white-space: normal;
@@ -94,26 +99,30 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 30rem;
-    height: 9rem;
+    width: 34rem;
+    height: 10.2rem;
     border-radius: 100vw;
     vertical-align: baseline;
     overflow: hidden;
     margin: 0 1.5rem;
     z-index: 111;
     position: relative;
+
     @include respond-below(xml) {
-      height: 7.8rem;
-      width: 24rem;
+      height: 8.6rem;
+      width: 27rem;
     }
+
     @include respond-below(lg) {
-      height: 6.4rem;
-      width: 20rem;
+      height: 7.2rem;
+      width: 22rem;
     }
+
     @include respond-below(md) {
       margin: 1.5rem auto;
       display: flex;
     }
+
     .heroImg {
       width: 100%;
       height: 100%;
@@ -124,6 +133,7 @@
       border-radius: 100vw;
       transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
+
     .imageWrapper {
       width: 100%;
       height: 100%;
@@ -132,21 +142,22 @@
       align-items: center;
       justify-content: center;
       outline: none;
-      
+
       &:hover .heroImg {
         transform: scale(1.05);
       }
-      
+
       &:active .heroImg {
         transform: scale(0.98);
       }
-      
+
       &:focus-visible {
         outline: 2px solid hsl(var(--color-primary));
         outline-offset: 2px;
         border-radius: 100vw;
       }
     }
+
     .reveal {
       position: absolute;
       inset: 0;
@@ -158,7 +169,7 @@
     }
   }
 
-  p{
+  p {
     font-size: 1.55rem;
     font-weight: 300;
     color: hsl(var(--color-text-subtitle));
@@ -210,7 +221,7 @@
     background: rgba(0, 0, 0, 0.35);
   }
 
-  > * {
+  >* {
     position: absolute;
   }
 
@@ -261,6 +272,26 @@
       }
     }
   }
+
+  // Reliable bottom fade — inside isolation:isolate so z-index is guaranteed
+  .bottomFade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 55%;
+    z-index: 10;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      hsla(var(--color-bg-alt), 0.25) 25%,
+      hsla(var(--color-bg-alt), 0.55) 50%,
+      hsla(var(--color-bg-alt), 0.82) 72%,
+      hsla(var(--color-bg-alt), 0.95) 88%,
+      hsl(var(--color-bg-alt)) 100%
+    );
+  }
 }
 
 .fakeContainer {
@@ -283,7 +314,7 @@
   pointer-events: none;
   user-select: none;
 
-  > * {
+  >* {
     width: 100% !important;
     height: 100% !important;
   }
@@ -294,6 +325,7 @@
     opacity: 0;
     transform: translate3d(0, 1.8rem, 0);
   }
+
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -301,9 +333,12 @@
 }
 
 @keyframes heroHeadingFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     translate: 0 0;
   }
+
   50% {
     translate: 0 -0.9rem;
   }
@@ -317,7 +352,7 @@
   }
 
   .title {
-    transform: none ;
+    transform: none;
     will-change: auto;
   }
 
@@ -330,6 +365,7 @@
 
   .heroReady {
     .title {
+
       h1,
       .roleLine,
       p {
@@ -348,47 +384,49 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1.5rem;
   cursor: pointer;
   backdrop-filter: blur(0px);
   animation: modalBackdropIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  
+
   @include respond-below(md) {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 }
 
 .modalContent {
   position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 96vw;
+  max-height: 94vh;
   cursor: default;
   opacity: 0;
   transform: scale(0.85) translateY(20px);
   animation: modalContentIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
   border-radius: 1.5rem;
   overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05),
-              0 2rem 6rem rgba(0, 0, 0, 0.8),
-              0 0 80px rgba(0, 0, 0, 0.6);
-  
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 2rem 6rem rgba(0, 0, 0, 0.85),
+    0 0 100px rgba(0, 0, 0, 0.7);
+
   .fullImage {
     width: auto;
     height: auto;
-    max-width: 90vw;
-    max-height: 90vh;
+    max-width: 95vw;
+    max-height: 92vh;
+    min-height: 75vh;
     object-fit: contain;
     display: block;
   }
-  
+
   @include respond-below(md) {
-    max-width: 95vw;
-    max-height: 85vh;
+    max-width: 96vw;
+    max-height: 90vh;
     border-radius: 1rem;
-    
+
     .fullImage {
-      max-width: 95vw;
-      max-height: 85vh;
+      max-width: 96vw;
+      max-height: 90vh;
+      min-height: unset;
     }
   }
 }
@@ -410,33 +448,33 @@
   z-index: 10;
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.4);
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  
+
   svg {
     width: 2rem;
     height: 2rem;
   }
-  
+
   &:hover {
     background: hsl(var(--color-primary-alt));
     transform: scale(1.15) rotate(90deg);
     box-shadow: 0 0.8rem 3rem rgba(0, 0, 0, 0.5);
   }
-  
+
   &:active {
     transform: scale(1.05) rotate(90deg);
   }
-  
+
   &:focus-visible {
     outline: 2px solid white;
     outline-offset: 3px;
   }
-  
+
   @include respond-below(md) {
     top: -0.5rem;
     right: -0.5rem;
     width: 3.5rem;
     height: 3.5rem;
-    
+
     svg {
       width: 1.6rem;
       height: 1.6rem;
@@ -447,7 +485,7 @@
 // Closing animations
 .imageModal.closing {
   animation: modalBackdropOut 0.5s cubic-bezier(0.6, 0, 0.84, 0) forwards;
-  
+
   .modalContent {
     animation: modalContentOut 0.5s cubic-bezier(0.6, 0, 0.84, 0) forwards;
   }
@@ -458,6 +496,7 @@
     background: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
   }
+
   100% {
     background: rgba(0, 0, 0, 0.94);
     backdrop-filter: blur(12px);
@@ -469,6 +508,7 @@
     background: rgba(0, 0, 0, 0.94);
     backdrop-filter: blur(12px);
   }
+
   100% {
     background: rgba(0, 0, 0, 0);
     backdrop-filter: blur(0px);
@@ -480,6 +520,7 @@
     opacity: 0;
     transform: scale(0.85) translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -491,6 +532,7 @@
     opacity: 1;
     transform: scale(1) translateY(0);
   }
+
   100% {
     opacity: 0;
     transform: scale(0.9) translateY(15px);
@@ -503,16 +545,16 @@
     background: rgba(0, 0, 0, 0.94);
     backdrop-filter: blur(12px);
   }
-  
+
   .modalContent {
     animation: none;
     opacity: 1;
     transform: none;
   }
-  
+
   .closeButton {
     transition: none;
-    
+
     &:hover {
       transform: none;
     }
